@@ -1,1 +1,6 @@
-CREATE TABLE visitors (id SERIAL PRIMARY KEY, time TIMESTAMP);
+CREATE TABLE restaurants (
+    id SERIAL PRIMARY KEY,
+    name	TEXT,
+    description TEXT
+);
+

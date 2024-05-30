@@ -1,3 +1,9 @@
-Tervetuloa!
-<p>
-Olet sivuston {{ counter }}. käyttäjä
+<a href="/create">Uusi ravintola</a>
+<hr>
+{% for restaurant in Restaurants %}
+Nimi: {{ restaurant.name }} <br>
+Kuvaus: {{ restaurant.description }} <br>
+<a href="/restaurant/{{ restaurant.id }}">Ravintolan tiedot</a> |
+<hr>
+{% endfor %}
+
