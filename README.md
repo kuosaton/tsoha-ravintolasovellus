@@ -12,6 +12,10 @@ Sovelluksen toimintoja:
 - Käyttäjä voi etsiä ja järjestää ravintoloita nimen, kategorian, kuvauksen avainsanan tai arvostelupisteytyksen perusteella.
 - Käyttäjä voi tarkastella yllämainittuihin asioihin liittyviä tilastoja, esimerkiksi arvostelupisteyksien keskiarvo tai yleisin arvosana, suosituin keittiökulttuuri, tms.
 
+## Sovelluksen tämänhetkinen tilanne
+
+Sovellus käynnistyy tällä hetkellä aloitusnäkymään, jossa on "Uusi ravintola" -linkki. Tätä painamalla pääsee luomaan uuden ravintolan, jolle tällä hetkellä pystyy antamaan nimen sekä kuvauksen. Tämän jälkeen käyttäjä ohjataan takaisin yleisnäkymään, jossa näkyvät kaikki ravintolat. Ravintoloita ei vielä eritellä kategorioiden mukaan, eikä niiden "Ravintolan tiedot" -lisätietolinkki vielä ohjaa toimivalle sivulle. 
+
 ## Käynnistysohjeet
 
 Kloonaa tämä repositorio omalle koneellesi ja siirry sen juurikansioon. Luo kansioon .env-tiedosto ja määritä sen sisältö seuraavanlaiseksi:
