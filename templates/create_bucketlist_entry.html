@@ -1,0 +1,24 @@
+<title>Bucketlist-ravintolan luonti – Ravintolasovellus</title>
+<h2>Bucketlist-ravintolan luonti</h2>
+<form action="/send_bucketlist_entry" method="post">
+<hr>
+Ravintolan nimi(*):<br>
+<input type="text" name="name" minlength="1" maxlength="15" required>
+<br>
+Kuvaus:<br>
+<textarea name="description" rows="3" cols="50" maxlength="50"></textarea>
+<br>
+Kategoria(*):<br>
+<input type="text" name="category" minlength="1" maxlength="15" required>
+<br>
+Osoite:<br>
+<textarea name="address" rows="2" cols="30" maxlength="35"></textarea>
+<br>
+<input type="submit" value="Luo ravintola">
+<br>
+Tähdellä (*) merkityt kentät ovat pakollisia täyttää.
+<br>
+<hr>
+<a href="/">Palaa etusivulle</a>
+</form>
+

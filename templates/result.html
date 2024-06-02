@@ -1,29 +1,26 @@
-<title>Yleisnäkymä – Ravintolasovellus</title>
-<h1>Ravintolasovellus</h1>
-<h2>Yleisnäkymä</h2>
-<a href="/create_bucketlist_entry">Lisää uusi bucketlist-ravintola</a>
-<a href="/create_visited_entry">Lisää uusi vierailtu ravintola</a>
-<a href="/search">Hae ravintolaa</a>
-<hr>
+<title> Osumat haulle ''{{ query }}'' – Ravintolasovellus</title>
+<h2>Osumat haulle ''{{ query }}''</h2>
 <h3>Vieraillut ravintolat</h3>
 <hr>
 {% for restaurant in visited_restaurants %}
-<h3> Ravintola: {{ restaurant.name }} </h3>
+<h4>{{ restaurant.name }}</h4>
 Kuvaus: <b>{{ restaurant.description }}</b> <br>
 Kategoria: <b>{{ restaurant.category }}</b> <br>
-Osoite: <b>{{ restaurant.address }}</b> <br>
 Arvostelu: <b>{{ restaurant.rating }} tähteä</b> <br>
-Sanallinen arvostelu: <b>''{{ restaurant.review }}''</b> <br>
+Arvio: <b>''{{ restaurant.review }}''</b> <br>
+Osoite: <b>{{ restaurant.address }}</b> <br> 
 <a href="/visited_restaurant/{{ restaurant.id }}">Ravintolan tiedot</a>
-<hr> 
-{% endfor %}
-<h3>Bucketlist-ravintolat</h3>
 <hr>
+{% endfor %}
+<hr>
+<h3>Bucketlist-ravintolat</h3>
 {% for restaurant in bucketlist_restaurants %}
-<h3>Ravintola: {{ restaurant.name }}</h3>
+<h4>{{ restaurant.name }}</h4>
 Kuvaus: <b>{{ restaurant.description }}</b> <br>
 Kategoria: <b>{{ restaurant.category }}</b> <br>
 Osoite: <b>{{ restaurant.address }}</b> <br>
 <a href="/bucketlist_restaurant/{{ restaurant.id }}">Ravintolan tiedot</a>
 <hr>
 {% endfor %}
+<hr>
+<a href="/">Palaa etusivulle</a>
