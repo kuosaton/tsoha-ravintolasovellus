@@ -20,7 +20,11 @@ Ravintolasovellus käynnistyy yleisnäkymään, jossa näytetään kaikki lisät
 
 Sovellus ei vielä tarjoa mahdollisuutta poistaa, järjestellä tai muokata tietoja.
 
+## Käyttöliittymän kuvakaappauksia
+
 ### Yleisnäkymä
+
+Yleisnäkymän tämänhetkinen tilanne. Tavoitteena on seuraavaksi lisätä yleisnäkymään ravintolakirjausten muokkaus- ja poistopainikkeet.
 
 ![Yleisnäkymä](https://github.com/kuosaton/tsoha-ravintolasovellus/assets/120479105/49e94037-dcff-44db-acbe-4583a8dfa34f)
 
@@ -41,6 +45,8 @@ Ravintolaa luotaessa kysytään tyypistä riippuen hieman eriäviä tietoja. Uut
 Hakuominaisuus on case-insensitive, eli isoilla alkukirjaimilla ei ole väliä.
 
 ### Ravintolan lisätietonäkymä
+
+Lisätietonäkymä ei tämänhetkisessä vaiheessa tarjoa varsinaisesti lisäominaisuuksia tai -tietoa.
 
 ![Ravintola-view-1](https://github.com/kuosaton/tsoha-ravintolasovellus/assets/120479105/4feec9c6-4e87-4916-a171-e411ba81aa01)
 
