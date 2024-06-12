@@ -4,6 +4,7 @@
 <a href="/create_bucketlist_entry">Lisää uusi bucketlist-ravintola</a>
 <a href="/create_visited_entry">Lisää uusi vierailtu ravintola</a>
 <a href="/search">Hae ravintolaa</a>
+<a href="/deleted_entries">Poistetut ravintolat</a>
 <hr>
 <h3>Vieraillut ravintolat</h3>
 <hr>
@@ -16,6 +17,8 @@ Arvostelu: <b>{{ restaurant.rating }} tähteä</b> <br>
 Sanallinen arvostelu: <b>''{{ restaurant.review }}''</b> <br>
 <a href="/visited_restaurant/{{ restaurant.id }}">Ravintolan tiedot</a>
 <hr> 
+<a href="visited_restaurant/{{ restaurant.id }}/delete">Poista ravintola</a>
+<hr>
 {% endfor %}
 <h3>Bucketlist-ravintolat</h3>
 <hr>
@@ -26,4 +29,7 @@ Kategoria: <b>{{ restaurant.category }}</b> <br>
 Osoite: <b>{{ restaurant.address }}</b> <br>
 <a href="/bucketlist_restaurant/{{ restaurant.id }}">Ravintolan tiedot</a>
 <hr>
+<a href="/bucketlist_restaurant/{{ restaurant.id }}">Poista ravintola</a>
+<hr>
 {% endfor %}
+<hr>

@@ -8,6 +8,12 @@ def index():
     bucketlist_list = bucketlist_restaurants.get_list()
     return render_template("index.html", visited_restaurants=visited_list, bucketlist_restaurants=bucketlist_list)
 
+@app.route("/deleted_entries")
+def get_deleted_entries():
+    visited_deleted_list = visited_restaurants.get_deleted_entries()
+    bucketlist_deleted_list = bucketlist_restaurants.get_deleted_entries()
+    return render_template("deleted_entries.html", visited_restaurants=visited_deleted_list, bucketlist_restaurants=bucketlist_deleted_list)
+
 @app.route("/create_bucketlist_entry")
 def create_bucketlist():
     return render_template("create_bucketlist_entry.html")
@@ -15,6 +21,26 @@ def create_bucketlist():
 @app.route("/create_visited_entry")
 def create_visited():
     return render_template("create_visited_entry.html")
+
+@app.route("/bucketlist_restaurant/<int:id>/delete")
+def delete_bucketlist_restaurant(id):
+    bucketlist_restaurants.delete(id)
+    return redirect("/")
+
+@app.route("/bucketlist_restaurant/<int:id>/restore")
+def restore_bucketlist_restaurant(id):
+    bucketlist_restaurants.restore(id)
+    return redirect("/")
+
+@app.route("/visited_restaurant/<int:id>/restore")
+def restore_visited_restaurant(id):
+    visited_restaurants.restore(id)
+    return redirect("/")
+
+@app.route("/visited_restaurant/<int:id>/delete")
+def delete_visited_restaurant(id):
+    visited_restaurants.delete(id)
+    return redirect("/")
 
 @app.route("/send_visited_entry", methods=["POST"])
 def send_visited_entry():
@@ -60,3 +86,4 @@ def bucketlist_restaurant(id):
 def visited_restaurant(id):
     content = visited_restaurants.get_content(id)
     return render_template("visited_restaurant.html", id=id, content=content)
+
