@@ -1,26 +1,18 @@
 <title> Osumat haulle ''{{ query }}'' – Ravintolasovellus</title>
 <h2>Osumat haulle ''{{ query }}''</h2>
-<h3>Vieraillut ravintolat</h3>
 <hr>
-{% for restaurant in visited_restaurants %}
-<h4>{{ restaurant.name }}</h4>
-Kuvaus: <b>{{ restaurant.description }}</b> <br>
-Kategoria: <b>{{ restaurant.category }}</b> <br>
-Arvostelu: <b>{{ restaurant.rating }} tähteä</b> <br>
-Arvio: <b>''{{ restaurant.review }}''</b> <br>
-Osoite: <b>{{ restaurant.address }}</b> <br> 
-<a href="/visited_restaurant/{{ restaurant.id }}">Ravintolan tiedot</a>
+<h3>Ravintolat</h3>
 <hr>
-{% endfor %}
-<hr>
-<h3>Bucketlist-ravintolat</h3>
-{% for restaurant in bucketlist_restaurants %}
-<h4>{{ restaurant.name }}</h4>
+{% for restaurant in restaurants %}
+<h3> Ravintola: {{ restaurant.name }} </h3>
 Kuvaus: <b>{{ restaurant.description }}</b> <br>
 Kategoria: <b>{{ restaurant.category }}</b> <br>
 Osoite: <b>{{ restaurant.address }}</b> <br>
-<a href="/bucketlist_restaurant/{{ restaurant.id }}">Ravintolan tiedot</a>
+Aukioloajat: <b>{{ restaurant.business_hours }} </b> <br>
+<a href="/restaurant/{{ restaurant.id }}">Ravintolan tiedot</a>
+<hr>
+<a href="/restaurant/{{ restaurant.id }}/delete">Poista ravintola</a>
 <hr>
 {% endfor %}
-<hr>
+
 <a href="/">Palaa etusivulle</a>

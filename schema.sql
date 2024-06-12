@@ -1,26 +1,42 @@
-CREATE TABLE visited_restaurants (
-    id SERIAL PRIMARY KEY,
-    name	TEXT,
-    description TEXT,
-    category    TEXT,
-    rating      INT,
-    review	TEXT,
-    address	TEXT,
-    visible	BOOLEAN DEFAULT TRUE
+CREATE TABLE users (
+	id SERIAL PRIMARY KEY,
+	name TEXT,
+	password TEXT,
+	seclevel INTEGER
 );
 
-CREATE TABLE bucketlist_restaurants (
-    id SERIAL PRIMARY KEY,
-    name	TEXT,
-    description TEXT,
-    category	TEXT,
-    address	TEXT,
-    visible	BOOLEAN DEFAULT TRUE
+CREATE TABLE restaurants (
+	id SERIAL PRIMARY KEY,
+	name TEXT,
+	description TEXT,
+	category TEXT,
+	address	TEXT,
+	business_hours TEXT,
+	visible	BOOLEAN DEFAULT TRUE
 );
 
-CREATE TABLE favourites (
-    id SERIAL PRIMARY KEY,
-    visited_id    INTEGER REFERENCES visited_restaurants,
-    bucketlist_id INTEGER REFERENCES bucketlist_restaurants,
-    visible	  BOOLEAN DEFAULT TRUE
+CREATE TABLE reviews (
+	id SERIAL PRIMARY KEY,
+	user_id INTEGER REFERENCES users,
+	restaurant_id INTEGER REFERENCES restaurants,
+	sent_at TIMESTAMP,
+	stars INTEGER,
+	content TEXT,
+	visible	BOOLEAN DEFAULT TRUE
+);
+
+CREATE TABLE questions (
+	id SERIAL PRIMARY KEY,
+	user_id INTEGER REFERENCES users,
+	restaurant_id INTEGER REFERENCES restaurants,
+	sent_at TIMESTAMP,
+	content TEXT
+);
+
+CREATE TABLE answers (
+	id SERIAL PRIMARY KEY,
+	user_id INTEGER REFERENCES users,
+	question_id INTEGER REFERENCES questions,
+	sent_at TIMESTAMP,
+	content TEXT
 );

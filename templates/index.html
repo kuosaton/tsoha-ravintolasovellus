@@ -1,35 +1,31 @@
 <title>Yleisnäkymä – Ravintolasovellus</title>
 <h1>Ravintolasovellus</h1>
 <h2>Yleisnäkymä</h2>
-<a href="/create_bucketlist_entry">Lisää uusi bucketlist-ravintola</a>
-<a href="/create_visited_entry">Lisää uusi vierailtu ravintola</a>
+
+<a href="/create">Luo uusi ravintola</a>
 <a href="/search">Hae ravintolaa</a>
 <a href="/deleted_entries">Poistetut ravintolat</a>
+
+<!-- Login and registration is a work in progress {% if session.user_id %}
+Kirjauduttu sisään käyttäjänä <b>{{session.user_name}}</b>. <a href="/logout">Kirjaudu ulos</a>
+{% else %}
+<a href="/login">Kirjaudu sisään</a>
+{% endif %} -->
+
 <hr>
-<h3>Vieraillut ravintolat</h3>
+<h3>Ravintolat</h3>
 <hr>
-{% for restaurant in visited_restaurants %}
+{% for restaurant in restaurants %}
 <h3> Ravintola: {{ restaurant.name }} </h3>
 Kuvaus: <b>{{ restaurant.description }}</b> <br>
 Kategoria: <b>{{ restaurant.category }}</b> <br>
 Osoite: <b>{{ restaurant.address }}</b> <br>
-Arvostelu: <b>{{ restaurant.rating }} tähteä</b> <br>
-Sanallinen arvostelu: <b>''{{ restaurant.review }}''</b> <br>
-<a href="/visited_restaurant/{{ restaurant.id }}">Ravintolan tiedot</a>
+Aukioloajat: <b>{{ restaurant.business_hours }} </b> <br>
+<a href="/restaurant/{{ restaurant.id }}">Ravintolan tiedot</a>
 <hr> 
-<a href="visited_restaurant/{{ restaurant.id }}/delete">Poista ravintola</a>
+<!-- {% if session.user_seclevel == 2 %} -->
+<a href="/restaurant/{{ restaurant.id }}/delete">Poista ravintola</a>
+<!-- {% endif %} -->
 <hr>
 {% endfor %}
-<h3>Bucketlist-ravintolat</h3>
-<hr>
-{% for restaurant in bucketlist_restaurants %}
-<h3>Ravintola: {{ restaurant.name }}</h3>
-Kuvaus: <b>{{ restaurant.description }}</b> <br>
-Kategoria: <b>{{ restaurant.category }}</b> <br>
-Osoite: <b>{{ restaurant.address }}</b> <br>
-<a href="/bucketlist_restaurant/{{ restaurant.id }}">Ravintolan tiedot</a>
-<hr>
-<a href="/bucketlist_restaurant/{{ restaurant.id }}">Poista ravintola</a>
-<hr>
-{% endfor %}
-<hr>
+

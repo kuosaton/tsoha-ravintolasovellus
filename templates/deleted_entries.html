@@ -1,25 +1,13 @@
 <title> Poistetut ravintolat – Ravintolasovellus</title>
 <h2>Poistetut ravintolat</h2>
-<h3>Vieraillut ravintolat</h3>
 <hr>
-{% for restaurant in visited_restaurants %}
+{% for restaurant in restaurants %}
 <h4>{{ restaurant.name }}</h4>
 Kuvaus: <b>{{ restaurant.description }}</b> <br>
 Kategoria: <b>{{ restaurant.category }}</b> <br>
-Arvostelu: <b>{{ restaurant.rating }} tähteä</b> <br>
-Arvio: <b>''{{ restaurant.review }}''</b> <br>
 Osoite: <b>{{ restaurant.address }}</b> <br> 
+Aukioloajat: <b> {{restaurant.business_hours }} </b> <br>
 <a href="/visited_restaurant/{{ restaurant.id }}/restore">Palauta ravintola</a>
-<hr>
-{% endfor %}
-<hr>
-<h3>Bucketlist-ravintolat</h3>
-{% for restaurant in bucketlist_restaurants %}
-<h4>{{ restaurant.name }}</h4>
-Kuvaus: <b>{{ restaurant.description }}</b> <br>
-Kategoria: <b>{{ restaurant.category }}</b> <br>
-Osoite: <b>{{ restaurant.address }}</b> <br>
-<a href="/bucketlist_restaurant/{{ restaurant.id }}/restore">Palauta ravintola</a>
 <hr>
 {% endfor %}
 <hr>

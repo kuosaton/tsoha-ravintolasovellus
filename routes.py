@@ -1,70 +1,57 @@
 from app import app
-import visited_restaurants, bucketlist_restaurants
 from flask import render_template, request, redirect
+import restaurants
+import users
 
 @app.route("/")
 def index():
-    visited_list = visited_restaurants.get_list()
-    bucketlist_list = bucketlist_restaurants.get_list()
-    return render_template("index.html", visited_restaurants=visited_list, bucketlist_restaurants=bucketlist_list)
+	restaurants_list = restaurants.get_list()
+	return render_template("index.html", restaurants=restaurants_list)
 
 @app.route("/deleted_entries")
 def get_deleted_entries():
-    visited_deleted_list = visited_restaurants.get_deleted_entries()
-    bucketlist_deleted_list = bucketlist_restaurants.get_deleted_entries()
-    return render_template("deleted_entries.html", visited_restaurants=visited_deleted_list, bucketlist_restaurants=bucketlist_deleted_list)
+	deleted_restaurants_list = restaurants.get_deleted_entries()
+	return render_template("deleted_entries.html", restaurants=deleted_restaurants_list)
 
-@app.route("/create_bucketlist_entry")
-def create_bucketlist():
-    return render_template("create_bucketlist_entry.html")
+@app.route("/create", methods=["GET", "POST"])
+def create_restaurant():
+	if request.method == "GET":
+		return render_template("create.html")
 
-@app.route("/create_visited_entry")
-def create_visited():
-    return render_template("create_visited_entry.html")
+	if request.method == "POST":
+		name = request.form["name"]
+		if len(name) < 1 or len(name) > 25:
+			return render_template("error.html", errorcode=1, message="Nimen tulee olla 1-25 merkkiä pitkä")
 
-@app.route("/bucketlist_restaurant/<int:id>/delete")
-def delete_bucketlist_restaurant(id):
-    bucketlist_restaurants.delete(id)
-    return redirect("/")
+		description = request.form["description"]
+		if len(description) < 1 or len(description) > 100:
+			return render_template("error.html", errorcode=1, message="Kuvauksen tulee olla 1-100 merkkiä pitkä")
 
-@app.route("/bucketlist_restaurant/<int:id>/restore")
-def restore_bucketlist_restaurant(id):
-    bucketlist_restaurants.restore(id)
-    return redirect("/")
+		category = request.form["category"]
+		if len(category) < 1 or len(category) > 25:
+			return render_template("error.html", errorcode = 1, message="Kategorian tulee olla 1-25 merkkiä pitkä")
 
-@app.route("/visited_restaurant/<int:id>/restore")
-def restore_visited_restaurant(id):
-    visited_restaurants.restore(id)
-    return redirect("/")
+		address = request.form["address"]
+		if len(address) < 1 or len(address) > 50:
+			return render_template("error.html", errorcode = 1, message="Osoitteen tulee olla 1-50 merkkiä pitkä")
 
-@app.route("/visited_restaurant/<int:id>/delete")
-def delete_visited_restaurant(id):
-    visited_restaurants.delete(id)
-    return redirect("/")
+		business_hours = request.form["business_hours"]
+		if len(business_hours) < 1 or len(business_hours) > 50:
+			return render_template("error.html", errorcode = 1, message="Osoitteen tulee olla 1-50 merkkiä pitkä")
 
-@app.route("/send_visited_entry", methods=["POST"])
-def send_visited_entry():
-    name = request.form["name"]
-    description = request.form["description"]
-    category = request.form["category"]
-    rating = request.form["rating"]
-    review = request.form["review"]
-    address = request.form["address"]
-    if visited_restaurants.create(name, description, category, rating, review, address):
-        return redirect("/")
-    else:
-        return render_template("error.html", message="Error with creating visited restaurant entry. Please try again. If issue persists, contact site maintainer. Error code: CREATION_ERROR_VISITED")
+		restaurant_id = restaurants.create(name, description, category, address, business_hours)
 
-@app.route("/send_bucketlist_entry", methods=["POST"])
-def send_bucketlist_entry():
-    name = request.form["name"]
-    description = request.form["description"]
-    category = request.form["category"]
-    address = request.form["address"]
-    if bucketlist_restaurants.create(name, description, category, address):
-       return redirect("/")
-    else:
-        return render_template("error.html", message="Error with creating bucketlist restaurant. Please try again. If issue persists, please contact site maintainer. Error code: CREATION_ERROR_BUCKETLIST")
+		return redirect("/restaurant/"+str(restaurant_id))
+
+@app.route("/restaurant/<int:id>/delete")
+def delete_restaurant(id):
+	restaurants.delete(id)
+	return redirect("/")
+
+@app.route("/restaurant/<int:id>/restore")
+def restore_restaurant(id):
+	restaurants.restore(id)
+	return redirect("/")
 
 @app.route("/search")
 def search():
@@ -73,17 +60,57 @@ def search():
 @app.route("/result", methods=["GET"])
 def result():
     query = request.args["query"]
-    visited_list = visited_restaurants.search(query)
-    bucketlist_list = bucketlist_restaurants.search(query)
-    return render_template("result.html", query=query, visited_restaurants=visited_list, bucketlist_restaurants=bucketlist_list)
+    result_list = restaurants.search(query)
+    return render_template("result.html", query=query, restaurants=result_list)
 
-@app.route("/bucketlist_restaurant/<int:id>")
-def bucketlist_restaurant(id):
-    content = bucketlist_restaurants.get_content(id)
-    return render_template("bucketlist_restaurant.html", id=id, content=content)
+@app.route("/restaurant/<int:id>")
+def view_restaurant(id):
+    content = restaurants.get_content(id)
+    return render_template("restaurant.html", id=id, content=content)
 
-@app.route("/visited_restaurant/<int:id>")
-def visited_restaurant(id):
-    content = visited_restaurants.get_content(id)
-    return render_template("visited_restaurant.html", id=id, content=content)
+
+@app.route("/login", methods=["GET", "POST"])
+def login():
+	if request.method == "GET":
+		return render_template("login.html")
+
+	if request.method == "POST":
+		username = request.form["username"]
+		password = request.form["password"]
+
+	if users.login(username, password):
+		return redirect("/")
+	else:
+		return render_template("error.html", errorcode = 2, message="Kirjautuminen epäonnistui. Tarkista käyttäjänimi ja salasana")
+
+@app.route("/logout")
+def logout():
+	users.logout()
+	return redirect("/")
+
+@app.route("/register", methods=["GET", "POST"])
+def register():
+	if request.method == "GET":
+		return render_template("register.html")
+
+	if request.method == "POST":
+		username = request.form["username"]
+		if len(username) < 1 or len(username) > 20:
+			return render_template("error.html", errorcode = 0,  message="Käyttäjänimen tulee olla 1-20 merkkiä pitkä")
+
+		password = request.form["password"]
+		password_verify = request.form["password_verify"]
+		if password != password_verify:
+			return render_template("error.html", errorcode = 0, message="Annetut salasanat eivät vastaa toisiaan")
+		if password == "":
+			return render_template("error.html", errorcode = 0, message="Annettu salasana ei voi olla tyhjä")
+
+		seclevel = request.form["seclevel"]
+		if seclevel != "1" or seclevel != "2":
+			return render_template("error.html", errorcode = 0, message="Annettua käyttäjätasoa ei ole olemassa")
+
+		if users.register(username, password, seclevel):
+			return redirect("/")
+		else:
+			return render_template("error.html", errorcode = 0, message="Käyttäjän luonti epäonnistui")
 
