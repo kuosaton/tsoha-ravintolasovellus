@@ -18,6 +18,10 @@ Sovelluksen toimintoja:
 
 Ravintolasovellus käynnistyy yleisnäkymään, jossa näytetään kaikki lisätyt ravintolat. Näkymästä voi navigoida uuden ravintolan lisäämiseen, hakutoimintoon, tai poistettujen ravintoloiden näkymään, jossa voi tarkastella ja palauttaa poistettuja kirjauksia. 
 
+Sovellukseen voi luoda tilin (normaali käyttäjä tai ylläpitäjä), ja kirjautua sisään. Ylläpitäjä saa joitakin ylimääräisiä toiminnallisuuksia käyttöönsä, kuten kirjausten poiston ja palautuksen. 
+
+Sovelluksessa on osittainen käyttäjäroolin ja CSRF-tokenin tarkistus. Tämä ei vielä kata kaikkia toiminnallisuuksia.
+
 Ravintolaa luodessa määritetään seuraavat kriteerit: 
 - Kirjauksen tyyppi (Onko ravintolassa jo käyty, vai meneekö se bucketlistille?)
   - Sovelluksen rakenteeseen on tämän suhteen tehty parannuksia – visited_restaurants ja bucketlist_restaurants on yhdistetty yhdeksi restaurants-tauluksi, ja määritys tapahtuu nyt yksinkertaisemmin entry_type -attribuutilla. 
@@ -28,8 +32,6 @@ Ravintolaa luodessa määritetään seuraavat kriteerit:
 - Aukioloajat
 
 Sovellukseen on tarkoitus toteuttaa seuraavaksi arvosteluominaisuus ravintoloille, sekä Q&A-osio, jossa käyttäjät voivat kysyä ja vastata ravintoloihin liittyviin mietteisiin. 
-
-Tämän lisäksi sovelluksen käyttäjäjärjestelmä on vielä työn alla. Tavoitteena on, että käyttäjäjärjestelmä tukee kahta tilityyppiä, normaalia käyttäjää sekä ylläpitäjää. Ylläpitäjä saisi joitakin ylimääräisiä toiminnallisuuksia käyttöönsä, kuten arvostelujen poistamisen.
 
 Sovellus ei ainakaan toistaiseksi tarjoa käyttäjälle mahdollisuutta järjestellä tietoja oman mielensä mukaan, vaan ravintolat järjestetään ensisijaisesti kirjaustyypin (bucketlist-ravintola tai käyty ravintola) ja toissijaisesti nimen eli aakkosjärjestyksen mukaan.
 
