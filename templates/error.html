@@ -1,3 +1,9 @@
-<title>Virhe – Ravintolasovellus</title>
-<h2>Virhe {{ errorcode }}</h2>
+<title>Virhe {{ errorcode }}– Ravintolasovellus</title>
+{% if errorcode == 1 %}
+<h2> Virhe {{ errorcode }}: Ravintolakirjauksen luonti epäonnistui
+{% elif errorcode == 2 %}
+<h2> Virhe {{ errorcode }}: Kirjautuminen epäonnistui
+{% elif errorcode == 0 %}
+<h2> Virhe {{ errorcode }}: Käyttäjätilin luonti epäonnistui
+{% endif %}
 <p>{{ message }}</p>

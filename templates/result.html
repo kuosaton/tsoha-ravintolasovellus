@@ -5,14 +5,13 @@
 <hr>
 {% for restaurant in restaurants %}
 <h3> Ravintola: {{ restaurant.name }} </h3>
+Tyyppi: <b>{{ restaurant.entry_type }}</b> <br>
 Kuvaus: <b>{{ restaurant.description }}</b> <br>
 Kategoria: <b>{{ restaurant.category }}</b> <br>
 Osoite: <b>{{ restaurant.address }}</b> <br>
 Aukioloajat: <b>{{ restaurant.business_hours }} </b> <br>
-<a href="/restaurant/{{ restaurant.id }}">Ravintolan tiedot</a>
-<hr>
+<a href="/restaurant/{{ restaurant.id }}">Ravintolan tiedot</a><br>
 <a href="/restaurant/{{ restaurant.id }}/delete">Poista ravintola</a>
 <hr>
 {% endfor %}
-
 <a href="/">Palaa etusivulle</a>

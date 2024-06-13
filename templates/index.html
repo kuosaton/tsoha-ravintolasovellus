@@ -15,17 +15,18 @@ Kirjauduttu sisään käyttäjänä <b>{{session.user_name}}</b>. <a href="/logo
 <hr>
 <h3>Ravintolat</h3>
 <hr>
+{% if not restaurants %}
+<h3> Ravintoloita ei vielä ole. Kokeile luoda ravintola!</h3>
+{% else %}
 {% for restaurant in restaurants %}
 <h3> Ravintola: {{ restaurant.name }} </h3>
+Tyyppi: <b>{{ restaurant.entry_type }}</b> <br>
 Kuvaus: <b>{{ restaurant.description }}</b> <br>
 Kategoria: <b>{{ restaurant.category }}</b> <br>
 Osoite: <b>{{ restaurant.address }}</b> <br>
 Aukioloajat: <b>{{ restaurant.business_hours }} </b> <br>
-<a href="/restaurant/{{ restaurant.id }}">Ravintolan tiedot</a>
-<hr> 
-<!-- {% if session.user_seclevel == 2 %} -->
+<a href="/restaurant/{{ restaurant.id }}">Ravintolan tiedot</a> <br>
 <a href="/restaurant/{{ restaurant.id }}/delete">Poista ravintola</a>
-<!-- {% endif %} -->
 <hr>
 {% endfor %}
-
+{% endif %}

@@ -12,6 +12,7 @@ CREATE TABLE restaurants (
 	category TEXT,
 	address	TEXT,
 	business_hours TEXT,
+	entry_type TEXT,
 	visible	BOOLEAN DEFAULT TRUE
 );
 

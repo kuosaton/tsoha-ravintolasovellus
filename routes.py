@@ -39,8 +39,11 @@ def create_restaurant():
 		if len(business_hours) < 1 or len(business_hours) > 50:
 			return render_template("error.html", errorcode = 1, message="Osoitteen tulee olla 1-50 merkkiä pitkä")
 
-		restaurant_id = restaurants.create(name, description, category, address, business_hours)
+		entry_type = request.form["entry_type"]
+		if entry_type not in ("bucketlist", "visited"):
+			return render_template("error.html", errorcode = 1, message="Virhe ravintolakirjauksen tyypin määrittelyssä")
 
+		restaurant_id = restaurants.create(name, description, category, address, business_hours, entry_type)
 		return redirect("/restaurant/"+str(restaurant_id))
 
 @app.route("/restaurant/<int:id>/delete")
