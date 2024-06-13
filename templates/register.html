@@ -1,0 +1,24 @@
+<title>Käyttäjätilin luonti – Ravintolasovellus</title>
+<h2>Käyttäjätilin luonti</h2>
+
+<form action="/register" method="post">
+Käyttäjänimi (1-20 merkkiä):<br>
+<input type="text" name="username" minlength="1" maxlength="20" required>
+<p>
+Salasana (1-30 merkkiä):<br>
+<input type="password" name="password" minlength="1" maxlength="30" required>
+<p>
+Kirjoita salasana uudelleen:<br>
+<input type="password" name="password_verify" minlength="1" maxlength="30" required>
+<p>
+Tilin tyyppi:
+<input type="radio" name="seclevel" value="1" checked>Käyttäjä
+<input type="radio" name="seclevel" value="2">Ylläpitäjä
+<p>
+<input type="submit" value="Luo tili">
+</form>
+
+Kaikki kentät ovat pakollisia täyttää.
+<p>
+
+<a href="/">Palaa etusivulle</a>

@@ -1,4 +1,5 @@
 <title>Yleisnäkymä – Ravintolasovellus</title>
+
 <h1>Ravintolasovellus</h1>
 <h2>Yleisnäkymä</h2>
 
@@ -6,27 +7,42 @@
 <a href="/search">Hae ravintolaa</a>
 <a href="/deleted_entries">Poistetut ravintolat</a>
 
-<!-- Login and registration is a work in progress {% if session.user_id %}
-Kirjauduttu sisään käyttäjänä <b>{{session.user_name}}</b>. <a href="/logout">Kirjaudu ulos</a>
+{% if session.user_id == 1 %}
+Kirjauduttu sisään käyttäjänä <b>{{ session.user_name }}</b>. Tilin taso: Käyttäjä. <a href="/logout">Kirjaudu ulos</a>
+{% elif session.user_id == 2 %}
+Kirjauduttu sisään käyttäjänä <b>{{ session.user_name }}</b>. Tilin taso: Ylläpitäjä. <a href="/logout">Kirjaudu ulos</a>
 {% else %}
 <a href="/login">Kirjaudu sisään</a>
-{% endif %} -->
+{% endif %}
 
 <hr>
 <h3>Ravintolat</h3>
-<hr>
 {% if not restaurants %}
-<h3> Ravintoloita ei vielä ole. Kokeile luoda ravintola!</h3>
+<hr>
+<h4> Ravintoloita ei vielä ole lisätty. Kokeile luoda ravintola!</h4>
 {% else %}
 {% for restaurant in restaurants %}
-<h3> Ravintola: {{ restaurant.name }} </h3>
-Tyyppi: <b>{{ restaurant.entry_type }}</b> <br>
-Kuvaus: <b>{{ restaurant.description }}</b> <br>
-Kategoria: <b>{{ restaurant.category }}</b> <br>
-Osoite: <b>{{ restaurant.address }}</b> <br>
-Aukioloajat: <b>{{ restaurant.business_hours }} </b> <br>
-<a href="/restaurant/{{ restaurant.id }}">Ravintolan tiedot</a> <br>
-<a href="/restaurant/{{ restaurant.id }}/delete">Poista ravintola</a>
 <hr>
+<h4> Ravintola: {{ restaurant.name }} </h4>
+Tyyppi:
+{% if restaurant.entry_type == 1 %}
+<b>Bucketlist-ravintola</b>
+{% elif restaurant.entry_type == 2 %}
+<b>Käyty ravintola</b> 
+{% endif %}
+<br>
+Kuvaus:<b>{{ restaurant.description }}</b> 
+<br>
+Kategoria:<b>{{ restaurant.category }}</b> 
+<br>
+Osoite:<b>{{ restaurant.address }}</b> 
+<br>
+Aukioloajat:<b>{{ restaurant.business_hours }} </b> 
+<p>
+<a href="/restaurant/{{ restaurant.id }}">Ravintolan tiedot</a><br>
+{% if session.user_id == 2 %}
+<hr>
+<a href="/restaurant/{{ restaurant.id }}/delete">Poista ravintola</a>
+{% endif %}
 {% endfor %}
 {% endif %}

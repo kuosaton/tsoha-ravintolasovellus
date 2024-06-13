@@ -15,32 +15,36 @@ def get_deleted_entries():
 
 @app.route("/create", methods=["GET", "POST"])
 def create_restaurant():
+	users.check_seclevel(1)
+
 	if request.method == "GET":
 		return render_template("create.html")
 
 	if request.method == "POST":
+		users.check_csrf()
+
 		name = request.form["name"]
-		if len(name) < 1 or len(name) > 25:
-			return render_template("error.html", errorcode=1, message="Nimen tulee olla 1-25 merkkiä pitkä")
+		if len(name) < 1 or len(name) > 30:
+			return render_template("error.html", errorcode=1, message="Nimi voi olla 1-30 merkkiä pitkä")
 
 		description = request.form["description"]
 		if len(description) < 1 or len(description) > 100:
-			return render_template("error.html", errorcode=1, message="Kuvauksen tulee olla 1-100 merkkiä pitkä")
+			return render_template("error.html", errorcode=1, message="Kuvaus voi olla 1-100 merkkiä pitkä")
 
 		category = request.form["category"]
-		if len(category) < 1 or len(category) > 25:
-			return render_template("error.html", errorcode = 1, message="Kategorian tulee olla 1-25 merkkiä pitkä")
+		if len(category) < 1 or len(category) > 30:
+			return render_template("error.html", errorcode = 1, message="Kategoria voi olla 1-30 merkkiä pitkä")
 
 		address = request.form["address"]
 		if len(address) < 1 or len(address) > 50:
-			return render_template("error.html", errorcode = 1, message="Osoitteen tulee olla 1-50 merkkiä pitkä")
+			return render_template("error.html", errorcode = 1, message="Osoite voi olla 1-50 merkkiä pitkä")
 
 		business_hours = request.form["business_hours"]
 		if len(business_hours) < 1 or len(business_hours) > 50:
-			return render_template("error.html", errorcode = 1, message="Osoitteen tulee olla 1-50 merkkiä pitkä")
+			return render_template("error.html", errorcode = 1, message="Aukioloajat voivat olla 1-50 merkkiä pitkät")
 
 		entry_type = request.form["entry_type"]
-		if entry_type not in ("bucketlist", "visited"):
+		if entry_type not in ("1", "2"):
 			return render_template("error.html", errorcode = 1, message="Virhe ravintolakirjauksen tyypin määrittelyssä")
 
 		restaurant_id = restaurants.create(name, description, category, address, business_hours, entry_type)
@@ -58,18 +62,18 @@ def restore_restaurant(id):
 
 @app.route("/search")
 def search():
-    return render_template("search.html")
+	return render_template("search.html")
 
 @app.route("/result", methods=["GET"])
 def result():
-    query = request.args["query"]
-    result_list = restaurants.search(query)
-    return render_template("result.html", query=query, restaurants=result_list)
+	query = request.args["query"]
+	result_list = restaurants.search(query)
+	return render_template("result.html", query=query, restaurants=result_list)
 
 @app.route("/restaurant/<int:id>")
 def view_restaurant(id):
-    content = restaurants.get_content(id)
-    return render_template("restaurant.html", id=id, content=content)
+	restaurant = restaurants.get_content(id)
+	return render_template("restaurant.html", id=id, restaurant=restaurant)
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -81,10 +85,10 @@ def login():
 		username = request.form["username"]
 		password = request.form["password"]
 
-	if users.login(username, password):
-		return redirect("/")
-	else:
+	if not users.login(username, password):
 		return render_template("error.html", errorcode = 2, message="Kirjautuminen epäonnistui. Tarkista käyttäjänimi ja salasana")
+
+	return redirect("/")
 
 @app.route("/logout")
 def logout():
@@ -103,17 +107,18 @@ def register():
 
 		password = request.form["password"]
 		password_verify = request.form["password_verify"]
+
 		if password != password_verify:
 			return render_template("error.html", errorcode = 0, message="Annetut salasanat eivät vastaa toisiaan")
-		if password == "":
-			return render_template("error.html", errorcode = 0, message="Annettu salasana ei voi olla tyhjä")
+		if len(password) < 1 or len(password) > 30:
+			return render_template("error.html", errorcode = 0, message="Annetun salasanan pituus ei ole toivotunlainen")
 
 		seclevel = request.form["seclevel"]
-		if seclevel != "1" or seclevel != "2":
+
+		if seclevel not in ("1", "2"):
 			return render_template("error.html", errorcode = 0, message="Annettua käyttäjätasoa ei ole olemassa")
 
-		if users.register(username, password, seclevel):
-			return redirect("/")
-		else:
-			return render_template("error.html", errorcode = 0, message="Käyttäjän luonti epäonnistui")
+		if not users.register(username, password, seclevel):
+			return render_template("error.html", errorcode = 0, message="Tietojen tallentaminen ei onnistunut.")
 
+		return redirect("/")

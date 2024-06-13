@@ -13,13 +13,13 @@ def create(name, description, category, address, business_hours, entry_type):
 	return restaurant_id
 
 def delete(id):
-	sql = "UPDATE restaurants SET visible = FALSE WHERE id = :id"
+	sql = "UPDATE restaurants SET visible = FALSE WHERE id=:id"
 	db.session.execute(text(sql), {"id":id})
 	db.session.commit()
 	return True
 
 def restore(id):
-	sql = "UPDATE restaurants SET visible = TRUE WHERE id = :id"
+	sql = "UPDATE restaurants SET visible = TRUE WHERE id=:id"
 	db.session.execute(text(sql), {"id":id})
 	db.session.commit()
 	return True

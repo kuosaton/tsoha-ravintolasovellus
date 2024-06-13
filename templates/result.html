@@ -2,16 +2,34 @@
 <h2>Osumat haulle ''{{ query }}''</h2>
 <hr>
 <h3>Ravintolat</h3>
+{% if not restaurants %}
 <hr>
+<h3> Ei hakutuloksia. </h3>
+{% else %}
 {% for restaurant in restaurants %}
-<h3> Ravintola: {{ restaurant.name }} </h3>
-Tyyppi: <b>{{ restaurant.entry_type }}</b> <br>
-Kuvaus: <b>{{ restaurant.description }}</b> <br>
-Kategoria: <b>{{ restaurant.category }}</b> <br>
-Osoite: <b>{{ restaurant.address }}</b> <br>
-Aukioloajat: <b>{{ restaurant.business_hours }} </b> <br>
-<a href="/restaurant/{{ restaurant.id }}">Ravintolan tiedot</a><br>
-<a href="/restaurant/{{ restaurant.id }}/delete">Poista ravintola</a>
 <hr>
+<h3> Ravintola: {{ restaurant.name }} </h3>
+Tyyppi: 
+{% if restaurant.entry_type == 1 %}
+<b>Bucketlist-ravintola</b>
+{% elif restaurant.entry_type == 2 %}
+<b>Käyty ravintola</b>
+{% endif %} 
+<br>
+Kuvaus: <b>{{ restaurant.description }}</b> 
+<br>
+Kategoria: <b>{{ restaurant.category }}</b> 
+<br>
+Osoite: <b>{{ restaurant.address }}</b> 
+<br>
+Aukioloajat: <b>{{ restaurant.business_hours }} </b> 
+<p>
+<a href="/restaurant/{{ restaurant.id }}">Ravintolan tiedot</a><br>
+{% if session.user_id == 2 %}
+<hr>
+<a href="/restaurant/{{ restaurant.id }}/delete">Poista ravintola</a>
+{% endif %}
 {% endfor %}
+{% endif %}
+
 <a href="/">Palaa etusivulle</a>
