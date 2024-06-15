@@ -1,13 +1,11 @@
 <title> {{ restaurant[0][0] }} – Ravintolasovellus </title>
-<h2> Ravintola: {{ restaurant[0][0] }} </h2>
-<hr>
-Tyyppi:
+
 {% if restaurant[0][5] == 1 %}
-<b>Bucketlist-ravintola</b> 
+<h2>Bucketlist-ravintola: {{ restaurant[0][0] }}</h2> 
 {% elif restaurant[0][5] == 2 %}
-<b>Käyty ravintola</b>
+<h2>Käyty ravintola: {{ restaurant[0][0] }}</h2>
 {% endif %}
-<br>
+
 Kuvaus: <b>{{ restaurant[0][1] }}</b> 
 <br>
 Kategoria: <b>{{ restaurant[0][2] }}</b> 
@@ -16,9 +14,12 @@ Osoite: <b>{{ restaurant[0][3] }}</b>
 <br>
 Aukioloajat: <b>{{ restaurant[0][4] }}</b> 
 <br>
+
 {% if session.user_id == 2 %}
 <hr>
 <a href="/restaurant/{{ id }}/delete">Poista ravintola</a>
 {% endif %}
+
+<hr>
 
 <a href="/"> Palaa etusivulle </a>

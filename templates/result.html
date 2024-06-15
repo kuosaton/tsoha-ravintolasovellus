@@ -6,30 +6,31 @@
 <hr>
 <h3> Ei hakutuloksia. </h3>
 {% else %}
+
 {% for restaurant in restaurants %}
 <hr>
-<h3> Ravintola: {{ restaurant.name }} </h3>
-Tyyppi: 
 {% if restaurant.entry_type == 1 %}
-<b>Bucketlist-ravintola</b>
+<h4> Bucketlist-ravintola: {{ restaurant.name }} </h4>
 {% elif restaurant.entry_type == 2 %}
-<b>Käyty ravintola</b>
-{% endif %} 
-<br>
+<h4> Käyty ravintola: {{ restaurant.name }} </h4>
+{% endif %}
 Kuvaus: <b>{{ restaurant.description }}</b> 
 <br>
 Kategoria: <b>{{ restaurant.category }}</b> 
 <br>
 Osoite: <b>{{ restaurant.address }}</b> 
 <br>
-Aukioloajat: <b>{{ restaurant.business_hours }} </b> 
+Aukioloajat: <b>{{ restaurant.business_hours }}</b> 
 <p>
 <a href="/restaurant/{{ restaurant.id }}">Ravintolan tiedot</a><br>
 {% if session.user_id == 2 %}
 <hr>
 <a href="/restaurant/{{ restaurant.id }}/delete">Poista ravintola</a>
 {% endif %}
+
 {% endfor %}
+<hr>
+
 {% endif %}
 
 <a href="/">Palaa etusivulle</a>

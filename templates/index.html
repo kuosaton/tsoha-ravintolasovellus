@@ -8,9 +8,9 @@
 <a href="/deleted_entries">Poistetut ravintolat</a>
 
 {% if session.user_id == 1 %}
-Kirjauduttu sisään käyttäjänä <b>{{ session.user_name }}</b>. Tilin taso: Käyttäjä. <a href="/logout">Kirjaudu ulos</a>
+Kirjauduttu sisään käyttäjänä: <b>{{ session.user_name }}</b>. Tilin taso: Käyttäjä. <a href="/logout">Kirjaudu ulos</a>
 {% elif session.user_id == 2 %}
-Kirjauduttu sisään käyttäjänä <b>{{ session.user_name }}</b>. Tilin taso: Ylläpitäjä. <a href="/logout">Kirjaudu ulos</a>
+Kirjauduttu sisään käyttäjänä: <b>{{ session.user_name }}</b>. Tilin taso: Ylläpitäjä. <a href="/logout">Kirjaudu ulos</a>
 {% else %}
 <a href="/login">Kirjaudu sisään</a>
 {% endif %}
@@ -23,21 +23,18 @@ Kirjauduttu sisään käyttäjänä <b>{{ session.user_name }}</b>. Tilin taso: 
 {% else %}
 {% for restaurant in restaurants %}
 <hr>
-<h4> Ravintola: {{ restaurant.name }} </h4>
-Tyyppi:
 {% if restaurant.entry_type == 1 %}
-<b>Bucketlist-ravintola</b>
+<h4> Bucketlist-ravintola: {{ restaurant.name }} </h4>
 {% elif restaurant.entry_type == 2 %}
-<b>Käyty ravintola</b> 
+<h4> Käyty ravintola: {{ restaurant.name }} </h4>
 {% endif %}
+Kuvaus: <b>{{ restaurant.description }}</b> 
 <br>
-Kuvaus:<b>{{ restaurant.description }}</b> 
+Kategoria: <b>{{ restaurant.category }}</b> 
 <br>
-Kategoria:<b>{{ restaurant.category }}</b> 
+Osoite: <b>{{ restaurant.address }}</b> 
 <br>
-Osoite:<b>{{ restaurant.address }}</b> 
-<br>
-Aukioloajat:<b>{{ restaurant.business_hours }} </b> 
+Aukioloajat: <b>{{ restaurant.business_hours }}</b> 
 <p>
 <a href="/restaurant/{{ restaurant.id }}">Ravintolan tiedot</a><br>
 {% if session.user_id == 2 %}
@@ -45,4 +42,5 @@ Aukioloajat:<b>{{ restaurant.business_hours }} </b>
 <a href="/restaurant/{{ restaurant.id }}/delete">Poista ravintola</a>
 {% endif %}
 {% endfor %}
+<hr>
 {% endif %}

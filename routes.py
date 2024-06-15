@@ -36,12 +36,16 @@ def create_restaurant():
 			return render_template("error.html", errorcode = 1, message="Kategoria voi olla 1-30 merkkiä pitkä")
 
 		address = request.form["address"]
-		if len(address) < 1 or len(address) > 50:
+		if address == "":
+			address = "-"
+		elif len(address) > 50:
 			return render_template("error.html", errorcode = 1, message="Osoite voi olla 1-50 merkkiä pitkä")
 
 		business_hours = request.form["business_hours"]
-		if len(business_hours) < 1 or len(business_hours) > 50:
-			return render_template("error.html", errorcode = 1, message="Aukioloajat voivat olla 1-50 merkkiä pitkät")
+		if business_hours == "":
+			business_hours = "-"
+		elif len(business_hours) > 100:
+			return render_template("error.html", errorcode = 1, message="Annetut aukioloajat ylittivät sallitun merkkimäärän")
 
 		entry_type = request.form["entry_type"]
 		if entry_type not in ("1", "2"):

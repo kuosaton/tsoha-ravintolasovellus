@@ -1,14 +1,26 @@
 <title> Poistetut ravintolat – Ravintolasovellus</title>
 <h2>Poistetut ravintolat</h2>
 <hr>
+
+{% if not restaurants %}
+<h3>Ei poistettuja kirjauksia.</h3>
+{% else %}
+
 {% for restaurant in restaurants %}
-<h4>{{ restaurant.name }}</h4>
+
+{% if restaurant.entry_type == 1 %}
+<h3> Bucketlist-ravintola: {{ restaurant.name }} </h3>
+{% elif restaurant.entry_type == 2 %}
+<h3> Käyty ravintola: {{ restaurant.name }} </h3>
+{% endif %}
+
 Kuvaus: <b>{{ restaurant.description }}</b> <br>
 Kategoria: <b>{{ restaurant.category }}</b> <br>
 Osoite: <b>{{ restaurant.address }}</b> <br> 
 Aukioloajat: <b> {{restaurant.business_hours }} </b> <br>
 <a href="/restaurant/{{ restaurant.id }}/restore">Palauta ravintola</a>
-<hr>
+
 {% endfor %}
 <hr>
+{% endif %}
 <a href="/">Palaa etusivulle</a>

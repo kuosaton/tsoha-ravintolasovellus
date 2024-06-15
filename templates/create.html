@@ -2,22 +2,22 @@
 <h2>Ravintolan luonti</h2>
 
 <form action="/create" method="post">
-Ravintolan nimi:<br>
+Ravintolan nimi: (*)<br>
 <input type="text" name="name" minlength="1" maxlength="30" required>
 <p>
-Kuvaus:<br>
+Kuvaus: (*)<br>
 <textarea name="description" rows="3" cols="50" maxlength="100"></textarea>
 <p>
-Kategoria:<br>
+Kategoria: (*)<br>
 <input type="text" name="category" minlength="1" maxlength="30" required>
 <p>
 Osoite:<br>
 <textarea name="address" rows="2" cols="30" maxlength="50"></textarea>
 <p>
 Aukioloajat:<br>
-<textarea name="business_hours" rows="3" cols="50"></textarea>
+<textarea name="business_hours" rows="3" cols="50" maxlength="100"></textarea>
 <p>
-Onko kyseessä bucketlist-ravintola, vai ravintola, jossa olet jo käynyt? <br>
+Onko kyseessä bucketlist-ravintola, vai ravintola, jossa olet jo käynyt? (*) <br>
 <input type="radio" name="entry_type" value="1" checked> Bucketlist-ravintola
 <input type="radio" name="entry_type" value="2"> Käyty ravintola
 <p>
@@ -25,7 +25,8 @@ Onko kyseessä bucketlist-ravintola, vai ravintola, jossa olet jo käynyt? <br>
 
 <input type="hidden" name="csrf_token" value="{{session.csrf_token}}">
 </form>
-
+Tähdellä (*) merkityt kentät ovat pakollisia täyttää.
+<p>
 <hr>
 <a href="/">Palaa etusivulle</a>
 
