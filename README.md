@@ -35,6 +35,13 @@ Sovellukseen on tarkoitus toteuttaa seuraavaksi arvosteluominaisuus ravintoloill
 
 Sovellus ei ainakaan toistaiseksi tarjoa käyttäjälle mahdollisuutta järjestellä tietoja oman mielensä mukaan, vaan ravintolat järjestetään ensisijaisesti kirjaustyypin (bucketlist-ravintola tai käyty ravintola) ja toissijaisesti nimen eli aakkosjärjestyksen mukaan.
 
+### Kuvakaappaus tämänhetkisestä käyttöliittymästä
+
+Kuvan esimerkkitilanteessa sisään on kirjauduttu admin-tason tilillä, jonka johdosta kirjauksissa näytetään "Poista ravintola" -painikkeet. Normaalin tason käyttäjälle tätä ei näy.
+
+![yleisnäkymä](https://github.com/kuosaton/tsoha-ravintolasovellus/assets/120479105/2dba3f91-7456-4c2e-b783-235b6f566c2d)
+
+
 ## Käynnistysohjeet
 
 Kloonaa tämä repositorio omalle koneellesi ja siirry sen juurikansioon. Luo kansioon .env-tiedosto ja määritä sen sisältö seuraavanlaiseksi:
