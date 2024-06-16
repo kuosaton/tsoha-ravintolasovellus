@@ -29,11 +29,19 @@ Näkymästä voi navigoida eteenpäin seuraaviin toimintoihin:
 
 Sovellukseen voi luoda tilin (normaali käyttäjä tai ylläpitäjä), ja kirjautua sisään. Ylläpitäjä saa joitakin ylimääräisiä toiminnallisuuksia käyttöönsä, kuten kirjausten poiston ja palautuksen. 
 
+Ravintolat järjestetään ensisijaisesti kirjaustyypin (bucketlist-ravintola tai käyty ravintola) ja toissijaisesti nimen eli aakkosjärjestyksen mukaan. Arvostelut järjestetään ensisijaisesti pisteytyksen eli tähtien mukaan, suurin ensin.
+
+### Tietoturva
+
 Tietoa lisäävissä tai muokkaavissa toiminnallisuuksista on käyttäjäroolin ja CSRF-tokenin tarkistus. Esimerkkinä ravintolakirjauksen tai arvostelun poisto tai palautus.
 
-Sovellukseen on tarkoitus toteuttaa vielä toiminto olemassaolevien tietojen muokkaamiseksi, sekä Q&A-osio, jossa käyttäjät voivat kysyä ja vastata ravintoloihin liittyviin mietteisiin. 
+SQL-injektio ja XSS-haavoittuvuudet huomioidaan tietokantakäskyjä suunniteltaessa.
 
-Sovellus ei ainakaan toistaiseksi tarjoa käyttäjälle mahdollisuutta järjestellä tietoja oman mielensä mukaan, vaan ravintolat järjestetään ensisijaisesti kirjaustyypin (bucketlist-ravintola tai käyty ravintola) ja toissijaisesti nimen eli aakkosjärjestyksen mukaan. Arvostelut järjestetään ensisijaisesti pisteytyksen eli tähtien mukaan, suurin ensin.
+### To-do
+
+- Kirjausten muokkaus (turvallisesti): Sovellukseen on tarkoitus toteuttaa vielä toiminto olemassaolevien tietojen muokkaamiseksi, SQL-injektiot huomioiden.
+- Q&A-osio: Osio, jossa käyttäjät voivat kysyä ja vastata ravintoloihin liittyviin mietteisiin.
+- Yhtenäinen ja käytännöllinen ilme: Käyttöliittymään on suunnitteilla toteuttaa vielä layout.html:ää sekä block-osioita hyödyntävä malli. 
 
 ### Kuvakaappauksia käyttöliittymästä
 
