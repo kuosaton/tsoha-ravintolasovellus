@@ -1,0 +1,26 @@
+<title>Poista ravintola</title>
+
+<h2>Poista ravintola</h2>
+
+<hr>
+
+{% if not restaurants %}
+<h3>Ei poistettavia ravintoloita.</h3>
+{% else %}
+<h3>Valitse poistettava ravintola</h3>
+
+<form action="/delete_restaurant" method="post">
+{% for restaurant in restaurants %}
+<input type="radio" name="restaurant" value="{{ restaurant.id }}"> {{ restaurant.name }}<br> 
+{% endfor %}
+<br>
+
+<input type="submit" value="Poista valittu">
+<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+
+</form>
+
+{% endif %}
+
+<hr>
+<a href="/"> Palaa etusivulle </a>

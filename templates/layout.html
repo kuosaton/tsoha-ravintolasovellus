@@ -1,7 +1,7 @@
-<title>Yleisnäkymä – Ravintolasovellus</title>
+<!doctype html>
+<title>{% block title %}{% endblock %} – Ravintolasovellus</title>
 
 <h1>Ravintolasovellus</h1>
-<h2>Yleisnäkymä</h2>
 
 <hr>
 <a href="/create">Luo uusi ravintola</a>
@@ -21,31 +21,9 @@ Ylläpitäjän toiminnot:
 <a href="/delete_review">Poista arvostelu
 <a href="/restore_restaurant">Palauta poistettu ravintola</a>
 <a href="/restore_review">Palauta poistettu arvostelu</a>
-<hr>
 {% endif %}
 <br>
 
-<h3>Ravintolat</h3>
-{% if not restaurants %}
 <hr>
-<h4> Ravintoloita ei vielä ole lisätty. Kokeile luoda ravintola!</h4>
-{% else %}
-{% for restaurant in restaurants %}
-<hr>
-{% if restaurant.entry_type == 1 %}
-<h4> Bucketlist-ravintola: {{ restaurant.name }} </h4>
-{% elif restaurant.entry_type == 2 %}
-<h4> Käyty ravintola: {{ restaurant.name }} </h4>
-{% endif %}
-Kuvaus: <b>{{ restaurant.description }}</b> 
-<br>
-Kategoria: <b>{{ restaurant.category }}</b> 
-<br>
-Osoite: <b>{{ restaurant.address }}</b> 
-<br>
-Aukioloajat: <b>{{ restaurant.business_hours }}</b> 
-<p>
-<a href="/restaurant/{{ restaurant.id }}">Ravintolan tiedot</a><br>
-{% endfor %}
-{% endif %}
+{% block content %}{% endblock %}
 <hr>

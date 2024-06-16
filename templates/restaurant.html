@@ -14,14 +14,14 @@ Osoite: <b>{{ restaurant[0][3] }}</b>
 <br>
 Aukioloajat: <b>{{ restaurant[0][4] }}</b> 
 <br>
+
+{% if rating != None %}
 Arvostelujen keskiarvo: <b>{{ rating }} tähteä</b>
 <br>
+{% endif %}
 
 <hr>
 <a href="/restaurant/{{ id }}/create_review">Lisää ravintolalle arvostelu</a>
-{% if session.user_seclevel == 2 %}
-<a href="/restaurant/{{ id }}/delete">Poista ravintola</a>
-{% endif %}
 
 <hr>
 <h3>Arvostelut</h3>

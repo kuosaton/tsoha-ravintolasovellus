@@ -51,52 +51,80 @@ def create_restaurant():
 		restaurant_id = restaurants.create(name, description, category, address, business_hours, entry_type)
 		return redirect("/restaurant/"+str(restaurant_id))
 
-@app.route("/restaurant/<int:id>/delete")
-def delete_restaurant(id):
-	restaurants.delete(id)
-	return redirect("/")
+@app.route("/delete_restaurant", methods = ["GET", "POST"])
+def delete_restaurant():
+	users.check_seclevel(2)
 
-@app.route("/restaurant/<int:id>/restore")
-def restore_restaurant(id):
-	restaurants.restore(id)
-	return redirect("/")
-
-@app.route("/deleted_entries")
-def get_deleted_entries():
-        deleted_restaurants_list = restaurants.get_deleted_entries()
-        return render_template("deleted_entries.html", restaurants=deleted_restaurants_list)
-
-@app.route("/restaurant/<int:restaurant_id>/reviews/<int:review_id>")
-def view_review(restaurant_id, review_id):
-	restaurant = restaurants.get_content(restaurant_id)
-	review = reviews.get_content(restaurant_id)
-	return render_template("reviews.html", restaurant=restaurant, review=review)
-
-@app.route("/restaurant/<int:id>/reviews/")
-def view_all_reviews(id):
-	restaurant = restaurants.get_content(id)
-	reviews_list = reviews.get_content(id)
-	return render_template("reviews.html", restaurant=restaurant, reviews=reviews_list)
-
-@app.route("/restaurant/<int:id>/reviews/delete", methods=["GET", "POST"])
-def delete_reviews(restaurant_id):
 	if request.method == "GET":
-		reviews_list = reviews.get_content(restaurant_id)
-		return render_template("delete_review.html", reviews=reviews)
+		restaurants_list = restaurants.get_list()
+		return render_template("delete_restaurant.html", restaurants=restaurants_list)
 
 	if request.method == "POST":
-		users.check_seclevel(2)
 		users.check_csrf()
-		if "review" in request.form:
-			review_id = request.form["review"]
-			reviews.delete_review(review_id)
+		if "restaurant" in request.form:
+			restaurant_id = request.form["restaurant"]
+			restaurants.delete(restaurant_id)
 
 		return redirect("/")
 
-@app.route("/deleted_reviews")
-def get_deleted_reviews():
-	deleted_reviews_list = reviews.get_deleted_entries()
-	return render_template("deleted_reviews.html", reviews=deleted_reviews_list)
+@app.route("/restore_restaurant", methods = ["GET", "POST"])
+def restore_restaurant():
+	users.check_seclevel(2)
+
+	if request.method == "GET":
+		deleted_restaurants = restaurants.get_deleted_entries()
+		return render_template("restore_restaurant.html", restaurants=deleted_restaurants)
+
+	if request.method == "POST":
+		users.check_csrf()
+		if "restaurant" in request.form:
+			restaurant_id = request.form["restaurant"]
+			restaurants.restore(restaurant_id)
+
+		return redirect("/")
+
+@app.route("/restaurant/<int:restaurant_id>/reviews/<int:review_id>")
+def view_review(restaurant_id, review_id):
+	restaurant_content = restaurants.get_content(restaurant_id)
+	review_content = reviews.get_content(restaurant_id)
+	return render_template("reviews.html", restaurant=restaurant_content, review=review_content)
+
+@app.route("/restaurant/<int:id>/reviews/")
+def view_all_reviews(id):
+	restaurant_content = restaurants.get_content(id)
+	reviews_list = reviews.get_content(id)
+	return render_template("reviews.html", restaurant=restaurant_content, reviews=reviews_list)
+
+@app.route("/delete_review", methods = ["GET", "POST"])
+def delete_review():
+	users.check_seclevel(2)
+
+	if request.method == "GET":
+		reviews_list = reviews.get_list()
+		return render_template("delete_review.html", reviews=reviews_list)
+
+	if request.method == "POST":
+		users.check_csrf()
+		if "review" in request.form:
+			review_id = request.form["review"]
+			reviews.delete(review_id)
+
+		return redirect("/")
+
+@app.route("/restore_review", methods = ["GET", "POST"])
+def restore_review():
+	users.check_seclevel(2)
+	if request.method == "GET":
+		deleted_reviews = reviews.get_deleted_entries()
+		return render_template("restore_review.html", reviews=deleted_reviews)
+
+	if request.method == "POST":
+		users.check_csrf()
+		if "review" in request.form:
+			review_id = request.form["review"]
+			reviews.restore(review_id)
+
+		return redirect("/")
 
 @app.route("/search")
 def search():

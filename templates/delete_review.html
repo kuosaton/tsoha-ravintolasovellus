@@ -1,0 +1,25 @@
+<title>Poista arvostelu</title>
+
+<h2>Poista arvostelu</h2>
+<hr>
+
+{% if not reviews %}
+<h3>Ei poistettavia arvosteluita.</h3>
+{% else %}
+<h3>Valitse poistettava arvostelu</h3>
+
+<form action="/delete_review" method="post">
+
+{% for review in reviews %}
+<input type="radio" name="review" value="{{ review.id }}"> {{ review.title }}: {{ review.review }}<br> 
+{% endfor %} 
+<br>
+
+<input type="submit" value="Poista valittu">
+<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+
+</form>
+
+{% endif %}
+<hr>
+<a href="/"> Palaa etusivulle </a>

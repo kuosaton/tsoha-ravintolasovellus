@@ -40,6 +40,6 @@ def get_deleted_entries():
         return result.fetchall()
 
 def get_rating_average(restaurant_id):
-	sql = "SELECT COALESCE(SUM(rating), 0) / COUNT (*) FROM reviews WHERE restaurant_id = :restaurant_id AND visible = TRUE" 
+	sql = "SELECT SUM(rating) / COUNT (*) FROM reviews WHERE restaurant_id = :restaurant_id AND visible = TRUE" 
 	result = db.session.execute(text(sql), {"restaurant_id":restaurant_id})
 	return result.fetchone()[0]

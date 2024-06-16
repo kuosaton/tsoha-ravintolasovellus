@@ -1,0 +1,23 @@
+<title>Poistetut arvostelut</title>
+
+<h2>Poistetut arvostelut</h2>
+
+<hr>
+
+{% if not reviews %}
+<h3> Ei poistettuja arvosteluja. </h3>
+{% else %}
+<form action="/restore_review" method="post">
+{% for review in reviews %}
+<input type="radio" name="review" value="{{ review.id }}"> {{ review.title }} : {{ review.review }}<br>
+{% endfor %}
+<br>
+
+<input type="submit" value="Palauta valittu">
+<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+
+</form>
+{% endif %}
+<hr>
+<a href="/"> Palaa etusivulle </a>
+

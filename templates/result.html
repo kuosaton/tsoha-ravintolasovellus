@@ -23,11 +23,6 @@ Osoite: <b>{{ restaurant.address }}</b>
 Aukioloajat: <b>{{ restaurant.business_hours }}</b> 
 <p>
 <a href="/restaurant/{{ restaurant.id }}">Ravintolan tiedot</a><br>
-{% if session.user_id == 2 %}
-<hr>
-<a href="/restaurant/{{ restaurant.id }}/delete">Poista ravintola</a>
-{% endif %}
-
 {% endfor %}
 <hr>
 
