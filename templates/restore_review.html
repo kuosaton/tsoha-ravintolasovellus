@@ -9,7 +9,8 @@
 {% else %}
 <form action="/restore_review" method="post">
 {% for review in reviews %}
-<input type="radio" name="review" value="{{ review.id }}"> {{ review.title }} : {{ review.review }}<br>
+<input type="radio" name="review" value="{{ review.id }}"> {{ review.title }}: {{ review.description }}, tekijä {{ review.user_name }}, käyttäjätunnus {{ review.user_id }}<br>
+
 {% endfor %}
 <br>
 

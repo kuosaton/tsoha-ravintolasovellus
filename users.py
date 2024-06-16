@@ -38,9 +38,6 @@ def register(username, password, seclevel):
 
 	return login(username, password)
 
-def user_id():
-	return session.get("user_id", 0)
-
 def check_seclevel(seclevel):
 	if seclevel > session.get("user_seclevel", 0):
 		abort(403)

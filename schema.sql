@@ -20,8 +20,9 @@ CREATE TABLE reviews (
 	id SERIAL PRIMARY KEY,
 	restaurant_id INTEGER REFERENCES restaurants,
 	user_id INTEGER REFERENCES users,
+	user_name TEXT,
 	title TEXT,
-	review TEXT,
+	description TEXT,
 	rating INTEGER,
 	recommendation INTEGER,
 	visible	BOOLEAN DEFAULT TRUE
@@ -30,15 +31,17 @@ CREATE TABLE reviews (
 CREATE TABLE questions (
 	id SERIAL PRIMARY KEY,
 	user_id INTEGER REFERENCES users,
+	user_name TEXT,
 	restaurant_id INTEGER REFERENCES restaurants,
-	sent_at TIMESTAMP,
-	content TEXT
+	content TEXT,
+	visible BOOLEAN DEFAULT TRUE
 );
 
 CREATE TABLE answers (
 	id SERIAL PRIMARY KEY,
 	user_id INTEGER REFERENCES users,
+	user_name TEXT,
 	question_id INTEGER REFERENCES questions,
-	sent_at TIMESTAMP,
-	content TEXT
+	content TEXT,
+	visible BOOLEAN DEFAULT TRUE
 );

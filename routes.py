@@ -7,8 +7,7 @@ import reviews
 @app.route("/")
 def index():
 	restaurants_list = restaurants.get_list()
-	reviews_list = reviews.get_list()
-	return render_template("index.html", restaurants=restaurants_list, reviews=reviews_list)
+	return render_template("index.html", restaurants=restaurants_list)
 
 @app.route("/create", methods=["GET", "POST"])
 def create_restaurant():
@@ -82,18 +81,6 @@ def restore_restaurant():
 			restaurants.restore(restaurant_id)
 
 		return redirect("/")
-
-@app.route("/restaurant/<int:restaurant_id>/reviews/<int:review_id>")
-def view_review(restaurant_id, review_id):
-	restaurant_content = restaurants.get_content(restaurant_id)
-	review_content = reviews.get_content(restaurant_id)
-	return render_template("reviews.html", restaurant=restaurant_content, review=review_content)
-
-@app.route("/restaurant/<int:id>/reviews/")
-def view_all_reviews(id):
-	restaurant_content = restaurants.get_content(id)
-	reviews_list = reviews.get_content(id)
-	return render_template("reviews.html", restaurant=restaurant_content, reviews=reviews_list)
 
 @app.route("/delete_review", methods = ["GET", "POST"])
 def delete_review():
@@ -194,6 +181,7 @@ def register():
 @app.route("/restaurant/<int:id>/create_review", methods=["GET", "POST"])
 def create_review(id):
 	users.check_seclevel(1)
+
 	if request.method == "GET":
 		return render_template("create_review.html", id=id)
 
@@ -204,9 +192,9 @@ def create_review(id):
 		if len(title) < 1 or len(title) > 50:
 			return render_template("error.html", errorcode = 3, message="Arvostelun otsikko voi olla 1-30 merkkiä pitkä")
 
-		review = request.form["review"]
-		if len(review) < 1 or len(review) > 1000:
-			return render_template("error.html", errorcode = 3, message="Arvostelu voi olla 1-1000 merkkiä pitkä")
+		description = request.form["description"]
+		if len(description) < 1 or len(description) > 1000:
+			return render_template("error.html", errorcode = 3, message="Arvostelun kuvaus voi olla 1-1000 merkkiä pitkä")
 
 		rating = request.form["rating"]
 		if rating not in ("1", "2", "3", "4", "5"):
@@ -218,7 +206,10 @@ def create_review(id):
 
 		user_id = request.form["user_id"]
 
-		if not reviews.create(id, user_id, title, review, rating, recommendation):
+		user_name = request.form["user_name"]
+
+
+		if not reviews.create(id, user_id, user_name, title, description, rating, recommendation):
 			return render_template("error.html", errorcode = 3, message="Arvostelun tallentamisessa tapahtui virhe")
 
 		return redirect("/restaurant/"+str(id))

@@ -2,30 +2,37 @@
 <h2>Ravintolan arvostelu</h2>
 
 <form action="/restaurant/{{ id }}/create_review" method="post">
-Otsikko: (*)<br>
+
+Otsikko: <br>
 <input type="text" name="title" minlength="1" maxlength="50" required>
 <p>
-Sanallinen arvostelu: (*)<br>
-<textarea name="review" rows="5" cols="100" maxlength="1000"></textarea>
+Kuvaus: <br>
+<textarea name="description" rows="5" cols="100" maxlength="1000"></textarea>
 <p>
-Arvostelu, tähteä: (*)<br>
+Arvostelu, tähteä: <br>
 <input type="radio" name="rating" value="1" required> 1
 <input type="radio" name="rating" value="2"> 2
 <input type="radio" name="rating" value="3"> 3
 <input type="radio" name="rating" value="4"> 4
 <input type="radio" name="rating" value="5"> 5
 <p>
-Suosittelisitko tätä ravintolaa? (*) <br>
+Suosittelisitko tätä ravintolaa kaverille? <br>
 <input type="radio" name="recommendation" value="1" required> Kyllä
 <input type="radio" name="recommendation" value="2"> Ei
 <p>
+
 <input type="submit" value="Lisää arvostelu">
 
 <input type="hidden" name="user_id" value="{{ session.user_id }}">
+<input type="hidden" name="user_name" value="{{ session.user_name }}">
 <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+
 </form>
+
 Kaikki kentät ovat pakollisia täyttää.
 <p>
+
 <hr>
+
 <a href="/">Palaa etusivulle</a>
 
