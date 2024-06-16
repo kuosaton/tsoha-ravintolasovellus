@@ -16,7 +16,16 @@ Sovelluksen toimintoja:
 
 ## Sovelluksen tämänhetkinen toiminnallisuus
 
-Ravintolasovellus käynnistyy yleisnäkymään, jossa näytetään kaikki lisätyt ravintolat. Näkymästä voi navigoida uuden ravintolan lisäämiseen, hakutoimintoon, tai poistettujen ravintoloiden näkymään, jossa voi tarkastella ja palauttaa poistettuja kirjauksia. 
+Ravintolasovellus käynnistyy yleisnäkymään, jossa näytetään kaikki lisätyt ravintolat. 
+
+Näkymästä voi navigoida eteenpäin seuraaviin toimintoihin:
+- Uuden ravintolan luonti
+- Ravintolan haku
+- Poistettujen ravintoloiden näkymä, jossa voi tarkastella ja palauttaa poistettuja kirjauksia
+- Sisäänkirjautuminen
+  - Tältä sivulta voi siirtyä uuden tilin rekisteröintiin
+- Ravintolaspesifinen näkymä, jossa näytetään ravintolan arvostelut ja arvostelujen keskiarvopisteytys
+  - Tältä sivulta voi siirtyä arvostelun tekemiseen ravintolalle 
 
 Sovellukseen voi luoda tilin (normaali käyttäjä tai ylläpitäjä), ja kirjautua sisään. Ylläpitäjä saa joitakin ylimääräisiä toiminnallisuuksia käyttöönsä, kuten kirjausten poiston ja palautuksen. 
 
@@ -31,7 +40,7 @@ Ravintolaa luodessa määritetään seuraavat kriteerit:
 - Osoite
 - Aukioloajat
 
-Sovellukseen on tarkoitus toteuttaa seuraavaksi arvosteluominaisuus ravintoloille, sekä Q&A-osio, jossa käyttäjät voivat kysyä ja vastata ravintoloihin liittyviin mietteisiin. 
+Sovellukseen on tarkoitus toteuttaa vielä Q&A-osio, jossa käyttäjät voivat kysyä ja vastata ravintoloihin liittyviin mietteisiin. 
 
 Sovellus ei ainakaan toistaiseksi tarjoa käyttäjälle mahdollisuutta järjestellä tietoja oman mielensä mukaan, vaan ravintolat järjestetään ensisijaisesti kirjaustyypin (bucketlist-ravintola tai käyty ravintola) ja toissijaisesti nimen eli aakkosjärjestyksen mukaan.
 
