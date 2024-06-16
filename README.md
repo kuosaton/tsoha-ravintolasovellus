@@ -21,34 +21,31 @@ Ravintolasovellus käynnistyy yleisnäkymään, jossa näytetään kaikki lisät
 Näkymästä voi navigoida eteenpäin seuraaviin toimintoihin:
 - Uuden ravintolan luonti
 - Ravintolan haku
-- Poistettujen ravintoloiden näkymä, jossa voi tarkastella ja palauttaa poistettuja kirjauksia
+- Näkymät ravintoloiden ja arvostelujen poistamista tai palauttamista varten
 - Sisäänkirjautuminen
   - Tältä sivulta voi siirtyä uuden tilin rekisteröintiin
-- Ravintolaspesifinen näkymä, jossa näytetään ravintolan arvostelut ja arvostelujen keskiarvopisteytys
+- Ravintolan näkymä, jossa näytetään ravintolan arvostelut ja arvostelujen keskiarvopisteytys, jos arvosteluja on annettu
   - Tältä sivulta voi siirtyä arvostelun tekemiseen ravintolalle 
 
 Sovellukseen voi luoda tilin (normaali käyttäjä tai ylläpitäjä), ja kirjautua sisään. Ylläpitäjä saa joitakin ylimääräisiä toiminnallisuuksia käyttöönsä, kuten kirjausten poiston ja palautuksen. 
 
-Sovelluksessa on osittainen käyttäjäroolin ja CSRF-tokenin tarkistus. Tämä ei vielä kata kaikkia toiminnallisuuksia.
-
-Ravintolaa luodessa määritetään seuraavat kriteerit: 
-- Kirjauksen tyyppi (Onko ravintolassa jo käyty, vai meneekö se bucketlistille?)
-  - Sovelluksen rakenteeseen on tämän suhteen tehty parannuksia – visited_restaurants ja bucketlist_restaurants on yhdistetty yhdeksi restaurants-tauluksi, ja määritys tapahtuu nyt yksinkertaisemmin entry_type -attribuutilla. 
-- Nimi
-- Kuvaus
-- Kategoria (Tämä on vapaasti käyttäjän määriteltävissä, ja voi olla esimerkiksi alkuperämaa tai tyyli)
-- Osoite
-- Aukioloajat
+Osassa sovelluksen toiminnallisuuksista on käyttäjäroolin ja CSRF-tokenin tarkistus. Näihin toiminnallisuuksiin lukeutuvat sellaiset, jotka lisäävät tai muokkaavat tietoa (ravintolan/arvostelun lisäys tai poisto / poistetun ravintolan/arvostelun palautus).
 
 Sovellukseen on tarkoitus toteuttaa vielä Q&A-osio, jossa käyttäjät voivat kysyä ja vastata ravintoloihin liittyviin mietteisiin. 
 
-Sovellus ei ainakaan toistaiseksi tarjoa käyttäjälle mahdollisuutta järjestellä tietoja oman mielensä mukaan, vaan ravintolat järjestetään ensisijaisesti kirjaustyypin (bucketlist-ravintola tai käyty ravintola) ja toissijaisesti nimen eli aakkosjärjestyksen mukaan.
+Sovellus ei ainakaan toistaiseksi tarjoa käyttäjälle mahdollisuutta järjestellä tietoja oman mielensä mukaan, vaan ravintolat järjestetään ensisijaisesti kirjaustyypin (bucketlist-ravintola tai käyty ravintola) ja toissijaisesti nimen eli aakkosjärjestyksen mukaan. Arvostelut järjestetään ensisijaisesti pisteytyksen eli tähtien mukaan, suurin ensin.
 
-### Kuvakaappaus tämänhetkisestä käyttöliittymästä
+### Kuvakaappauksia käyttöliittymästä
 
-Kuvan esimerkkitilanteessa sisään on kirjauduttu admin-tason tilillä, jonka johdosta kirjauksissa näytetään "Poista ravintola" -painikkeet. Normaalin tason käyttäjälle tätä ei näy.
+#### Yleisnäkymä
 
-![yleisnäkymä](https://github.com/kuosaton/tsoha-ravintolasovellus/assets/120479105/2dba3f91-7456-4c2e-b783-235b6f566c2d)
+![yleisnäkymä](https://github.com/kuosaton/tsoha-ravintolasovellus/assets/120479105/4a4f4822-b92f-4048-8c7f-681955bea63a)
+
+#### Ravintolan näkymä
+
+Arvosteluihin on tarkoituksena lisätä vielä arvostelun tekijän nimi.
+
+![arvostelut](https://github.com/kuosaton/tsoha-ravintolasovellus/assets/120479105/a4a02c02-3ed7-48d9-b9c8-0fd55478c8be)
 
 
 ## Käynnistysohjeet
