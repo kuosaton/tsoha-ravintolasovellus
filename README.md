@@ -44,7 +44,7 @@ Sovellus ei ainakaan toistaiseksi tarjoa käyttäjälle mahdollisuutta järjeste
 
 #### Ravintolan näkymä
 
-![arvostelut](https://github.com/kuosaton/tsoha-ravintolasovellus/assets/120479105/bf682288-fff9-4219-b5f6-5f91b116186f)
+![arvostelut](https://github.com/kuosaton/tsoha-ravintolasovellus/assets/120479105/bc228571-efc7-4325-9138-4b52ac9b03ed)
 
 ## Käynnistysohjeet
 
