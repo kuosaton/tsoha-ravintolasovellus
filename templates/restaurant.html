@@ -15,6 +15,19 @@ Osoite: <b>{{ restaurant[0][3] }}</b>
 Aukioloajat: <b>{{ restaurant[0][4] }}</b> 
 <br>
 
+{% if reviews %}
+<h3> Arvostelut <h3>
+{% for review in reviews %}
+{{ review.title }}
+{{ review.review }}
+{{ review.rating }}
+{{ review.recommendation }}
+{% endfor %}
+{% endif %}
+
+<a href="/restaurant/{{ id }}/create_review">Lisää ravintolalle arvostelu</a>
+<a href="/restaurant/{{ id }}/reviews">Ravintolan arvostelut</a>
+
 {% if session.user_id == 2 %}
 <hr>
 <a href="/restaurant/{{ id }}/delete">Poista ravintola</a>

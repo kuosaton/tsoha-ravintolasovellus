@@ -1,0 +1,27 @@
+<title>Ravintolan {{ restaurant[0][0] }} arvostelut – Ravintolasovellus</title>
+
+<h1>Ravintolan {{ restaurant[0][0] }} arvostelut</h1>
+
+<hr>
+<h2>Arvostelut</h2>
+{% if not reviews %}
+<h3> Arvosteluja ei vielä ole lisätty. Kokeile luoda arvostelu!</h3>
+{% else %}
+{% for review in reviews %}
+<hr>
+<h3>{{ review.title }}</h3>
+<h3>{{ review.rating}} tähteä</h3>
+<br>
+<h4>{{ review.review }}</h4>
+<br>
+Suosittelisitko tätä ravintolaa?
+{% if review.recommendation == 1 %}
+<b> Kyllä </b>
+{% elif review.recommendation == 2 %}
+<b> En <b>
+{% endif %}
+{% endfor %}
+{% endif %}
+<hr>
+
+<a href="/"> Palaa etusivulle </a>

@@ -18,11 +18,12 @@ CREATE TABLE restaurants (
 
 CREATE TABLE reviews (
 	id SERIAL PRIMARY KEY,
-	user_id INTEGER REFERENCES users,
 	restaurant_id INTEGER REFERENCES restaurants,
-	sent_at TIMESTAMP,
-	stars INTEGER,
-	content TEXT,
+	user_id INTEGER REFERENCES users,
+	title TEXT,
+	review TEXT,
+	rating INTEGER,
+	recommendation INTEGER,
 	visible	BOOLEAN DEFAULT TRUE
 );
 
