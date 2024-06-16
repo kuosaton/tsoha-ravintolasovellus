@@ -30,12 +30,12 @@ def get_review(review_id):
 	return result.fetchall()
 
 def get_content(restaurant_id):
-        sql = "SELECT restaurant_id, user_id, user_name, title, description, rating, recommendation FROM reviews WHERE restaurant_id = :restaurant_id AND visible = TRUE"
+        sql = "SELECT restaurant_id, user_id, user_name, title, description, rating, recommendation FROM reviews WHERE restaurant_id = :restaurant_id AND visible = TRUE ORDER BY rating DESC, recommendation"
         result = db.session.execute(text(sql), {"restaurant_id":restaurant_id})
         return result.fetchall()
 
 def get_deleted_entries():
-        sql = "SELECT id, restaurant_id, user_id, user_name, title, description, rating, recommendation FROM reviews WHERE visible = FALSE"
+        sql = "SELECT id, restaurant_id, user_id, user_name, title, description, rating, recommendation FROM reviews WHERE visible = FALSE ORDER BY user_id"
         result = db.session.execute(text(sql))
         return result.fetchall()
 
