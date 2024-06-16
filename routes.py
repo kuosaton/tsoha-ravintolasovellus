@@ -21,12 +21,12 @@ def create_restaurant():
 		users.check_csrf()
 
 		name = request.form["name"]
-		if len(name) < 1 or len(name) > 30:
-			return render_template("error.html", errorcode=1, message="Nimi voi olla 1-30 merkkiä pitkä")
+		if len(name) < 1 or len(name) > 50:
+			return render_template("error.html", errorcode=1, message="Nimi voi olla 1-50 merkkiä pitkä")
 
 		description = request.form["description"]
-		if len(description) < 1 or len(description) > 100:
-			return render_template("error.html", errorcode=1, message="Kuvaus voi olla 1-100 merkkiä pitkä")
+		if len(description) < 1 or len(description) > 1000:
+			return render_template("error.html", errorcode=1, message="Kuvaus voi olla 1-1000 merkkiä pitkä")
 
 		category = request.form["category"]
 		if len(category) < 1 or len(category) > 30:
@@ -41,8 +41,8 @@ def create_restaurant():
 		business_hours = request.form["business_hours"]
 		if business_hours == "":
 			business_hours = "-"
-		elif len(business_hours) > 100:
-			return render_template("error.html", errorcode = 1, message="Annetut aukioloajat ylittivät sallitun merkkimäärän")
+		elif len(business_hours) > 1000:
+			return render_template("error.html", errorcode = 1, message="Aukioloajat voivat olla 1-1000 merkkiä pitkät")
 
 		entry_type = request.form["entry_type"]
 		if entry_type not in ("1", "2"):
@@ -112,7 +112,8 @@ def result():
 def view_restaurant(id):
 	restaurant = restaurants.get_content(id)
 	reviews_list = reviews.get_content(id)
-	return render_template("restaurant.html", id=id, restaurant=restaurant, reviews=reviews_list)
+	rating = reviews.get_rating_average(id)
+	return render_template("restaurant.html", id=id, rating=rating, restaurant=restaurant, reviews=reviews_list)
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -141,8 +142,8 @@ def register():
 
 	if request.method == "POST":
 		username = request.form["username"]
-		if len(username) < 1 or len(username) > 20:
-			return render_template("error.html", errorcode = 0,  message="Käyttäjänimen tulee olla 1-20 merkkiä pitkä")
+		if len(username) < 1 or len(username) > 30:
+			return render_template("error.html", errorcode = 0,  message="Käyttäjänimi voi olla 1-30 merkkiä pitkä")
 
 		password = request.form["password"]
 		password_verify = request.form["password_verify"]
@@ -150,7 +151,7 @@ def register():
 		if password != password_verify:
 			return render_template("error.html", errorcode = 0, message="Annetut salasanat eivät vastaa toisiaan")
 		if len(password) < 1 or len(password) > 30:
-			return render_template("error.html", errorcode = 0, message="Annetun salasanan pituus ei ole toivotunlainen")
+			return render_template("error.html", errorcode = 0, message="Salasana voi olla 1-30 merkkiä pitkä")
 
 		seclevel = request.form["seclevel"]
 
@@ -172,12 +173,12 @@ def create_review(id):
 		users.check_csrf()
 
 		title = request.form["title"]
-		if len(title) < 1 or len(title) > 30:
+		if len(title) < 1 or len(title) > 50:
 			return render_template("error.html", errorcode = 3, message="Arvostelun otsikko voi olla 1-30 merkkiä pitkä")
 
 		review = request.form["review"]
-		if len(review) < 1 or len(review) > 100:
-			return render_template("error.html", errorcode = 3, message="Arvostelu voi olla 1-100 merkkiä pitkä")
+		if len(review) < 1 or len(review) > 1000:
+			return render_template("error.html", errorcode = 3, message="Arvostelu voi olla 1-1000 merkkiä pitkä")
 
 		rating = request.form["rating"]
 		if rating not in ("1", "2", "3", "4", "5"):

@@ -9,17 +9,16 @@
 {% else %}
 {% for review in reviews %}
 <hr>
-<h3>{{ review.title }}</h3>
-<h3>{{ review.rating}} tähteä</h3>
-<br>
-<h4>{{ review.review }}</h4>
-<br>
+<h3>''{{ review.title }}''</h3>
+Arvostelu: <b> {{ review.rating}} tähteä<b> <br>
+Sanallinen arvostelu: <b> {{ review.review }} <b> <br>
 Suosittelisitko tätä ravintolaa?
 {% if review.recommendation == 1 %}
 <b> Kyllä </b>
 {% elif review.recommendation == 2 %}
 <b> En <b>
 {% endif %}
+<br>
 {% endfor %}
 {% endif %}
 <hr>

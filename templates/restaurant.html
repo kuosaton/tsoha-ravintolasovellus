@@ -14,25 +14,34 @@ Osoite: <b>{{ restaurant[0][3] }}</b>
 <br>
 Aukioloajat: <b>{{ restaurant[0][4] }}</b> 
 <br>
+Arvostelujen keskiarvo: <b>{{ rating }} tähteä</b>
+<br>
 
-{% if reviews %}
-<h3> Arvostelut <h3>
-{% for review in reviews %}
-{{ review.title }}
-{{ review.review }}
-{{ review.rating }}
-{{ review.recommendation }}
-{% endfor %}
-{% endif %}
-
-<a href="/restaurant/{{ id }}/create_review">Lisää ravintolalle arvostelu</a>
-<a href="/restaurant/{{ id }}/reviews">Ravintolan arvostelut</a>
-
-{% if session.user_id == 2 %}
 <hr>
+<a href="/restaurant/{{ id }}/create_review">Lisää ravintolalle arvostelu</a>
+{% if session.user_seclevel == 2 %}
 <a href="/restaurant/{{ id }}/delete">Poista ravintola</a>
 {% endif %}
 
+<hr>
+<h3>Arvostelut</h3>
+{% if not reviews %}
+<h4> Ravintolalla ei vielä ole yhtään arvostelua. Kokeile luoda arvostelu!</h4>
+{% else %}
+{% for review in reviews %}
+<hr>
+<h4>''{{ review.title }}''</h4>
+Arvostelu: <b> {{ review.rating}} tähteä<b> <br>
+Sanallinen arvostelu: <b> {{ review.review }} <b> <br>
+Suosittelisitko tätä ravintolaa?
+{% if review.recommendation == 1 %}
+<b> Kyllä </b>
+{% elif review.recommendation == 2 %}
+<b> En <b>
+{% endif %}
+<br>
+{% endfor %}
+{% endif %}
 <hr>
 
 <a href="/"> Palaa etusivulle </a>
