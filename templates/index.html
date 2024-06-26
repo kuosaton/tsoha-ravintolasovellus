@@ -1,42 +1,26 @@
-<title>Yleisnäkymä – Ravintolasovellus</title>
+<!DOCTYPE html>
+{% extends "layout.html" %}
+{% block title %}Etusivu{% endblock %}
+{% block content %}
 
-<h1>Ravintolasovellus</h1>
-<h2>Yleisnäkymä</h2>
-
-<hr>
-<a href="/create">Luo uusi ravintola</a>
-<a href="/search">Hae ravintolaa</a>
-{% if session.user_seclevel == 1 %}
-Kirjauduttu sisään käyttäjänä: <b>{{ session.user_name }}</b>. Tilin taso: Käyttäjä. <a href="/logout">Kirjaudu ulos</a>
-{% elif session.user_seclevel == 2 %}
-Kirjauduttu sisään käyttäjänä: <b>{{ session.user_name }}</b>. Tilin taso: Ylläpitäjä. <a href="/logout">Kirjaudu ulos</a>
-{% else %}
-<a href="/login">Kirjaudu sisään</a>
-{% endif %}
-<hr>
-
-{% if session.user_seclevel == 2 %}
-Ylläpitäjän toiminnot:
-<a href="/delete_restaurant">Poista ravintola</a>
-<a href="/delete_review">Poista arvostelu
-<a href="/restore_restaurant">Poistetut ravintolat</a>
-<a href="/restore_review">Poistetut arvostelut</a>
-<hr>
-{% endif %}
-<br>
+<h2>Etusivu</h2>
 
 <h3>Ravintolat</h3>
+
 {% if not restaurants %}
 <hr>
 <h4> Ravintoloita ei vielä ole lisätty. Kokeile luoda ravintola!</h4>
+
 {% else %}
 {% for restaurant in restaurants %}
 <hr>
+
 {% if restaurant.entry_type == 1 %}
 <h4> Bucketlist-ravintola: {{ restaurant.name }} </h4>
 {% elif restaurant.entry_type == 2 %}
 <h4> Käyty ravintola: {{ restaurant.name }} </h4>
 {% endif %}
+
 Kuvaus: <b>{{ restaurant.description }}</b> 
 <br>
 Kategoria: <b>{{ restaurant.category }}</b> 
@@ -46,6 +30,9 @@ Osoite: <b>{{ restaurant.address }}</b>
 Aukioloajat: <b>{{ restaurant.business_hours }}</b> 
 <p>
 <a href="/restaurant/{{ restaurant.id }}">Ravintolan tiedot</a><br>
+
 {% endfor %}
+
 {% endif %}
-<hr>
+
+{% endblock %}

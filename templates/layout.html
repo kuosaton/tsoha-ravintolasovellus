@@ -1,29 +1,32 @@
-<!doctype html>
+<!DOCTYPE html>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+
 <title>{% block title %}{% endblock %} – Ravintolasovellus</title>
 
-<h1>Ravintolasovellus</h1>
-
-<hr>
-<a href="/create">Luo uusi ravintola</a>
-<a href="/search">Hae ravintolaa</a>
-{% if session.user_seclevel == 1 %}
-Kirjauduttu sisään käyttäjänä: <b>{{ session.user_name }}</b>. Tilin taso: Käyttäjä. <a href="/logout">Kirjaudu ulos</a>
-{% elif session.user_seclevel == 2 %}
-Kirjauduttu sisään käyttäjänä: <b>{{ session.user_name }}</b>. Tilin taso: Ylläpitäjä. <a href="/logout">Kirjaudu ulos</a>
-{% else %}
-<a href="/login">Kirjaudu sisään</a>
-{% endif %}
-<hr>
-
-{% if session.user_seclevel == 2 %}
-Ylläpitäjän toiminnot:
-<a href="/delete_restaurant">Poista ravintola</a>
-<a href="/delete_review">Poista arvostelu
-<a href="/restore_restaurant">Poistetut ravintolat</a>
-<a href="/restore_review">Poistetut arvostelut</a>
-{% endif %}
-<br>
-
-<hr>
-{% block content %}{% endblock %}
-<hr>
+<div class="container">
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<a class="navbar-brand" href="/">Ravintolasovellus</a>
+		<ul class="navbar-nav">
+			<li class="nav-item">
+				<a class="nav-link" href="/create">Ravintolan luonti</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link"  href="/search">Haku</a>
+			</li>
+		</ul>
+		<span class="navbar-text">
+			{% if session.user_seclevel == 1 %}
+			Kirjauduttu sisään käyttäjänä: {{ session.user_name }} 
+			<a class="nav-link" href="/logout">Kirjaudu ulos</a>
+			{% elif session.user_seclevel == 2 %}
+			Kirjauduttu sisään ylläpitäjänä: {{ session.user_name }} 
+			<a class="nav-link"  href="/logout">Kirjaudu ulos</a>
+			{% else %}
+                        <a class="nav-link" href="/login">Kirjaudu sisään</a>
+			{% endif %}
+		</span>
+	</nav>
+	<hr>
+	{% block content %}{% endblock %}
+</div>
