@@ -16,6 +16,26 @@ Sovelluksen toimintoja:
 
 ## Sovelluksen tämänhetkinen toiminnallisuus
 
+Toteutetut toiminnot on merkitty tehty-ikonilla. Tyhjällä ikonilla merkityt toiminnallisuudet ovat vielä kesken.
+
+### Ydintoiminnallisuus
+
+- [x] Sovellukseen voi luoda käyttäjätilin (tilin taso voi olla tavallinen tai ylläpitäjä)
+- [x] Käyttäjä voi luoda ja tarkastella ravintolakirjauksia
+  - Kirjausta luotaessa annetaan ravintolan nimi, kuvaus, kategoria, osoite, aukioloajat. Lisäksi määritellään onko kyseessä bucketlist-ravintola vai jo käyty ravintola
+- [x] Luodun ravintolan voi poistaa
+- [x] Käyttäjä voi antaa arvosteluja luoduille ravintoloille
+- [x] Luodun arvostelun voi poistaa
+- [x] Käyttäjä voi etsiä ravintoloita (tekstihaku)
+- [ ] Q&A: Käyttäjät voivat luoda ravintoloihin liittyviä kysymyksiä sekä vastata niihin
+- [ ] Luotujen kirjausten tietoja voi muokata
+
+### Jatkokehitysideoita
+
+- [ ] Käyttäjä voi tarkastella yllämainittuihin asioihin liittyviä tilastoja, esimerkiksi arvostelupisteyksien keskiarvo tai yleisin arvosana, suosituin keittiökulttuuri, tms.
+
+### Kuvaus
+
 Ravintolasovellus käynnistyy yleisnäkymään, jossa näytetään kaikki lisätyt ravintolat. 
 
 Näkymästä voi navigoida eteenpäin seuraaviin toimintoihin:
@@ -36,23 +56,6 @@ Ravintolat järjestetään ensisijaisesti kirjaustyypin (bucketlist-ravintola ta
 Tietoa lisäävissä tai muokkaavissa toiminnallisuuksista on käyttäjäroolin ja CSRF-tokenin tarkistus. Esimerkkinä ravintolakirjauksen tai arvostelun poisto tai palautus.
 
 SQL-injektio ja XSS-haavoittuvuudet huomioidaan tietokantakäskyjä suunniteltaessa.
-
-### To-do
-
-- Kirjausten muokkaus (turvallisesti): Sovellukseen on tarkoitus toteuttaa vielä toiminto olemassaolevien tietojen muokkaamiseksi, SQL-injektiot huomioiden.
-- Q&A-osio: Osio, jossa käyttäjät voivat kysyä ja vastata ravintoloihin liittyviin mietteisiin.
-- Yhtenäinen ja käytännöllinen ilme: Käyttöliittymään on suunnitteilla toteuttaa vielä layout.html:ää sekä block-osioita hyödyntävä malli. 
-
-### Kuvakaappauksia käyttöliittymästä
-
-#### Yleisnäkymä
-
-![yleisnäkymä](https://github.com/kuosaton/tsoha-ravintolasovellus/assets/120479105/9f80383d-1bea-4de0-8490-3bf74a392465)
-
-
-#### Ravintolan näkymä
-
-![arvostelut](https://github.com/kuosaton/tsoha-ravintolasovellus/assets/120479105/bc228571-efc7-4325-9138-4b52ac9b03ed)
 
 ## Käynnistysohjeet
 
