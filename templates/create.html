@@ -1,5 +1,10 @@
-<title>Ravintolan luonti – Ravintolasovellus</title>
+{% extends "layout.html" %}
+{% block title %}Ravintolan luonti{% endblock %}
+{% block content %}
+
 <h2>Ravintolan luonti</h2>
+
+<hr>
 
 <form action="/create" method="post">
 Ravintolan nimi: (*)<br>
@@ -30,3 +35,4 @@ Tähdellä (*) merkityt kentät ovat pakollisia täyttää.
 <hr>
 <a href="/">Palaa etusivulle</a>
 
+{% endblock %}

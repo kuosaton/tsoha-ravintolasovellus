@@ -4,6 +4,10 @@ import restaurants
 import users
 import reviews
 
+@app.errorhandler(404)
+def not_found(e):
+	return render_template("error.html", errorcode=404, message=e)
+
 @app.route("/")
 def index():
 	restaurants_list = restaurants.get_list()

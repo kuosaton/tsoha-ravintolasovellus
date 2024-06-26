@@ -1,12 +1,16 @@
-<title> Osumat haulle ''{{ query }}'' – Ravintolasovellus</title>
+{% extends "layout.html" %}
+{% block title %}Osumat haulle ''{{ query }}'' {% endblock %}
+{% block content %}
+
 <h2>Osumat haulle ''{{ query }}''</h2>
+
 <hr>
-<h3>Ravintolat</h3>
+
 {% if not restaurants %}
 <hr>
 <h3> Ei hakutuloksia. </h3>
 {% else %}
-
+<h3> Ravintolat </h3>
 {% for restaurant in restaurants %}
 <hr>
 {% if restaurant.entry_type == 1 %}
@@ -24,8 +28,11 @@ Aukioloajat: <b>{{ restaurant.business_hours }}</b>
 <p>
 <a href="/restaurant/{{ restaurant.id }}">Ravintolan tiedot</a><br>
 {% endfor %}
-<hr>
 
 {% endif %}
 
+<hr>
+
 <a href="/">Palaa etusivulle</a>
+
+{% endblock %}

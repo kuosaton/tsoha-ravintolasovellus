@@ -1,6 +1,9 @@
-<title>Poista arvostelu</title>
+{% extends "layout.html" %}
+{% block title %}Arvostelun poistaminen{% endblock %}
+{% block content %}
 
-<h2>Poista arvostelu</h2>
+<h2>Arvostelun poistaminen</h2>
+
 <hr>
 
 {% if not reviews %}
@@ -22,4 +25,7 @@
 
 {% endif %}
 <hr>
+
 <a href="/"> Palaa etusivulle </a>
+
+{% endblock %}

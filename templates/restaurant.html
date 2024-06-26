@@ -1,10 +1,14 @@
-<title> {{ restaurant[0][0] }} – Ravintolasovellus </title>
+{% extends "layout.html" %}
+{% block title %}Ravintola: {{ restaurant[0][0] }}{% endblock %}
+{% block content %}
 
 {% if restaurant[0][5] == 1 %}
 <h2>Bucketlist-ravintola: {{ restaurant[0][0] }}</h2> 
 {% elif restaurant[0][5] == 2 %}
 <h2>Käyty ravintola: {{ restaurant[0][0] }}</h2>
 {% endif %}
+
+<hr>
 
 Kuvaus: <b>{{ restaurant[0][1] }}</b> 
 <br>
@@ -49,7 +53,11 @@ Suosittelisitko tätä ravintolaa?
 
 <br>
 {% endfor %}
+
 {% endif %}
+
 <hr>
 
 <a href="/"> Palaa etusivulle </a>
+
+{% endblock %}

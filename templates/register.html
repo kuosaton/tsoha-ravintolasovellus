@@ -1,5 +1,8 @@
-<title>Käyttäjätilin luonti – Ravintolasovellus</title>
-<h2>Käyttäjätilin luonti</h2>
+{% extends "layout.html" %}
+{% block title %}Rekisteröityminen{% endblock %}
+{% block content %}
+
+<h2>Rekisteröityminen</h2>
 
 <form action="/register" method="post">
 Käyttäjänimi (1-30 merkkiä):<br>
@@ -22,3 +25,5 @@ Kaikki kentät ovat pakollisia täyttää.
 <p>
 
 <a href="/">Palaa etusivulle</a>
+
+{% endblock %}

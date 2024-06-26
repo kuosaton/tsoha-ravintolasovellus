@@ -1,5 +1,10 @@
-<title>Ravintolan arvostelu – Ravintolasovellus</title>
+{% extends "layout.html" %}
+{% block title %}Ravintolan arvostelu{% endblock %}
+{% block content %}
+
 <h2>Ravintolan arvostelu</h2>
+
+<hr>
 
 <form action="/restaurant/{{ id }}/create_review" method="post">
 
@@ -36,3 +41,4 @@ Kaikki kentät ovat pakollisia täyttää.
 
 <a href="/">Palaa etusivulle</a>
 
+{% endblock %}

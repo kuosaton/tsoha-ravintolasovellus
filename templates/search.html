@@ -1,10 +1,19 @@
-<title>Ravintolan haku – Ravintolasovellus</title>
+{% extends "layout.html" %}
+{% block title %}Ravintolan haku{% endblock %}
+{% block content %}
+
 <h2>Ravintolan haku</h2>
+
 <hr>
+
 <form action="/result" method="GET">
 Hakusana: <input type"text" name="query" minlength="1" required>
 <br>
 <input type="submit" value="Hae">
-<hr>
-<a href="/">Palaa etusivulle</a>
 </form>
+
+<hr>
+
+<a href="/">Palaa etusivulle</a>
+
+{% endblock %}
