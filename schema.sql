@@ -30,18 +30,19 @@ CREATE TABLE reviews (
 
 CREATE TABLE questions (
 	id SERIAL PRIMARY KEY,
-	creator_id INTEGER REFERENCES users(id) NOT NULL,
-	creator_name VARCHAR(30) REFERENCES users(username) NOT NULL,
 	restaurant_id INTEGER REFERENCES restaurants(id) NOT NULL,
+	creator_id INTEGER REFERENCES users(id) NOT NULL,
+	creator_name VARCHAR(30) REFERENCES users(username),
 	content TEXT,
+	answered BOOLEAN DEFAULT FALSE,
 	visible BOOLEAN DEFAULT TRUE
 );
 
 CREATE TABLE answers (
 	id SERIAL PRIMARY KEY,
+	question_id INTEGER REFERENCES questions(id) NOT NULL,
 	creator_id INTEGER REFERENCES users(id) NOT NULL,
 	creator_name VARCHAR(30) REFERENCES users(username) NOT NULL,
-	question_id INTEGER REFERENCES questions(id) NOT NULL,
 	content TEXT,
 	visible BOOLEAN DEFAULT TRUE
 );

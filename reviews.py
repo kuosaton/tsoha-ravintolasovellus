@@ -24,12 +24,12 @@ def restore(review_id):
         db.session.commit()
         return True
 
-def get_review(review_id):
+def get_content(review_id):
 	sql = "SELECT restaurant_id, creator_id, creator_name, title, description, rating, recommendation FROM reviews WHERE id = :id"
 	result = db.session.execute(text(sql), {"id":review_id})
 	return result.fetchall()
 
-def get_content(restaurant_id):
+def get_restaurant_reviews(restaurant_id):
         sql = "SELECT restaurant_id, creator_id, creator_name, title, description, rating, recommendation FROM reviews WHERE restaurant_id = :restaurant_id AND visible = TRUE ORDER BY rating DESC, recommendation"
         result = db.session.execute(text(sql), {"restaurant_id":restaurant_id})
         return result.fetchall()

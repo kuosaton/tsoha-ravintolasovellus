@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+{% block title %}Vastauksen luonti{% endblock %}
+{% block content %}
+
+<h2>Vastauksen luonti</h2>
+
+<hr>
+
+{% if not questions %}
+
+<p> Ravintolalla ei ole vastaamattomia kysymyksiä. Hyvää työtä! </p>
+
+{% else %}
+
+<form action="/restaurant/{{ id }}/create_answer" method="post">
+
+Mihin kysymykseen vastaat? <br>
+
+{% for question in questions %}
+<input type="radio" name="question_id" value="{{ question.id }}"> {{ question.content }} <br>
+{% endfor %}
+
+Vastaus (1-1000 merkkiä): <br>
+<textarea name="content" rows="5" cols="100" maxlength="1000"></textarea>
+<p>
+
+<input type="submit" value="Lähetä vastaus">
+
+<input type="hidden" name="creator_id" value="{{ session.user_id }}">
+<input type="hidden" name="creator_name" value="{{ session.user_name }}">
+<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+
+</form>
+
+Kaikki kentät ovat pakollisia täyttää.
+<p>
+
+{% endif %}
+
+<hr>
+
+<a href="/">Palaa etusivulle</a>
+
+{% endblock %}

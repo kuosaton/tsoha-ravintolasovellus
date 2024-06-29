@@ -25,7 +25,19 @@ Arvostelujen keskiarvo: <b>{{ rating }} tähteä</b>
 {% endif %}
 
 <hr>
+
+Sanottavaa?
+
 <a href="/restaurant/{{ id }}/create_review">Lisää ravintolalle arvostelu</a>
+
+Kysyttävää?
+
+<a href="/restaurant/{{ id }}/create_question">Lisää ravintolaan liittyvä kysymys</a>
+
+Vastattavaa?
+
+<a href="/restaurant/{{ id }}/create_answer">Vastaa kysymykseen ravintolaan liittyen</a>
+
 
 <hr>
 
@@ -53,6 +65,45 @@ Suosittelisitko tätä ravintolaa?
 {% endif %}
 
 <br>
+{% endfor %}
+
+{% endif %}
+
+<hr>
+
+<h4>Kysymykset ja vastaukset</h4>
+
+{% if not questions %}
+<hr>
+<p> Ravintolaan liittyen ei vielä ole kysymyksiä. Olisiko sinulla? </p>
+
+{% else %}
+{% for question in questions %}
+<hr>
+
+Kysymys käyttäjältä  <b>{{ question.creator_name }}</b>: <br>
+<p>  {{ question.content }} </p>
+
+
+{% if not answers %}
+<p> Ei vielä vastauksia. Tietäisitkö sinä? </p>
+
+{% else %}
+{% for answer in answers %}
+
+{% if answer[0][0] == question.id %}
+Vastaus kysymykseen käyttäjältä <b>{{ answer[0][2] }}</b>: <br>
+<p> {{ answer[0][3] }}</p>
+
+{% else %}
+<p> Ei vielä vastauksia kysymykseen. Tietäisitkö sinä? </p>
+
+{% endif %}
+
+{% endfor %}
+
+{% endif %}
+
 {% endfor %}
 
 {% endif %}

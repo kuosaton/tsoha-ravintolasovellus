@@ -3,6 +3,8 @@ from flask import render_template, request, redirect
 import restaurants
 import users
 import reviews
+import questions
+import answers
 
 @app.errorhandler(404)
 def not_found(e):
@@ -130,9 +132,17 @@ def result():
 @app.route("/restaurant/<int:id>")
 def view_restaurant(id):
 	restaurant = restaurants.get_content(id)
-	reviews_list = reviews.get_content(id)
+	reviews_list = reviews.get_restaurant_reviews(id)
 	rating = reviews.get_rating_average(id)
-	return render_template("restaurant.html", id=id, rating=rating, restaurant=restaurant, reviews=reviews_list)
+	questions_list = questions.get_restaurant_questions(id)
+	answers_list = []
+
+	if questions_list:
+		for question in questions_list:
+			if answers.get_question_answers(question.id):
+				answers_list.append(answers.get_question_answers(question.id))
+
+	return render_template("restaurant.html", id=id, rating=rating, restaurant=restaurant, reviews=reviews_list, questions=questions_list, answers=answers_list)
 
 
 @app.route("/profile", methods=["GET"])
@@ -144,7 +154,7 @@ def view_profile():
 		user_id = users.get_id()
 		username = users.get_name()
 
-		reviews_list = reviews.get_reviews_made_by_user(user_id)
+		reviews_list = reviews.get_user_reviews(user_id)
 
 		return render_template("profile.html", username = username, reviews = reviews_list)
 
@@ -207,7 +217,7 @@ def create_review(id):
 
 		title = request.form["title"]
 		if len(title) < 1 or len(title) > 50:
-			return render_template("error.html", errorcode = 3, message="Arvostelun otsikko voi olla 1-30 merkkiä pitkä.")
+			return render_template("error.html", errorcode = 3, message="Arvostelun otsikko voi olla 1-50 merkkiä pitkä.")
 
 		description = request.form["description"]
 		if len(description) < 1 or len(description) > 1000:
@@ -227,4 +237,53 @@ def create_review(id):
 		if not reviews.create(id, creator_id, creator_name, title, description, rating, recommendation):
 			return render_template("error.html", errorcode = 3, message="Arvostelun tallentamisessa tapahtui virhe.")
 
+		return redirect("/restaurant/"+str(id))
+
+@app.route("/restaurant/<int:id>/create_question", methods=["GET", "POST"])
+def create_question(id):
+	users.check_seclevel(1)
+
+	if request.method == "GET":
+		return render_template("create_question.html", id=id)
+
+	if request.method == "POST":
+		users.check_csrf()
+
+		content = request.form["content"]
+		if len(content) < 1 or len(content) > 1000:
+			return render_template("error.html", errorcode = 4, message="Kysymys voi olla 1-1000 merkkiä pitkä.")
+
+		creator_id = request.form["creator_id"]
+		creator_name = request.form["creator_name"]
+
+		if not questions.create(id, creator_id, creator_name, content):
+			return render_template("error.html", errorcode = 4, message="Kysymyksen luonnissa tapahtui virhe.")
+
+		return redirect("/restaurant/"+str(id))
+
+
+@app.route("/restaurant/<int:id>/create_answer", methods=["GET", "POST"])
+def create_answer(id):
+	users.check_seclevel(1)
+
+	if request.method == "GET":
+		questions_list = questions.get_unanswered_restaurant_questions(id)
+		return render_template("create_answer.html", id=id, questions=questions_list)
+
+	if request.method == "POST":
+		users.check_csrf()
+
+		question_id = request.form["question_id"]
+
+		content = request.form["content"]
+		if len(content) < 1 or len(content) > 1000:
+			return render_template("error.html", errorcode = 6, message="Vastaus voi olla 1-1000 merkkiä pitkä.")
+
+		creator_id = request.form["creator_id"]
+		creator_name = request.form["creator_name"]
+
+		if not answers.create(question_id, creator_id, creator_name, content):
+			return render_template("error.html", errorcode = 6, message="Vastauksen luonnissa tapahtui virhe.")
+
+		questions.mark_as_answered(question_id)
 		return redirect("/restaurant/"+str(id))

@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+{% block title %}Kysymyksen luonti{% endblock %}
+{% block content %}
+
+<h2>Kysymyksen luonti</h2>
+
+<hr>
+
+<form action="/restaurant/{{ id }}/create_question" method="post">
+
+Kysymys (1-1000 merkkiä): <br>
+<textarea name="content" rows="5" cols="100" maxlength="1000"></textarea>
+<p>
+
+<input type="submit" value="Lähetä kysymys">
+
+<input type="hidden" name="creator_id" value="{{ session.user_id }}">
+<input type="hidden" name="creator_name" value="{{ session.user_name }}">
+<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+
+</form>
+
+Kaikki kentät ovat pakollisia täyttää.
+<p>
+
+<hr>
+
+<a href="/">Palaa etusivulle</a>
+
+{% endblock %}
