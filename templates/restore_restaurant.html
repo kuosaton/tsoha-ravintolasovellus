@@ -7,11 +7,14 @@
 <hr>
 
 {% if not restaurants %}
-<h3>Ei poistettuja ravintoloita.</h3>
+<p>Ei poistettuja ravintoloita.</p>
+
 {% else %}
+<p>Valitse palautettava ravintola:</p>
+
 <form action="/restore_restaurant" method="post">
 {% for restaurant in restaurants %}
-<input type="radio" name="restaurant" value="{{ restaurant.id }}"> {{ restaurant.name }}<br>
+<input type="radio" name="restaurant" value="{{ restaurant.id }}"> {{ restaurant.name }}: {{ restaurant.description }}<br>
 {% endfor %}
 <br>
 

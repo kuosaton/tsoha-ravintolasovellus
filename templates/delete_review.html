@@ -7,10 +7,10 @@
 <hr>
 
 {% if not reviews %}
-<h3>Ei poistettavia arvosteluja.</h3>
-{% else %}
-<h3>Valitse poistettava arvostelu</h3>
+<p>Ei poistettavia arvosteluja.</p>
 
+{% else %}
+<p>Valitse poistettava arvostelu:</p>
 <form action="/delete_review" method="post">
 
 {% for review in reviews %}

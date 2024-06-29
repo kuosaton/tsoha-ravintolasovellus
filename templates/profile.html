@@ -2,21 +2,18 @@
 {% block title %}Profiili: {{ username }}{% endblock %}
 {% block content %}
 
-<h1>Profiili: {{ username }}</h1>
-
-<hr>
-
-<h3>Arvostelusi</h3>
+<h2>Profiili: {{ username }}</h2>
 
 <hr>
 
 {% if not reviews %}
-<h4> Et vielä ole luonut yhtään arvostelua. Kokeile luoda yksi! </h4>
+<p> Et vielä ole luonut yhtään arvostelua. Kokeile luoda yksi! </p>
 
 {% else %}
+<h4> Tehdyt arvostelut </h4>
 {% for review in reviews %}
 <hr>
-<h4>''{{ review.title }}''</h4>
+<p>''{{ review.title }}''</p>
 
 Arvostelu: <b> {{ review.rating}} tähteä</b> <br>
 

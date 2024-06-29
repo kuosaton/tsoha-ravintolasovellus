@@ -29,15 +29,16 @@ Arvostelujen keskiarvo: <b>{{ rating }} tähteä</b>
 
 <hr>
 
-<h3>Arvostelut</h3>
+<h4>Arvostelut</h4>
 
 {% if not reviews %}
-<h4> Ravintolalla ei vielä ole yhtään arvostelua. Kokeile luoda arvostelu!</h4>
+<hr>
+<p> Ravintolalla ei vielä ole yhtään arvostelua. Kokeile luoda arvostelu!</p>
 
 {% else %}
 {% for review in reviews %}
 <hr>
-<h4>''{{ review.title }}''</h4>
+<h6>''{{ review.title }}''</h6>
 Arvostelun tekijä: <b> {{ review.creator_name }} </b> <br>
 
 Arvostelu: <b> {{ review.rating}} tähteä</b> <br>

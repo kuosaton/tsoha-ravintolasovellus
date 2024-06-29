@@ -7,9 +7,9 @@
 <hr>
 
 {% if not restaurants %}
-<h3>Ei poistettavia ravintoloita.</h3>
+<p>Ei poistettavia ravintoloita.</p>
 {% else %}
-<h3>Valitse poistettava ravintola</h3>
+<p>Valitse poistettava ravintola:</p>
 
 <form action="/delete_restaurant" method="post">
 {% for restaurant in restaurants %}

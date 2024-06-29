@@ -4,13 +4,9 @@
 
 <h2>Etusivu</h2>
 
-<hr>
-
-<h3>Ravintolat</h3>
-
 {% if not restaurants %}
 <hr>
-<h4> Ravintoloita ei vielä ole lisätty. Kokeile luoda ravintola!</h4>
+<p> Ravintoloita ei vielä ole lisätty. Kokeile luoda ravintola!</p>
 
 {% else %}
 {% for restaurant in restaurants %}
@@ -35,7 +31,5 @@ Aukioloajat: <b>{{ restaurant.business_hours }}</b>
 {% endfor %}
 
 {% endif %}
-
-<hr>
 
 {% endblock %}
