@@ -5,14 +5,14 @@
 <h2>Rekisteröityminen</h2>
 
 <form action="/register" method="post">
-Käyttäjänimi (1-30 merkkiä):<br>
-<input type="text" name="username" minlength="1" maxlength="30" required>
+Käyttäjänimi (4-30 merkkiä):<br>
+<input type="text" name="username" minlength="4" maxlength="30" required>
 <p>
-Salasana (1-30 merkkiä):<br>
-<input type="password" name="password" minlength="1" maxlength="30" required>
+Salasana (8-30 merkkiä):<br>
+<input type="password" name="password" minlength="8" maxlength="30" required>
 <p>
 Kirjoita salasana uudelleen:<br>
-<input type="password" name="password_verify" minlength="1" maxlength="30" required>
+<input type="password" name="password_verify" minlength="8" maxlength="30" required>
 <p>
 Tilin tyyppi:
 <input type="radio" name="seclevel" value="1" checked>Käyttäjä

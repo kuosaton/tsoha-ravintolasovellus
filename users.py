@@ -45,3 +45,9 @@ def check_seclevel(seclevel):
 def check_csrf():
 	if session["csrf_token"] != request.form["csrf_token"]:
 		abort(403)
+
+def get_id():
+	return session.get("user_id")
+
+def get_name():
+	return session.get("user_name")

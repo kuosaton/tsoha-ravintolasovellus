@@ -1,47 +1,47 @@
 CREATE TABLE users (
 	id SERIAL PRIMARY KEY,
-	username TEXT,
-	password TEXT,
-	seclevel INTEGER
+	username VARCHAR(30) UNIQUE NOT NULL,
+	password TEXT NOT NULL,
+	seclevel INTEGER DEFAULT 1
 );
 
 CREATE TABLE restaurants (
 	id SERIAL PRIMARY KEY,
-	name TEXT,
+	name VARCHAR(50) NOT NULL,
 	description TEXT,
-	category TEXT,
+	category VARCHAR(50) NOT NULL,
 	address	TEXT,
-	business_hours TEXT,
-	entry_type INTEGER,
+	business_hours VARCHAR(50),
+	entry_type INTEGER NOT NULL,
 	visible	BOOLEAN DEFAULT TRUE
 );
 
 CREATE TABLE reviews (
 	id SERIAL PRIMARY KEY,
-	restaurant_id INTEGER REFERENCES restaurants,
-	user_id INTEGER REFERENCES users,
-	user_name TEXT,
-	title TEXT,
+	restaurant_id INTEGER REFERENCES restaurants(id) NOT NULL,
+	creator_id INTEGER REFERENCES users(id) NOT NULL,
+	creator_name VARCHAR(30) REFERENCES users(username),
+	title VARCHAR(50) NOT NULL,
 	description TEXT,
-	rating INTEGER,
-	recommendation INTEGER,
+	rating INTEGER NOT NULL,
+	recommendation INTEGER NOT NULL,
 	visible	BOOLEAN DEFAULT TRUE
 );
 
 CREATE TABLE questions (
 	id SERIAL PRIMARY KEY,
-	user_id INTEGER REFERENCES users,
-	user_name TEXT,
-	restaurant_id INTEGER REFERENCES restaurants,
+	creator_id INTEGER REFERENCES users(id) NOT NULL,
+	creator_name VARCHAR(30) REFERENCES users(username) NOT NULL,
+	restaurant_id INTEGER REFERENCES restaurants(id) NOT NULL,
 	content TEXT,
 	visible BOOLEAN DEFAULT TRUE
 );
 
 CREATE TABLE answers (
 	id SERIAL PRIMARY KEY,
-	user_id INTEGER REFERENCES users,
-	user_name TEXT,
-	question_id INTEGER REFERENCES questions,
+	creator_id INTEGER REFERENCES users(id) NOT NULL,
+	creator_name VARCHAR(30) REFERENCES users(username) NOT NULL,
+	question_id INTEGER REFERENCES questions(id) NOT NULL,
 	content TEXT,
 	visible BOOLEAN DEFAULT TRUE
 );

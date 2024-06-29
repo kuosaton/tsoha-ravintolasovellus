@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+{% block title %}Profiili: {{ username }}{% endblock %}
+{% block content %}
+
+<h1>Profiili: {{ username }}</h1>
+
+<hr>
+
+<h3>Arvostelusi</h3>
+
+<hr>
+
+{% if not reviews %}
+<h4> Et vielä ole luonut yhtään arvostelua. Kokeile luoda yksi! </h4>
+
+{% else %}
+{% for review in reviews %}
+<hr>
+<h4>''{{ review.title }}''</h4>
+
+Arvostelu: <b> {{ review.rating}} tähteä</b> <br>
+
+Kuvaus: <b> {{ review.description }} </b> <br>
+
+Suosittelisitko tätä ravintolaa? 
+{% if review.recommendation == 1 %}
+<b> Kyllä </b>
+{% elif review.recommendation == 2 %}
+<b> En </b>
+{% endif %}
+
+<br>
+{% endfor %}
+
+{% endif %}
+
+<hr>
+
+<a href="/"> Palaa etusivulle </a>
+
+{% endblock %}

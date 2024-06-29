@@ -13,7 +13,7 @@
 
 <form action="/delete_restaurant" method="post">
 {% for restaurant in restaurants %}
-<input type="radio" name="restaurant" value="{{ restaurant.id }}"> {{ restaurant.name }}<br> 
+<input type="radio" name="restaurant" value="{{ restaurant.id }}"> {{ restaurant.name }}: {{ restaurant.description }}<br> 
 {% endfor %}
 <br>
 

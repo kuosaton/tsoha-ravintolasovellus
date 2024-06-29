@@ -25,31 +25,31 @@ def create_restaurant():
 
 		name = request.form["name"]
 		if len(name) < 1 or len(name) > 50:
-			return render_template("error.html", errorcode=1, message="Nimi voi olla 1-50 merkkiä pitkä")
+			return render_template("error.html", errorcode=1, message="Nimi voi olla 1-50 merkkiä pitkä.")
 
 		description = request.form["description"]
 		if len(description) < 1 or len(description) > 1000:
-			return render_template("error.html", errorcode=1, message="Kuvaus voi olla 1-1000 merkkiä pitkä")
+			return render_template("error.html", errorcode=1, message="Kuvaus voi olla 1-1000 merkkiä pitkä.")
 
 		category = request.form["category"]
 		if len(category) < 1 or len(category) > 30:
-			return render_template("error.html", errorcode = 1, message="Kategoria voi olla 1-30 merkkiä pitkä")
+			return render_template("error.html", errorcode = 1, message="Kategoria voi olla 1-30 merkkiä pitkä.")
 
 		address = request.form["address"]
 		if address == "":
 			address = "-"
 		elif len(address) > 50:
-			return render_template("error.html", errorcode = 1, message="Osoite voi olla 1-50 merkkiä pitkä")
+			return render_template("error.html", errorcode = 1, message="Osoite voi olla 1-50 merkkiä pitkä.")
 
 		business_hours = request.form["business_hours"]
 		if business_hours == "":
 			business_hours = "-"
 		elif len(business_hours) > 1000:
-			return render_template("error.html", errorcode = 1, message="Aukioloajat voivat olla 1-1000 merkkiä pitkät")
+			return render_template("error.html", errorcode = 1, message="Aukioloajat voivat olla 1-1000 merkkiä pitkät.")
 
 		entry_type = request.form["entry_type"]
 		if entry_type not in ("1", "2"):
-			return render_template("error.html", errorcode = 1, message="Virhe ravintolakirjauksen tyypin määrittelyssä")
+			return render_template("error.html", errorcode = 1, message="Annettu kirjaustyyppi oli virheellinen.")
 
 		restaurant_id = restaurants.create(name, description, category, address, business_hours, entry_type)
 		return redirect("/restaurant/"+str(restaurant_id))
@@ -135,6 +135,19 @@ def view_restaurant(id):
 	return render_template("restaurant.html", id=id, rating=rating, restaurant=restaurant, reviews=reviews_list)
 
 
+@app.route("/profile", methods=["GET"])
+def view_profile():
+	if request.method == "GET":
+		if not users.get_id():
+			return render_template("error.html", errorcode = 5, message="Ei tarkasteltavaa profiilia, et ole kirjautunut sisään.")
+
+		user_id = users.get_id()
+		username = users.get_name()
+
+		reviews_list = reviews.get_reviews_made_by_user(user_id)
+
+		return render_template("profile.html", username = username, reviews = reviews_list)
+
 @app.route("/login", methods=["GET", "POST"])
 def login():
 	if request.method == "GET":
@@ -145,7 +158,7 @@ def login():
 		password = request.form["password"]
 
 	if not users.login(username, password):
-		return render_template("error.html", errorcode = 2, message="Kirjautuminen epäonnistui. Tarkista käyttäjänimi ja salasana")
+		return render_template("error.html", errorcode = 2, message="Tarkista käyttäjänimi ja salasana.")
 
 	return redirect("/")
 
@@ -161,24 +174,24 @@ def register():
 
 	if request.method == "POST":
 		username = request.form["username"]
-		if len(username) < 1 or len(username) > 30:
-			return render_template("error.html", errorcode = 0,  message="Käyttäjänimi voi olla 1-30 merkkiä pitkä")
+		if len(username) < 4 or len(username) > 30:
+			return render_template("error.html", errorcode = 0,  message="Käyttäjänimi voi olla 4-30 merkkiä pitkä.")
 
 		password = request.form["password"]
 		password_verify = request.form["password_verify"]
 
 		if password != password_verify:
-			return render_template("error.html", errorcode = 0, message="Annetut salasanat eivät vastaa toisiaan")
-		if len(password) < 1 or len(password) > 30:
-			return render_template("error.html", errorcode = 0, message="Salasana voi olla 1-30 merkkiä pitkä")
+			return render_template("error.html", errorcode = 0, message="Annetut salasanat eivät vastaa toisiaan.")
+		if len(password) < 8 or len(password) > 30:
+			return render_template("error.html", errorcode = 0, message="Salasana voi olla 8-30 merkkiä pitkä.")
 
 		seclevel = request.form["seclevel"]
 
 		if seclevel not in ("1", "2"):
-			return render_template("error.html", errorcode = 0, message="Annettua käyttäjätasoa ei ole olemassa")
+			return render_template("error.html", errorcode = 0, message="Annettua käyttäjätasoa ei ole olemassa.")
 
 		if not users.register(username, password, seclevel):
-			return render_template("error.html", errorcode = 0, message="Tietojen tallentaminen ei onnistunut.")
+			return render_template("error.html", errorcode = 0, message="Käyttäjätilin luonti ei onnistunut. Annettu käyttäjänimi on mahdollisesti jo käytössä.")
 
 		return redirect("/")
 
@@ -194,26 +207,24 @@ def create_review(id):
 
 		title = request.form["title"]
 		if len(title) < 1 or len(title) > 50:
-			return render_template("error.html", errorcode = 3, message="Arvostelun otsikko voi olla 1-30 merkkiä pitkä")
+			return render_template("error.html", errorcode = 3, message="Arvostelun otsikko voi olla 1-30 merkkiä pitkä.")
 
 		description = request.form["description"]
 		if len(description) < 1 or len(description) > 1000:
-			return render_template("error.html", errorcode = 3, message="Arvostelun kuvaus voi olla 1-1000 merkkiä pitkä")
+			return render_template("error.html", errorcode = 3, message="Arvostelun kuvaus voi olla 1-1000 merkkiä pitkä.")
 
 		rating = request.form["rating"]
 		if rating not in ("1", "2", "3", "4", "5"):
-			return render_template("error.html", errorcode = 3, message="Arvostelun annettu arviosyöte (tähdet) oli virheellinen")
+			return render_template("error.html", errorcode = 3, message="Arvostelun annettu arviosyöte (tähdet) oli virheellinen.")
 
 		recommendation = request.form["recommendation"]
 		if recommendation not in ("1", "2"):
-			return render_template("error.html", errorcode = 3, message="Arvostelun annettu suosittelusyöte oli virheellinen")
+			return render_template("error.html", errorcode = 3, message="Arvostelun annettu suosittelusyöte oli virheellinen.")
 
-		user_id = request.form["user_id"]
+		creator_id = request.form["creator_id"]
+		creator_name = request.form["creator_name"]
 
-		user_name = request.form["user_name"]
-
-
-		if not reviews.create(id, user_id, user_name, title, description, rating, recommendation):
-			return render_template("error.html", errorcode = 3, message="Arvostelun tallentamisessa tapahtui virhe")
+		if not reviews.create(id, creator_id, creator_name, title, description, rating, recommendation):
+			return render_template("error.html", errorcode = 3, message="Arvostelun tallentamisessa tapahtui virhe.")
 
 		return redirect("/restaurant/"+str(id))

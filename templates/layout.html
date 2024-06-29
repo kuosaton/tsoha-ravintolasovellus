@@ -21,6 +21,8 @@
 						<li class="nav-item">
 							<a class="nav-link"  href="/search">Hae ravintolaa</a>
 						</li>
+
+						{% if session.user_seclevel == 2 %}
                         			<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
 								Ylläpitäjän työkalut
@@ -33,18 +35,26 @@
                                 				<li><a class="dropdown-item" href="/restore_review">Poistetut arvostelut</a></li>
 							</ul>
                         			</li>
+						{% endif %}
 					</ul>
 					<span class="navbar-text">
 						{% if session.user_seclevel == 1 or session.user_seclevel == 2 %}
-						Kirjauduttu sisään käyttäjänä: <b>{{ session.user_name }}</b>
-						<a class="nav-link" href="/logout">Kirjaudu ulos</a> 
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+								Kirjauduttu sisään käyttäjänä: <b>{{ session.user_name }}</b>
+							</a>
+							<ul class="dropdown-menu">
+								<li><a class="dropdown-item" href="/profile">Profiili</a></li>
+								<li><a class="dropdown-item" href="/logout">Kirjaudu ulos</a></li>
+							<ul>
+						</li> 
 						{% else %}
                 				<a class="nav-link" href="/login">Kirjaudu sisään</a>
 						{% endif %}
 					</span>
 			</nav>
-		</div>
 		{% block content %}{% endblock %}
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 	</body>
+	</div>
 </html>

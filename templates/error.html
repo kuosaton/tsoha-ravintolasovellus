@@ -2,25 +2,23 @@
 {% block title %} Virhe {{ errorcode }} {% endblock %}
 {% block content %}
 
-<h1> Hups! Sattui virhe. </h1>
+<h2> Hups! Sattui virhe. </h2>
 
 <hr>
 
 {% if errorcode == 1 %}
-<h2> Virhe {{ errorcode }}: Ravintolakirjauksen luonti epäonnistui </h2>
+<p> Virhe {{ errorcode }}: Ravintolakirjauksen luonti epäonnistui </p>
 {% elif errorcode == 2 %}
-<h2> Virhe {{ errorcode }}: Kirjautuminen epäonnistui </h2>
+<p> Virhe {{ errorcode }}: Kirjautuminen epäonnistui </p>
 {% elif errorcode == 3 %}
-<h2> Virhe {{ errorcode }}: Arvostelun luonti epäonnistui </h2>
+<p> Virhe {{ errorcode }}: Arvostelun luonti epäonnistui </p>
 {% elif errorcode == 0 %}
-<h2> Virhe {{ errorcode }}: Käyttäjätilin luonti epäonnistui </h2>
+<p> Virhe {{ errorcode }}: Käyttäjätilin luonti epäonnistui </p>
 {% else %}
-<h2> Virhe {{ errorcode }} </h2>
+<p> Virhe {{ errorcode }} </p>
 {% endif %}
 
-<hr>
-
-<p>Sivun lataamisessa tapahtui virhe. Selite: {{ message }}</p>
+<p>Selite: <b>{{ message }}</b></p>
 
 <hr>
 
