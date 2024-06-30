@@ -155,8 +155,10 @@ def view_profile():
 		username = users.get_name()
 
 		reviews_list = reviews.get_user_reviews(user_id)
+		questions_list = questions.get_user_questions(user_id)
+		answers_list = answers.get_user_answers(user_id)
 
-		return render_template("profile.html", username = username, reviews = reviews_list)
+		return render_template("profile.html", username = username, reviews = reviews_list, questions = questions_list, answers = answers_list)
 
 @app.route("/login", methods=["GET", "POST"])
 def login():

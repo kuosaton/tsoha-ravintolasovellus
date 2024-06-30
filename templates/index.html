@@ -4,32 +4,56 @@
 
 <h2>Etusivu</h2>
 
-{% if not restaurants %}
-<hr>
-<p> Ravintoloita ei vielä ole lisätty. Kokeile luoda ravintola!</p>
-
-{% else %}
-{% for restaurant in restaurants %}
 <hr>
 
-{% if restaurant.entry_type == 1 %}
-<h4> Bucketlist-ravintola: {{ restaurant.name }} </h4>
-{% elif restaurant.entry_type == 2 %}
-<h4> Käyty ravintola: {{ restaurant.name }} </h4>
-{% endif %}
+<div class="container-fluid">
 
-Kuvaus: <b>{{ restaurant.description }}</b> 
-<br>
-Kategoria: <b>{{ restaurant.category }}</b> 
-<br>
-Osoite: <b>{{ restaurant.address }}</b> 
-<br>
-Aukioloajat: <b>{{ restaurant.business_hours }}</b> 
-<p>
-<a href="/restaurant/{{ restaurant.id }}">Ravintolan tiedot</a><br>
+	{% if not restaurants %}
+		<p>Ravintoloita ei vielä ole lisätty. Kokeile luoda ravintola!</p>
 
-{% endfor %}
+	{% else %}
 
-{% endif %}
+		{% for restaurant in restaurants %}
+			<div class="container-fluid">
+
+			{% if restaurant.entry_type == 1 %}
+				<h4>Bucketlist-ravintola: {{ restaurant.name }}</h4>
+			{% elif restaurant.entry_type == 2 %}
+				<h4>Käyty ravintola: {{ restaurant.name }}</h4>
+			{% endif %}
+			<br>			
+			<div class="row row-cols-auto">
+				<div class="col-auto">		
+					Kuvaus: <br> 
+					<b>{{ restaurant.description }}</b>
+					<br>	
+				</div>
+				<div class="col-auto">
+					Kategoria: <br>
+					<b>{{ restaurant.category }}</b>
+					<br>		
+				</div>
+				<div class="col-auto">
+					Osoite: <br>
+					<b>{{ restaurant.address }}</b>
+					<br>
+				</div>
+				<div class="col-auto">
+					Aukioloajat: <br> 
+					<b>{{ restaurant.business_hours }}</b>
+					<br>
+				</div>
+			</div>
+
+			<br>
+			<a class="btn btn-primary" role="button" href="/restaurant/{{ restaurant.id }}">Ravintolan tiedot</a>
+			<br>	
+
+			<hr>
+			</div>
+		{% endfor %}
+
+	{% endif %}
+</div>
 
 {% endblock %}

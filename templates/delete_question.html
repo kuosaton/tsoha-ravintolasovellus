@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+{% block title %}Kysymyksen poistaminen{% endblock %}
+{% block content %}
+
+<h2>Kysymyksen poistaminen</h2>
+
+<hr>
+
+{% if not questions %}
+<p>Ei poistettavia kysymyksiä.</p>
+
+{% else %}
+<p>Valitse poistettava kysymys:</p>
+<form action="/delete_question" method="post">
+
+{% for question in questions %}
+<input type="radio" name="question" value="{{ question.id }}"> {{ question.creator_name }} (käyttäjätunnus {{ question.creator_id }}: {{ question.content }}<br> 
+{% endfor %} 
+<br>
+
+<input type="submit" value="Poista valittu">
+<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+
+</form>
+
+{% endif %}
+<hr>
+
+<a href="/"> Palaa etusivulle </a>
+
+{% endblock %}

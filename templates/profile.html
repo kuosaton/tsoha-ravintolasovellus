@@ -33,6 +33,34 @@ Suosittelisitko tätä ravintolaa?
 
 <hr>
 
+<h4> Tehdyt kysymykset </h4>
+
+<hr>
+
+{% if not questions %}
+	<p> Et ole vielä tehnyt kysymyksiä. </p>
+	<hr>
+{% else %}
+	{% for question in questions %}
+	        <p>  {{ question.content }} </p>
+		<hr>
+        {% endfor %}
+{% endif %}
+
+<h4> Tehdyt vastaukset </h4>
+
+<hr>
+
+{% if not answers %}
+	<p> Et ole vielä vastannut yhteenkään kysymykseen. </p>
+	<hr>
+{% else %}
+	{% for answer in answers %}
+		<p> {{ answer.content }} </p>
+		<hr>
+	{% endfor %}
+{% endif %}
+
 <a href="/"> Palaa etusivulle </a>
 
 {% endblock %}

@@ -3,112 +3,147 @@
 {% block content %}
 
 {% if restaurant[0][5] == 1 %}
-<h2>Bucketlist-ravintola: {{ restaurant[0][0] }}</h2> 
+	<h2>Bucketlist-ravintola: {{ restaurant[0][0] }}</h2>
+ 
 {% elif restaurant[0][5] == 2 %}
-<h2>Käyty ravintola: {{ restaurant[0][0] }}</h2>
+	<h2>Käyty ravintola: {{ restaurant[0][0] }}</h2>
+
 {% endif %}
 
 <hr>
 
-Kuvaus: <b>{{ restaurant[0][1] }}</b> 
-<br>
-Kategoria: <b>{{ restaurant[0][2] }}</b> 
-<br>
-Osoite: <b>{{ restaurant[0][3] }}</b> 
-<br>
-Aukioloajat: <b>{{ restaurant[0][4] }}</b> 
-<br>
+<div class="container-fluid">
+	<div class="row row-cols-auto">
+		<div class="col-auto">
+			Kuvaus: <br> 
+			<b>{{ restaurant[0][1] }}</b>
+			<br>
+		</div>
+		<div class="col">
+			Kategoria: <br> 
+			<b>{{ restaurant[0][2] }}</b>
+			<br>
+		</div>
+		<div class="col">
+			Osoite: <br> 
+			<b>{{ restaurant[0][3] }}</b>
+			<br>
+		</div>
+		<div class="col-auto"> 
+			Aukioloajat: <br>
+			<b>{{ restaurant[0][4] }}</b>
+			<br>
+		</div>
 
-{% if rating != None %}
-Arvostelujen keskiarvo: <b>{{ rating }} tähteä</b>
-<br>
-{% endif %}
+		{% if rating != None %}
+			<div class="col">
+				Arvostelujen keskiarvo: <br>
+				<b>{{ rating }} tähteä</b>
+				<br>
+			</div>
+		{% endif %}
+	</div>
+</div>
 
 <hr>
 
-Sanottavaa?
-
-<a href="/restaurant/{{ id }}/create_review">Lisää ravintolalle arvostelu</a>
-
-Kysyttävää?
-
-<a href="/restaurant/{{ id }}/create_question">Lisää ravintolaan liittyvä kysymys</a>
-
-Vastattavaa?
-
-<a href="/restaurant/{{ id }}/create_answer">Vastaa kysymykseen ravintolaan liittyen</a>
-
+<div class="dropdown">
+	<button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+		Toiminnot
+	</button>
+	
+	<ul class="dropdown-menu">
+		<li><a class="dropdown-item" href="/restaurant/{{ id }}/create_review">Kirjoita arvostelu</a></li>
+		<li><a class="dropdown-item" href="/restaurant/{{ id }}/create_question">Lisää kysymys</a></li>
+		<li><a class="dropdown-item" href="/restaurant/{{ id }}/create_answer">Vastaa kysymyksiin</a></li>
+	</ul>
+</div>
 
 <hr>
 
 <h4>Arvostelut</h4>
 
-{% if not reviews %}
 <hr>
-<p> Ravintolalla ei vielä ole yhtään arvostelua. Kokeile luoda arvostelu!</p>
 
-{% else %}
-{% for review in reviews %}
-<hr>
-<h6>''{{ review.title }}''</h6>
-Arvostelun tekijä: <b> {{ review.creator_name }} </b> <br>
+<div class="container-fluid">
+	{% if not reviews %}
+		<p> Ravintolalla ei vielä ole yhtään arvostelua. Kokeile luoda arvostelu!</p>
+		<hr>
 
-Arvostelu: <b> {{ review.rating}} tähteä</b> <br>
+	{% else %}
 
-Kuvaus: <b> {{ review.description }} </b> <br>
+		{% for review in reviews %}
+			<div class="row row-cols-auto">
+				<div class="col-auto">
+					<h6>''{{ review.title }}''</h6>
+				</div>
+				<div class="col">
+					Arvostelun tekijä: <br> 
+					<b>{{ review.creator_name }}</b>
+				</div>
+				<div class="col">
+					Arvostelu: <br>
+					<b>{{ review.rating}} tähteä</b>
+				</div>
+				<div class="col-auto">
+					Kuvaus: <br>
+					<b>{{ review.description }} </b>
+				</div>
+				<div class="col">
+					Suosittelisitko tätä ravintolaa? <br>
+					{% if review.recommendation == 1 %}
+						<b> Kyllä </b>
+					{% elif review.recommendation == 2 %}
+						<b> En </b>
 
-Suosittelisitko tätä ravintolaa? 
-{% if review.recommendation == 1 %}
-<b> Kyllä </b>
-{% elif review.recommendation == 2 %}
-<b> En </b>
-{% endif %}
+					{% endif %}
+				</div>
+			</div>
+		<hr>
+		{% endfor %}
 
-<br>
-{% endfor %}
+	{% endif %}
 
-{% endif %}
-
-<hr>
+</div>
 
 <h4>Kysymykset ja vastaukset</h4>
 
+<hr>
+
+<div class="container-fluid">
+
 {% if not questions %}
-<hr>
-<p> Ravintolaan liittyen ei vielä ole kysymyksiä. Olisiko sinulla? </p>
-
+	<p> Ravintolaan liittyen ei vielä ole kysymyksiä. Olisiko sinulla? </p>
+	<hr>
 {% else %}
-{% for question in questions %}
-<hr>
 
-Kysymys käyttäjältä  <b>{{ question.creator_name }}</b>: <br>
-<p>  {{ question.content }} </p>
+	{% for question in questions %}
+		Kysymys käyttäjältä  <b>{{ question.creator_name }}</b>: <br>
+		<p>  {{ question.content }} </p>
 
+		{% if not answers %}
+			<p> Ei vielä vastauksia. Tietäisitkö sinä? </p>
 
-{% if not answers %}
-<p> Ei vielä vastauksia. Tietäisitkö sinä? </p>
+		{% else %}
 
-{% else %}
-{% for answer in answers %}
+			{% for answer in answers %}
 
-{% if answer[0][0] == question.id %}
-Vastaus kysymykseen käyttäjältä <b>{{ answer[0][2] }}</b>: <br>
-<p> {{ answer[0][3] }}</p>
+				{% if answer[0][0] == question.id %}
+					<div class="container-fluid">
+						Vastaus kysymykseen käyttäjältä <b>{{ answer[0][2] }}</b>: <br>
+						<p> – {{ answer[0][3] }}</p>
+					</div>
+				{% endif %}
 
-{% else %}
-<p> Ei vielä vastauksia kysymykseen. Tietäisitkö sinä? </p>
+			{% endfor %}
+
+		{% endif %}
+	<hr>
+	{% endfor %}
 
 {% endif %}
 
-{% endfor %}
-
-{% endif %}
-
-{% endfor %}
-
-{% endif %}
-
-<hr>
+</div>
 
 <a href="/"> Palaa etusivulle </a>
 

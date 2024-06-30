@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+{% block title %}Poistetut kysymykset{% endblock %}
+{% block content %}
+
+<h2>Poistetut kysymykset</h2>
+
+<hr>
+
+{% if not questions %}
+<p> Ei poistettuja kysymyksiä. </p>
+{% else %}
+<p> Valitse palautettava kysymys: </p>
+
+<form action="/restore_question" method="post">
+{% for question in questions %}
+<input type="radio" name="question" value="{{ question.id }}"> {{ question.creator_name }} (käyttäjätunnus {{ question.creator_id }}): {{ question.content }}<br>
+
+{% endfor %}
+<br>
+
+<input type="submit" value="Palauta valittu">
+<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+
+</form>
+{% endif %}
+<hr>
+<a href="/"> Palaa etusivulle </a>
+
+{% endblock %}

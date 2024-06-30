@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+{% block title %}Poistetut vastaukset{% endblock %}
+{% block content %}
+
+<h2>Poistetut vastaukset</h2>
+
+<hr>
+
+{% if not answers %}
+	<p> Ei poistettuja vastauksia. </p>
+
+{% else %}
+	<p> Valitse palautettava vastaus: </p>
+
+	<form action="/restore_answer" method="post">
+
+	{% for answer in answers %}
+		<input type="radio" name="answer" value="{{ answers.id }}"> Vastaus kysymykseen {{ answer.question_id }} käyttäjältä {{ answer.creator_name }} (käyttäjätunnus {{ answer.creator_id }}): {{ answer.content }}<br>
+	{% endfor %}
+
+	<br>
+
+	<input type="submit" value="Palauta valittu">
+	<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+
+	</form>
+
+{% endif %}
+
+<hr>
+
+<a href="/"> Palaa etusivulle </a>
+
+{% endblock %}

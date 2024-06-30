@@ -44,7 +44,7 @@ def get_rating_average(restaurant_id):
 	result = db.session.execute(text(sql), {"restaurant_id":restaurant_id})
 	return result.fetchone()[0]
 
-def get_reviews_made_by_user(creator_id):
+def get_user_reviews(creator_id):
 	sql = "SELECT restaurant_id, creator_name, title, description, rating, recommendation FROM reviews WHERE visible = TRUE AND creator_id = :creator_id ORDER BY rating DESC, recommendation"
 	result = db.session.execute(text(sql), {"creator_id":creator_id})
 	return result.fetchall()
