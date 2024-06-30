@@ -60,7 +60,9 @@ SQL-injektio ja XSS-haavoittuvuudet on huomioitu ja estetty tietokannan käsitte
 
 ### Virheenkäsittely
 
-Sovelluksella on virhesivu (ks. [error.html](/templates/error.html)), johon käyttäjä ohjataan jonkin virheen yllättäessä Käyttäjä viedään sivulle esimerkiksi silloin, kun etsittyä sivua ei löydy (404).
+Sovelluksella on virhesivu (ks. [error.html](/templates/error.html)), johon käyttäjä ohjataan jonkin virheen yllättäessä. Sivu näyttää virhekoodin ja selitteen virheelle, jos sellaiset on annettu. 
+
+Käyttäjä viedään sivulle esimerkiksi silloin, kun etsittyä sivua ei löydy (virhe 404).
 
 <details open>
 
