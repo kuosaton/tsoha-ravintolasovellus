@@ -27,11 +27,11 @@ def create_restaurant():
 
 		name = request.form["name"]
 		if len(name) < 1 or len(name) > 50:
-			return render_template("error.html", errorcode=1, message="Nimi voi olla 1-50 merkkiä pitkä.")
+			return render_template("error.html", errorcode = 1, message="Nimi voi olla 1-50 merkkiä pitkä.")
 
 		description = request.form["description"]
 		if len(description) < 1 or len(description) > 1000:
-			return render_template("error.html", errorcode=1, message="Kuvaus voi olla 1-1000 merkkiä pitkä.")
+			return render_template("error.html", errorcode = 1, message="Kuvaus voi olla 1-1000 merkkiä pitkä.")
 
 		category = request.form["category"]
 		if len(category) < 1 or len(category) > 30:
@@ -55,6 +55,48 @@ def create_restaurant():
 
 		restaurant_id = restaurants.create(name, description, category, address, business_hours, entry_type)
 		return redirect("/restaurant/"+str(restaurant_id))
+
+@app.route("/restaurant/<int:id>/edit", methods = ["GET", "POST"])
+def edit_restaurant(id):
+	users.check_seclevel(2)
+
+	if request.method == "GET":
+		restaurant_content = restaurants.get_content(id)
+		return render_template("edit_restaurant.html", id = id, restaurant = restaurant_content)
+
+	if request.method == "POST":
+		users.check_csrf()
+
+		name = request.form["name"]
+		if len(name) < 1 or len(name) > 50:
+			return render_template("error.html", errorcode = 7, message="Nimi voi olla 1-50 merkkiä pitkä.")
+
+		description = request.form["description"]
+		if len(description) < 1 or len(description) > 1000:
+			return render_template("error.html", errorcode = 7, message="Kuvaus voi olla 1-1000 merkkiä pitkä.")
+
+		category = request.form["category"]
+		if len(category) < 1 or len(category) > 30:
+			return render_template("error.html", errorcode = 7, message="Kategoria voi olla 1-30 merkkiä pitkä.")
+
+		address = request.form["address"]
+		if len(address) < 1 or len(address) > 100:
+			return render_template("error.html", errorcode = 7, message="Yhteystiedot voivat olla 1-100 merkkiä pitkät.")
+
+		business_hours = request.form["business_hours"]
+		if len(business_hours) < 1 or len(business_hours) > 1000:
+			return render_template("error.html", errorcode = 7, message="Aukioloajat voivat olla 1-1000 merkkiä pitkät.")
+
+		entry_type = request.form["entry_type"]
+		if entry_type not in ("1", "2"):
+			return render_template("error.html", errorcode = 7, message="Annettu kirjaustyyppi oli virheellinen.")
+
+		try:
+			restaurants.edit(id, name, description, category, address, business_hours, entry_type)
+		except:
+			return render_template("error.html", message="Virhe ravintolan tietojen muokkaamisessa.")
+
+		return redirect("/restaurant/"+str(id), alert = "True")
 
 @app.route("/delete_restaurant", methods = ["GET", "POST"])
 def delete_restaurant():
@@ -100,8 +142,11 @@ def delete_review():
 		users.check_csrf()
 
 		if "review" in request.form:
-			review_id = request.form["review"]
-			reviews.delete(review_id)
+			try:
+				review_id = request.form["review"]
+				reviews.delete(review_id)
+			except:
+				return render_template("error.html", errorcode=8, message="Virhe arvostelun poistamisessa")
 
 		return redirect("/")
 

@@ -7,15 +7,33 @@ def get_list():
 	return result.fetchall()
 
 def create(name, description, category, address, business_hours, entry_type):
-	sql = "INSERT INTO restaurants (name, description, category, address, business_hours, entry_type) VALUES (:name, :description, :category, :address, :business_hours, :entry_type) RETURNING id"
-	restaurant_id = db.session.execute(text(sql), {"name":name, "description":description, "category":category, "address":address, "business_hours":business_hours, "entry_type":entry_type}).fetchone()[0]
-	db.session.commit()
+	try:
+		sql = "INSERT INTO restaurants (name, description, category, address, business_hours, entry_type) VALUES (:name, :description, :category, :address, :business_hours, :entry_type) RETURNING id"
+		restaurant_id = db.session.execute(text(sql), {"name":name, "description":description, "category":category, "address":address, "business_hours":business_hours, "entry_type":entry_type}).fetchone()[0]
+		db.session.commit()
+	except:
+		return False
+
 	return restaurant_id
 
+def edit(id, name, description, category, address, business_hours, entry_type):
+	try:
+		sql = "UPDATE restaurants SET name = :name, description = :description, category = :category, address = :address, business_hours = :business_hours, entry_type = :entry_type WHERE id = :id"
+		db.session.execute(text(sql), {"id":id, "name":name, "description":description, "category":category, "address":address, "business_hours":business_hours, "entry_type":entry_type})
+		db.session.commit()
+	except:
+		return False
+
+	return True
+
 def delete(id):
-	sql = "UPDATE restaurants SET visible = FALSE WHERE id=:id"
-	db.session.execute(text(sql), {"id":id})
-	db.session.commit()
+	try:
+		sql = "UPDATE restaurants SET visible = FALSE WHERE id=:id"
+		db.session.execute(text(sql), {"id":id})
+		db.session.commit()
+	except:
+		return False
+
 	return True
 
 def restore(id):

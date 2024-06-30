@@ -53,6 +53,9 @@
 	</button>
 	
 	<ul class="dropdown-menu">
+		{% if session.user_seclevel == 2 %}
+			<li><a class="dropdown-item" href="/restaurant/{{ id }}/edit">Muokkaa ravintolan tietoja</a></li>
+		{% endif %}
 		<li><a class="dropdown-item" href="/restaurant/{{ id }}/create_review">Kirjoita arvostelu</a></li>
 		<li><a class="dropdown-item" href="/restaurant/{{ id }}/create_question">Lisää kysymys</a></li>
 		<li><a class="dropdown-item" href="/restaurant/{{ id }}/create_answer">Vastaa kysymyksiin</a></li>

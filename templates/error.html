@@ -6,16 +6,25 @@
 
 <hr>
 
+<h6> Virhe {{ errorcode }}: </h6>
 {% if errorcode == 1 %}
-<p> Virhe {{ errorcode }}: Ravintolakirjauksen luonti epäonnistui </p>
+<p> Ravintolakirjauksen luonti epäonnistui </p>
 {% elif errorcode == 2 %}
-<p> Virhe {{ errorcode }}: Kirjautuminen epäonnistui </p>
+<p> Kirjautuminen epäonnistui </p>
 {% elif errorcode == 3 %}
-<p> Virhe {{ errorcode }}: Arvostelun luonti epäonnistui </p>
+<p> Arvostelun luonti epäonnistui </p>
 {% elif errorcode == 0 %}
-<p> Virhe {{ errorcode }}: Käyttäjätilin luonti epäonnistui </p>
-{% else %}
-<p> Virhe {{ errorcode }} </p>
+<p> Käyttäjätilin luonti epäonnistui </p>
+{% elif errorcode == 4 %}
+<p> Kysymyksen luonti epäonnistui </p>
+{% elif errorcode == 5 %}
+<p> Profiilin lataaminen epäonnistui </p>
+{% elif errorcode == 6 %}
+<p> Vastauksen luonti epäonnistui </p>
+{% elif errorcode == 7 %}
+<p> Tietojen muokkaus epäonnistui </p>
+{% elif errorcode == 8 %}
+<p> Tietojen poistaminen epäonnistui </p>
 {% endif %}
 
 <p>Selite: <b>{{ message }}</b></p>
