@@ -1,8 +1,8 @@
 from sqlalchemy.sql import text
 from db import db
 
-def get_all():
-        sql = "SELECT id, restaurant_id, creator_id, content FROM questions WHERE visible = TRUE ORDER BY restaurant_id, creator_id"
+def get_list():
+        sql = "SELECT id, restaurant_id, creator_id, creator_name, content FROM questions WHERE visible = TRUE ORDER BY restaurant_id, creator_id"
         result = db.session.execute(text(sql))
         return result.fetchall()
 
@@ -41,6 +41,12 @@ def get_unanswered_restaurant_questions(restaurant_id):
 
 def mark_as_answered(question_id):
 	sql = "UPDATE questions SET answered = TRUE WHERE id=:id"
+	db.session.execute(text(sql), {"id":question_id})
+	db.session.commit()
+	return True
+
+def mark_as_unanswered(question_id):
+	sql = "UPDATE questions SET answered = FALSE WHERE id=:id"
 	db.session.execute(text(sql), {"id":question_id})
 	db.session.commit()
 	return True

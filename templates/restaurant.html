@@ -16,7 +16,7 @@
 	<div class="row row-cols-auto">
 		<div class="col-auto">
 			Kuvaus: <br> 
-			<b>{{ restaurant[0][1] }}</b>
+			<p>{{ restaurant[0][1] }}</p>
 			<br>
 		</div>
 		<div class="col">
@@ -25,7 +25,7 @@
 			<br>
 		</div>
 		<div class="col">
-			Osoite: <br> 
+			Yhteystiedot: <br> 
 			<b>{{ restaurant[0][3] }}</b>
 			<br>
 		</div>
@@ -75,19 +75,12 @@
 		{% for review in reviews %}
 			<div class="row row-cols-auto">
 				<div class="col-auto">
-					<h6>''{{ review.title }}''</h6>
-				</div>
-				<div class="col">
 					Arvostelun tekijä: <br> 
 					<b>{{ review.creator_name }}</b>
 				</div>
-				<div class="col">
+				<div class="col-auto">
 					Arvostelu: <br>
 					<b>{{ review.rating}} tähteä</b>
-				</div>
-				<div class="col-auto">
-					Kuvaus: <br>
-					<b>{{ review.description }} </b>
 				</div>
 				<div class="col">
 					Suosittelisitko tätä ravintolaa? <br>
@@ -97,6 +90,16 @@
 						<b> En </b>
 
 					{% endif %}
+				</div>
+			</div>
+
+			<br>
+			
+			<h6><i>''{{ review.title }}''</i></h6>			
+
+			<div class="row">
+				<div class="col-lg-auto">
+					<i> {{ review.description }} </i>
 				</div>
 			</div>
 		<hr>

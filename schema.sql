@@ -11,7 +11,7 @@ CREATE TABLE restaurants (
 	description TEXT,
 	category VARCHAR(50) NOT NULL,
 	address	TEXT,
-	business_hours VARCHAR(50),
+	business_hours TEXT,
 	entry_type INTEGER NOT NULL,
 	visible	BOOLEAN DEFAULT TRUE
 );

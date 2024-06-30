@@ -1,7 +1,7 @@
 from sqlalchemy.sql import text
 from db import db
 
-def get_all():
+def get_list():
         sql = "SELECT id, question_id, creator_id, creator_name, content FROM answers WHERE visible = TRUE ORDER BY question_id, creator_id"
         result = db.session.execute(text(sql))
         return result.fetchall()
@@ -18,11 +18,23 @@ def delete(id):
         db.session.commit()
         return True
 
+def delete_question_answers(question_id):
+	sql = "UPDATE answers SET visible = FALSE WHERE question_id=:question_id"
+	db.session.execute(text(sql), {"question_id":question_id})
+	db.session.commit()
+	return True
+
 def restore(id):
         sql = "UPDATE answers SET visible = TRUE WHERE id=:id"
         db.session.execute(text(sql), {"id":id})
         db.session.commit()
         return True
+
+def restore_question_answers(question_id):
+	sql = "UPDATE answers SET visible = TRUE WHERE question_id=:question_id"
+	db.session.execute(text(sql), {"question_id":question_id})
+	db.session.commit()
+	return True
 
 def get_content(answer_id):
 	sql = "SELECT question_id, creator_id, creator_name, content FROM answers WHERE id = :id"

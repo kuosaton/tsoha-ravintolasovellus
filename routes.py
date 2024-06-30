@@ -98,6 +98,7 @@ def delete_review():
 
 	if request.method == "POST":
 		users.check_csrf()
+
 		if "review" in request.form:
 			review_id = request.form["review"]
 			reviews.delete(review_id)
@@ -107,15 +108,95 @@ def delete_review():
 @app.route("/restore_review", methods = ["GET", "POST"])
 def restore_review():
 	users.check_seclevel(2)
+
 	if request.method == "GET":
 		deleted_reviews = reviews.get_deleted_entries()
 		return render_template("restore_review.html", reviews=deleted_reviews)
 
 	if request.method == "POST":
 		users.check_csrf()
+
 		if "review" in request.form:
 			review_id = request.form["review"]
 			reviews.restore(review_id)
+
+		return redirect("/")
+
+@app.route("/delete_question", methods = ["GET", "POST"])
+def delete_question():
+	users.check_seclevel(2)
+
+	if request.method == "GET":
+		questions_list = questions.get_list()
+		return render_template("delete_question.html", questions = questions_list)
+
+	if request.method == "POST":
+		users.check_csrf()
+
+		if "question" in request.form:
+			question_id = request.form["question"]
+			questions.delete(question_id)
+
+			answers.delete_question_answers(question_id)
+
+		return redirect("/")
+
+@app.route("/restore_question", methods = ["GET", "POST"])
+def restore_question():
+	users.check_seclevel(2)
+
+	if request.method == "GET":
+		deleted_questions = questions.get_deleted_entries()
+		return render_template("restore_question.html", questions = deleted_questions)
+
+	if request.method == "POST":
+		users.check_csrf()
+
+		if "question" in request.form:
+			question_id = request.form["question"]
+			questions.restore(question_id)
+
+			answers.restore_question_answers(question_id)
+
+		return redirect("/")
+
+@app.route("/delete_answer", methods = ["GET", "POST"])
+def delete_answer():
+	users.check_seclevel(2)
+
+	if request.method == "GET":
+		answers_list = answers.get_list()
+		return render_template("delete_answer.html", answers = answers_list)
+
+	if request.method == "POST":
+		users.check_csrf()
+
+		if "answer" in request.form:
+			answer_id = request.form["answer"]
+			question_id = request.form["question_id"]
+
+			answers.delete(answer_id)
+			questions.mark_as_unanswered(question_id)
+
+		return redirect("/")
+
+@app.route("/restore_answer", methods = ["GET", "POST"])
+def restore_answer():
+	users.check_seclevel(2)
+
+	if request.method == "GET":
+		deleted_answers = answers.get_deleted_entries()
+		return render_template("restore_answer.html", answers = deleted_answers)
+
+	if request.method == "POST":
+		users.check_csrf()
+
+		if "answer" in request.form:
+			answer_id = request.form["answer"]
+			question_id = request.form["question_id"]
+
+			answers.restore(answer_id)
+			questions.mark_as_answered(question_id)
 
 		return redirect("/")
 

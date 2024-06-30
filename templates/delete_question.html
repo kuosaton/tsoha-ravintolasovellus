@@ -14,7 +14,7 @@
 <form action="/delete_question" method="post">
 
 {% for question in questions %}
-<input type="radio" name="question" value="{{ question.id }}"> {{ question.creator_name }} (käyttäjätunnus {{ question.creator_id }}: {{ question.content }}<br> 
+<input type="radio" name="question" value="{{ question.id }}"> {{ question.creator_name }} (käyttäjätunnus {{ question.creator_id }}): {{ question.content }}<br> 
 {% endfor %} 
 <br>
 
