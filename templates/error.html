@@ -8,26 +8,30 @@
 
 <h6> Virhe {{ errorcode }}: </h6>
 {% if errorcode == 1 %}
-<p> Ravintolakirjauksen luonti epäonnistui </p>
+	<p> Virhe ravintolakirjauksen tallentamisessa </p>
 {% elif errorcode == 2 %}
-<p> Kirjautuminen epäonnistui </p>
+	<p> Virhe kirjautumisessa </p>
 {% elif errorcode == 3 %}
-<p> Arvostelun luonti epäonnistui </p>
+	<p> Virhe arvostelun tallentamisessa </p>
 {% elif errorcode == 0 %}
-<p> Käyttäjätilin luonti epäonnistui </p>
+	<p> Virhe rekisteröitymisen tallentamisessa </p>
 {% elif errorcode == 4 %}
-<p> Kysymyksen luonti epäonnistui </p>
+	<p> Virhe kysymyksen tallentamisessa </p>
 {% elif errorcode == 5 %}
-<p> Profiilin lataaminen epäonnistui </p>
+	<p> Virhe profiilin lataamisessa </p>
 {% elif errorcode == 6 %}
-<p> Vastauksen luonti epäonnistui </p>
+	<p> Virhe vastauksen tallentamisessa </p>
 {% elif errorcode == 7 %}
-<p> Tietojen muokkaus epäonnistui </p>
+	<p> Virhe tiedon päivittämisessä </p>
 {% elif errorcode == 8 %}
-<p> Tietojen poistaminen epäonnistui </p>
+	<p> Virhe tiedon poistamisessa </p>
+{% elif errorcode == 9 %}
+	<p> Virhe tiedon palauttamisessa </p>
 {% endif %}
 
 <p>Selite: <b>{{ message }}</b></p>
+
+<p>Yritä uudelleen. Jos ongelma jatkuu, ota yhteyttä sovelluksen ylläpitäjään.</p>
 
 <hr>
 

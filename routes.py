@@ -94,9 +94,9 @@ def edit_restaurant(id):
 		try:
 			restaurants.edit(id, name, description, category, address, business_hours, entry_type)
 		except:
-			return render_template("error.html", message="Virhe ravintolan tietojen muokkaamisessa.")
+			return render_template("error.html", errorcode = 7, message="Ravintolan tietojen päivittäminen ei onnistunut. Tarkista annetut tiedot.")
 
-		return redirect("/restaurant/"+str(id), alert = "True")
+		return redirect("/restaurant/"+str(id))
 
 @app.route("/delete_restaurant", methods = ["GET", "POST"])
 def delete_restaurant():
@@ -108,9 +108,13 @@ def delete_restaurant():
 
 	if request.method == "POST":
 		users.check_csrf()
+
 		if "restaurant" in request.form:
-			restaurant_id = request.form["restaurant"]
-			restaurants.delete(restaurant_id)
+			try:
+				restaurant_id = request.form["restaurant"]
+				restaurants.delete(restaurant_id)
+			except:
+				return render_template("error.html", errorcode = 8, message="Ravintolan poistaminen epäonnistui.")
 
 		return redirect("/")
 
@@ -124,9 +128,13 @@ def restore_restaurant():
 
 	if request.method == "POST":
 		users.check_csrf()
+
 		if "restaurant" in request.form:
-			restaurant_id = request.form["restaurant"]
-			restaurants.restore(restaurant_id)
+			try:
+				restaurant_id = request.form["restaurant"]
+				restaurants.restore(restaurant_id)
+			except:
+				return render_template("error.html", errorcode = 9, message="Ravintolan palauttaminen epäonnistui.")
 
 		return redirect("/")
 
@@ -146,7 +154,7 @@ def delete_review():
 				review_id = request.form["review"]
 				reviews.delete(review_id)
 			except:
-				return render_template("error.html", errorcode=8, message="Virhe arvostelun poistamisessa")
+				return render_template("error.html", errorcode = 8, message="Arvostelun poistaminen epäonnistui.")
 
 		return redirect("/")
 
@@ -162,8 +170,11 @@ def restore_review():
 		users.check_csrf()
 
 		if "review" in request.form:
-			review_id = request.form["review"]
-			reviews.restore(review_id)
+			try:
+				review_id = request.form["review"]
+				reviews.restore(review_id)
+			except:
+				return render_template("error.html", errorcode = 9, message="Arvostelun palauttaminen epäonnistui.")
 
 		return redirect("/")
 
@@ -179,10 +190,13 @@ def delete_question():
 		users.check_csrf()
 
 		if "question" in request.form:
-			question_id = request.form["question"]
-			questions.delete(question_id)
+			try:
+				question_id = request.form["question"]
+				questions.delete(question_id)
 
-			answers.delete_question_answers(question_id)
+				answers.delete_question_answers(question_id)
+			except:
+				return render_template("error.html", errorcode = 8, message="Kysymyksen poistaminen epäonnistui.")
 
 		return redirect("/")
 
@@ -198,10 +212,13 @@ def restore_question():
 		users.check_csrf()
 
 		if "question" in request.form:
-			question_id = request.form["question"]
-			questions.restore(question_id)
+			try:
+				question_id = request.form["question"]
+				questions.restore(question_id)
 
-			answers.restore_question_answers(question_id)
+				answers.restore_question_answers(question_id)
+			except:
+				return render_template("error.html", errorcode = 9, message="Kysymyksen palauttaminen epäonnistui.")
 
 		return redirect("/")
 
@@ -217,11 +234,15 @@ def delete_answer():
 		users.check_csrf()
 
 		if "answer" in request.form:
-			answer_id = request.form["answer"]
-			question_id = request.form["question_id"]
+			try:
+				answer_id = request.form["answer"]
+				question_id = request.form["question_id"]
 
-			answers.delete(answer_id)
-			questions.mark_as_unanswered(question_id)
+				answers.delete(answer_id)
+				questions.mark_as_unanswered(question_id)
+
+			except:
+				return render_template("error.html", errorcode = 8, message="Vastauksen poistaminen epäonnistui. Tämä voi johtua siitä, että siihen linkittyneen kysymyksen käsittelyssä tapahtui virhe.")
 
 		return redirect("/")
 
@@ -237,11 +258,15 @@ def restore_answer():
 		users.check_csrf()
 
 		if "answer" in request.form:
-			answer_id = request.form["answer"]
-			question_id = request.form["question_id"]
+			try:
+				answer_id = request.form["answer"]
+				question_id = request.form["question_id"]
 
-			answers.restore(answer_id)
-			questions.mark_as_answered(question_id)
+				answers.restore(answer_id)
+				questions.mark_as_answered(question_id)
+
+			except:
+				return render_template("error.html", errorcode = 9, message="Vastauksen palauttaminen epäonnistui. Tämä voi johtua siitä, että siihen linkittyneen kysymyksen käsittelyssä tapahtui virhe.")
 
 		return redirect("/")
 
@@ -414,4 +439,5 @@ def create_answer(id):
 			return render_template("error.html", errorcode = 6, message="Vastauksen luonnissa tapahtui virhe.")
 
 		questions.mark_as_answered(question_id)
+
 		return redirect("/restaurant/"+str(id))
