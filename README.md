@@ -28,11 +28,11 @@ Toteutetut toiminnot on merkitty tehty-ikonilla. Tyhjällä ikonilla merkityt to
 - [x] Luodun arvostelun voi poistaa
 - [x] Käyttäjä voi etsiä ravintoloita (tekstihaku)
 - [x] Q&A: Käyttäjät voivat luoda ravintoloihin liittyviä kysymyksiä sekä vastata niihin
-- [ ] Luotujen kirjausten tietoja voi muokata
 
 ### Jatkokehitysideoita
 
-- [ ] Käyttäjä voi tarkastella yllämainittuihin asioihin liittyviä tilastoja, esimerkiksi arvostelupisteyksien keskiarvo tai yleisin arvosana, suosituin keittiökulttuuri, tms.
+- Luotujen kirjausten tietoja voi muokata
+- Käyttäjä voi tarkastella yllämainittuihin asioihin liittyviä tilastoja, esimerkiksi arvostelupisteyksien keskiarvo tai yleisin arvosana, suosituin keittiökulttuuri, tms.
 
 ### Kuvaus
 
@@ -41,11 +41,11 @@ Ravintolasovellus käynnistyy yleisnäkymään, jossa näytetään kaikki lisät
 Näkymästä voi navigoida eteenpäin seuraaviin toimintoihin:
 - Uuden ravintolan luonti
 - Ravintolan haku
-- Näkymät ravintoloiden ja arvostelujen poistamista tai palauttamista varten
+- Linkit näkymiin ravintolan/arvostelun/kysymyksen/vastauksen poistamista/palauttamista varten
 - Sisäänkirjautuminen
   - Tältä sivulta voi siirtyä uuden tilin rekisteröintiin
-- Ravintolan näkymä, jossa näytetään ravintolan arvostelut ja arvostelujen keskiarvopisteytys, jos arvosteluja on annettu
-  - Tältä sivulta voi siirtyä arvostelun tekemiseen ravintolalle 
+- Ravintolan näkymä, jossa näytetään ravintolan tiedot, arvostelut sekä Q&A-osio
+  - Sivu sisältää dropdown-valikon toiminnalisuuksien käyttöön (arvostelun, kysymyksen tai vastauksen luonti)
 
 Sovellukseen voi luoda tilin (normaali käyttäjä tai ylläpitäjä), ja kirjautua sisään. Ylläpitäjä saa joitakin ylimääräisiä toiminnallisuuksia käyttöönsä, kuten kirjausten poiston ja palautuksen. 
 
@@ -56,13 +56,6 @@ Ravintolat järjestetään ensisijaisesti kirjaustyypin (bucketlist-ravintola ta
 Tietoa lisäävissä tai muokkaavissa toiminnallisuuksista on käyttäjäroolin ja CSRF-tokenin tarkistus. Esimerkkinä ravintolakirjauksen tai arvostelun poisto tai palautus.
 
 SQL-injektio ja XSS-haavoittuvuudet huomioidaan tietokantakäskyjä suunniteltaessa.
-
-### Kuvia käyttöliittymästä
-
-Esimerkki ravintolan sisäisestä näkymästä realistisessa asiakaskäytössä.
-
-![ravintola](https://github.com/kuosaton/tsoha-ravintolasovellus/assets/120479105/2c201a4a-ff54-4aa7-bbd6-259381e45ba9)
-
 
 ## Käynnistysohjeet
 
@@ -94,3 +87,24 @@ Nyt voit käynnistää sovelluksen komennolla
 ```
 $ flask run
 ```
+
+## Kuvia käyttöliittymästä
+
+Etusivu
+
+![etusivu](https://github.com/kuosaton/tsoha-ravintolasovellus/assets/120479105/bdb9bcf7-616b-4f11-ba52-769aa0ae4823)
+
+Ravintolakirjauksen luonti
+
+![ravintolan_luonti](https://github.com/kuosaton/tsoha-ravintolasovellus/assets/120479105/bdf160e9-1bf6-4921-b802-61e219d4dea8)
+
+
+Esimerkkejä ravintolan sisäisestä näkymästä realistisessa asiakaskäytössä.
+
+Ravintolanäkymä, esimerkki 1
+
+![ravintola](https://github.com/kuosaton/tsoha-ravintolasovellus/assets/120479105/2c201a4a-ff54-4aa7-bbd6-259381e45ba9)
+
+Ravintolanäkymä, esimerkki 2
+
+![ravintola2](https://github.com/kuosaton/tsoha-ravintolasovellus/assets/120479105/2d3625b2-2a57-45bc-acc1-f21d865929e9)
