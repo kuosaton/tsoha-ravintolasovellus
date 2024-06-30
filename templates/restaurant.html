@@ -47,22 +47,26 @@
 
 <hr>
 
-<div class="dropdown">
-	<button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown">
-		Toiminnot
-	</button>
+{% if session.user_seclevel == 1 or session.user_seclevel == 2 %}
+
+	<div class="dropdown">
+		<button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+			Toiminnot
+		</button>
 	
-	<ul class="dropdown-menu">
-		{% if session.user_seclevel == 2 %}
-			<li><a class="dropdown-item" href="/restaurant/{{ id }}/edit">Muokkaa ravintolan tietoja</a></li>
-		{% endif %}
-		<li><a class="dropdown-item" href="/restaurant/{{ id }}/create_review">Kirjoita arvostelu</a></li>
-		<li><a class="dropdown-item" href="/restaurant/{{ id }}/create_question">Lisää kysymys</a></li>
-		<li><a class="dropdown-item" href="/restaurant/{{ id }}/create_answer">Vastaa kysymyksiin</a></li>
-	</ul>
-</div>
+		<ul class="dropdown-menu">
+			{% if session.user_seclevel == 2 %}
+				<li><a class="dropdown-item" href="/restaurant/{{ id }}/edit">Muokkaa ravintolan tietoja</a></li>
+			{% endif %}
+			<li><a class="dropdown-item" href="/restaurant/{{ id }}/create_review">Kirjoita arvostelu</a></li>
+			<li><a class="dropdown-item" href="/restaurant/{{ id }}/create_question">Lisää kysymys</a></li>
+			<li><a class="dropdown-item" href="/restaurant/{{ id }}/create_answer">Vastaa kysymykseen</a></li>
+		</ul>
+	</div>
 
 <hr>
+{% endif %}
+
 
 <h4>Arvostelut</h4>
 
