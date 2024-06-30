@@ -7,27 +7,33 @@
 <hr>
 
 {% if not restaurants %}
-<hr>
-<h3> Ei hakutuloksia. </h3>
+	<hr>
+	<h3> Ei hakutuloksia. </h3>
 {% else %}
-<h3> Ravintolat </h3>
-{% for restaurant in restaurants %}
-<hr>
-{% if restaurant.entry_type == 1 %}
-<h4> Bucketlist-ravintola: {{ restaurant.name }} </h4>
-{% elif restaurant.entry_type == 2 %}
-<h4> Käyty ravintola: {{ restaurant.name }} </h4>
-{% endif %}
-Kuvaus: <b>{{ restaurant.description }}</b> 
-<br>
-Kategoria: <b>{{ restaurant.category }}</b> 
-<br>
-Osoite: <b>{{ restaurant.address }}</b> 
-<br>
-Aukioloajat: <b>{{ restaurant.business_hours }}</b> 
-<p>
-<a href="/restaurant/{{ restaurant.id }}">Ravintolan tiedot</a><br>
-{% endfor %}
+	<h3> Ravintolat </h3>
+	{% for restaurant in restaurants %}
+		<hr>
+		{% if restaurant.entry_type == 1 %}
+			<h4> Bucketlist-ravintola: {{ restaurant.name }} </h4>
+		{% elif restaurant.entry_type == 2 %}
+			<h4> Käyty ravintola: {{ restaurant.name }} </h4>
+		{% endif %}
+		Kuvaus: <br> 
+		<p>{{ restaurant.description }}</p> 
+		<br>
+		Kategoria: <br>
+		<b>{{ restaurant.category }}</b> 
+		<br>
+		Yhteystiedot: <br> 
+		<b>{{ restaurant.address }}</b> 
+		<br>
+		Aukioloajat: <br> 
+		<b>{{ restaurant.business_hours }}</b> 
+		<br>
+
+		<a class="btn btn-primary" role="button" href="/restaurant/{{ restaurant.id }}">Ravintolan tiedot</a>
+		<br>
+	{% endfor %}
 
 {% endif %}
 
