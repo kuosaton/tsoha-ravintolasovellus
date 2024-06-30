@@ -1,26 +1,17 @@
 # Ravintolasovellus
 
-## Kuvaus
+## Esittely 
 
-Sovelluksen avulla käyttäjä voi pitää kirjaa kulinaristisista seikkailuistaan. Käyttäjä voi lisätä sovellukseen ravintoloita, joissa on käynyt tai joissa haluaisi käydä, toimien kirjanpito/bucketlist-sovelluksena.
+Ravintolasovelluksen avulla käyttäjät voivat pitää kirjaa ja pysyä aina ajan tasalla kulinaristisista seikkailuistaan.
 
-Sovelluksen toimintoja:
-- Käyttäjä voi luoda uuden ravintolan, jossa on käynyt, tai ravintolan, jossa haluaisi käydä, sekä kuvauksen sille.
-- Käyttäjä voi eritellä ravintolat käytyihin ja käymättömiin.
-- Käyttäjä voi poistaa ravintolan.
-- Käyttäjä voi antaa ravintolalle arvostelun.
-- Käyttäjä voi muokata ravintolan tietoja, esimerkiksi merkitäkseen bucketlist-ravintolan käydyksi ja antaakseen sille arvostelun.
-- Käyttäjä voi luoda ravintolakategorioita eritelläkseen niitä tyypin mukaan, esimerkiksi alkuperämaa (kreikkalainen keittiö, tms.), tyyli (lounas, buffet, casual, fine dining, tms.) tai hintataso.
-- Käyttäjä voi etsiä ja järjestää ravintoloita nimen, kategorian, kuvauksen avainsanan tai arvostelupisteytyksen perusteella.
-- Käyttäjä voi tarkastella yllämainittuihin asioihin liittyviä tilastoja, esimerkiksi arvostelupisteyksien keskiarvo tai yleisin arvosana, suosituin keittiökulttuuri, tms.
+Käyttäjät voivat kirjata ylös ravintoloita, joissa ovat käyneet, tai bucketlist-ravintoloita, joissa haluaisivat käydä. Luotavalle ravintolalle määritellään lisäksi nimi, kuvaus, kategoria, yhteystiedot ja aukioloajat. 
 
-(Sovelluksen kehittämisen alkuvaiheessa on kuvailtu sovellusta yllä esitetysti. Nämä toiminnallisuudet / tavoitteet ovat voineet muuttua kehityksen aikana, eivätkä ne välttämättä kuvaa sovelluksen lopullista tilaa.)
+Käyttäjät voivat lisätä ravintoloille arvosteluja, ja ravintolan Q&A-osio tarjoaa käyttäjille mahdollisuuden luoda kysymyksiä ja vastauksia ravintolaan liittyen.
 
-## Sovelluksen tämänhetkinen toiminnallisuus
+## Toiminnallisuudet pähkinänkuoressa
 
-Toteutetut toiminnot on merkitty tehty-ikonilla.
-
-### Ydintoiminnallisuus
+> [!NOTE]
+> Tämä on ajantasainen ja lopullinen kuvaus sovelluksen toiminnallisuuksista su 30.6.2024.
 
 - [x] Sovellukseen voi luoda käyttäjätilin (tilin taso voi olla tavallinen tai ylläpitäjä)
 - [x] Käyttäjät voivat luoda ja tarkastella ravintolakirjauksia
@@ -35,30 +26,38 @@ Toteutetut toiminnot on merkitty tehty-ikonilla.
 ### Jatkokehitysideoita
 - [ ] Käyttäjä voi tarkastella yllämainittuihin asioihin liittyviä tilastoja, esimerkiksi arvostelupisteyksien keskiarvo tai yleisin arvosana, suosituin keittiökulttuuri, tms.
 
-### Kuvaus
+## Sovelluksen kuvaus
 
-Ravintolasovellus käynnistyy yleisnäkymään, jossa näytetään kaikki lisätyt ravintolat. 
+Sovellus käynnistyy etusivulle, jossa näytetään kaikki lisätyt ravintolat. 
 
-Näkymästä voi navigoida eteenpäin seuraaviin toimintoihin:
-- Uuden ravintolan luonti
-- Ravintolan haku
-- Linkit näkymiin ravintolan/arvostelun/kysymyksen/vastauksen poistamista/palauttamista varten
-- Sisäänkirjautuminen
-  - Tältä sivulta voi siirtyä uuden tilin rekisteröintiin
-- Ravintolan näkymä, jossa näytetään ravintolan tiedot, arvostelut sekä Q&A-osio
-  - Sivu sisältää dropdown-valikon toiminnalisuuksien käyttöön (ravintolan tietojen muokkaus / arvostelun, kysymyksen tai vastauksen luonti)
+### Navbar
+Sovelluksen yläosassa aina näkyvä navbar mahdollistaa helpon navigoimisen seuraaviin toimintoihin:
+1. Uuden ravintolan luonti
+2. Ravintolan haku
+3. (Vain ylläpitäjille näkyvä) Dropdown-valikko, joka sisältää linkit näkymiin ravintolan/arvostelun/kysymyksen/vastauksen poistamista/palauttamista varten
+4. (Vain uloskirjautuneille näkyvä) Sisäänkirjautuminen
+    - Tältä sivulta voi siirtyä eteenpäin uuden tilin rekisteröintiin
+5. (Vain sisäänkirjautuneille näkyvä) Dropdown-valikko, joka sisältää linkit käyttäjäprofiiliin ja uloskirjautumiseen
 
-Sovellukseen voi luoda tilin (normaali käyttäjä tai ylläpitäjä), ja kirjautua sisään. Ylläpitäjä saa joitakin ylimääräisiä toiminnallisuuksia käyttöönsä, kuten kirjausten poiston ja palautuksen. 
+
+### Ravintolan näkymä
+Etusivun (tai hakutoiminnon) kautta voi siirtyä tarkastelemaan luotua ravintolaa. Ravintolan näkymässä näytetään sen tiedot, arvostelut sekä Q&A-osio. Sivu sisältää sisäänkirjautuneille käyttäjille näkyvän dropdown-valikon toiminnalisuuksien käyttöön seuraavilla toiminnallisuuksilla:
+- (Vain ylläpitäjille näkyvä) Ravintolan tietojen muokkaus
+- Arvostelun, kysymyksen tai vastauksen luonti
+
+## Käyttäjäjärjestelmä
+
+Sovellukseen voi luoda tilin (normaali käyttäjä tai ylläpitäjä), ja kirjautua sisään. Ylläpitäjä saa ylimääräisiä toiminnallisuuksia käyttöönsä – nämä liittyvät luodun tiedon muokkaamiseen, poistamiseen ja palauttamiseen.
 
 Ravintolat järjestetään ensisijaisesti kirjaustyypin (bucketlist-ravintola tai käyty ravintola) ja toissijaisesti nimen eli aakkosjärjestyksen mukaan. Arvostelut järjestetään ensisijaisesti pisteytyksen eli tähtien mukaan, suurin ensin.
 
-### Tietoturva
+## Tietoturva
 
 Tietoa lisäävissä tai muokkaavissa toiminnallisuuksista on käyttäjäroolin ja CSRF-tokenin tarkistus. Esimerkkinä ravintolakirjauksen tai arvostelun poisto tai palautus.
 
 SQL-injektio ja XSS-haavoittuvuudet on huomioitu ja estetty tietokannan käsittelyn toteutuksessa.
 
-### Virheenkäsittely
+## Virheenkäsittely
 
 Sovelluksella on virhesivu (ks. [error.html](/templates/error.html)), johon käyttäjä ohjataan jonkin virheen yllättäessä. Sivu näyttää virhekoodin ja selitteen virheelle, jos sellaiset on annettu. 
 
@@ -68,49 +67,49 @@ Käyttäjä viedään sivulle esimerkiksi silloin, kun etsittyä sivua ei löydy
 
 <summary> Kuvakaappauksia virhesivusta (collapsible) </summary>
 
-#### Virhesivu 404:
+### Virhesivu 404:
 
 ![virhe404](https://github.com/kuosaton/tsoha-ravintolasovellus/assets/120479105/c2531840-ab03-4155-8eb0-f476288d150b)
 
 
-#### Virhesivu, kun ravintolan tietojen muokkaus epäonnistuu:
+### Virhesivu, kun ravintolan tietojen muokkaus epäonnistuu:
 
 ![virhe7](https://github.com/kuosaton/tsoha-ravintolasovellus/assets/120479105/1dbdf154-5ee8-43a6-a18c-eb424c7860b9)
 
 
 </details>
 
-### Kuvia käyttöliittymästä
+## Kuvia käyttöliittymästä
 
 <details open>
 
 <summary> Kuvakaappauksia käyttöliittymästä (collapsible) </summary>
 
 
-#### Etusivu:
+### Etusivu:
 
 ![etusivu](https://github.com/kuosaton/tsoha-ravintolasovellus/assets/120479105/bdb9bcf7-616b-4f11-ba52-769aa0ae4823)
 
-#### Ravintolakirjauksen luonti:
+### Ravintolakirjauksen luonti:
 
 ![ravintolan_luonti](https://github.com/kuosaton/tsoha-ravintolasovellus/assets/120479105/bdf160e9-1bf6-4921-b802-61e219d4dea8)
 
 
 Esimerkkejä ravintolan sisäisestä näkymästä asiakaskäytössä.
 
-#### Ravintolanäkymä, esimerkki 1:
+### Ravintolanäkymä, esimerkki 1:
 
 ![ravintola](https://github.com/kuosaton/tsoha-ravintolasovellus/assets/120479105/2c201a4a-ff54-4aa7-bbd6-259381e45ba9)
 
-#### Ravintolanäkymä, esimerkki 2:
+### Ravintolanäkymä, esimerkki 2:
 
 ![ravintola2](https://github.com/kuosaton/tsoha-ravintolasovellus/assets/120479105/2d3625b2-2a57-45bc-acc1-f21d865929e9)
 
-#### Hakuominaisuus:
+### Hakuominaisuus:
 
 ![hakutoiminto](https://github.com/kuosaton/tsoha-ravintolasovellus/assets/120479105/762bd9ff-805b-460a-8ed2-b94fc70ff50f)
 
-#### Profiili:
+### Profiili:
 
 ![profiili](https://github.com/kuosaton/tsoha-ravintolasovellus/assets/120479105/4e2a8213-c4be-43b6-9e14-9ec73be0b81e)
 
