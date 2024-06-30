@@ -23,15 +23,14 @@ Toteutetut toiminnot on merkitty tehty-ikonilla.
 ### Ydintoiminnallisuus
 
 - [x] Sovellukseen voi luoda käyttäjätilin (tilin taso voi olla tavallinen tai ylläpitäjä)
-- [x] Käyttäjä voi luoda ja tarkastella ravintolakirjauksia
-  - Kirjausta luotaessa annetaan ravintolan nimi, kuvaus, kategoria, osoite, aukioloajat. Lisäksi määritellään onko kyseessä bucketlist-ravintola vai jo käyty ravintola
-- [x] Luodun ravintolan voi poistaa
-- [x] Käyttäjä voi antaa arvosteluja luoduille ravintoloille
-- [x] Luodun arvostelun voi poistaa
-- [x] Käyttäjä voi etsiä ravintoloita (tekstihaku)
+- [x] Käyttäjät voivat luoda ja tarkastella ravintolakirjauksia
+  - [x] Luodun ravintolan voi poistaa
+  - [x] Luodun ravintolan tietoja voi muokata 
+- [x] Käyttäjät voivat antaa arvosteluja ravintoloille
+  - [x] Luodun arvostelun voi poistaa
+- [x] Käyttäjät voivat etsiä ravintoloita hakusanalla
 - [x] Q&A: Käyttäjät voivat luoda ravintoloihin liittyviä kysymyksiä sekä vastata niihin
-- [x] Luotujen kirjausten tietoja voi muokata
-
+  - [x] Kysymyksiä ja vastauksia voi poistaa 
 
 ### Jatkokehitysideoita
 - [ ] Käyttäjä voi tarkastella yllämainittuihin asioihin liittyviä tilastoja, esimerkiksi arvostelupisteyksien keskiarvo tai yleisin arvosana, suosituin keittiökulttuuri, tms.
@@ -53,6 +52,31 @@ Sovellukseen voi luoda tilin (normaali käyttäjä tai ylläpitäjä), ja kirjau
 
 Ravintolat järjestetään ensisijaisesti kirjaustyypin (bucketlist-ravintola tai käyty ravintola) ja toissijaisesti nimen eli aakkosjärjestyksen mukaan. Arvostelut järjestetään ensisijaisesti pisteytyksen eli tähtien mukaan, suurin ensin.
 
+### Tietoturva
+
+Tietoa lisäävissä tai muokkaavissa toiminnallisuuksista on käyttäjäroolin ja CSRF-tokenin tarkistus. Esimerkkinä ravintolakirjauksen tai arvostelun poisto tai palautus.
+
+SQL-injektio ja XSS-haavoittuvuudet on huomioitu ja estetty tietokannan käsittelyn toteutuksessa.
+
+### Virheenkäsittely
+
+Sovelluksella on virhesivu (ks. [error.html](/templates/error.html)), johon käyttäjä ohjataan jonkin virheen yllättäessä Käyttäjä viedään sivulle esimerkiksi silloin, kun etsittyä sivua ei löydy (404).
+
+<details open>
+
+<summary> Kuvakaappauksia virhesivusta (collapsible) </summary>
+
+#### Virhesivu 404:
+
+![virhe404](https://github.com/kuosaton/tsoha-ravintolasovellus/assets/120479105/c2531840-ab03-4155-8eb0-f476288d150b)
+
+
+#### Virhesivu, kun ravintolan tietojen muokkaus epäonnistuu:
+
+![virhe7](https://github.com/kuosaton/tsoha-ravintolasovellus/assets/120479105/1dbdf154-5ee8-43a6-a18c-eb424c7860b9)
+
+
+</details>
 
 ### Kuvia käyttöliittymästä
 
@@ -61,40 +85,34 @@ Ravintolat järjestetään ensisijaisesti kirjaustyypin (bucketlist-ravintola ta
 <summary> Kuvakaappauksia käyttöliittymästä (collapsible) </summary>
 
 
-Etusivu
+#### Etusivu:
 
 ![etusivu](https://github.com/kuosaton/tsoha-ravintolasovellus/assets/120479105/bdb9bcf7-616b-4f11-ba52-769aa0ae4823)
 
-Ravintolakirjauksen luonti
+#### Ravintolakirjauksen luonti:
 
 ![ravintolan_luonti](https://github.com/kuosaton/tsoha-ravintolasovellus/assets/120479105/bdf160e9-1bf6-4921-b802-61e219d4dea8)
 
 
-Esimerkkejä ravintolan sisäisestä näkymästä realistisessa asiakaskäytössä.
+Esimerkkejä ravintolan sisäisestä näkymästä asiakaskäytössä.
 
-Ravintolanäkymä, esimerkki 1
+#### Ravintolanäkymä, esimerkki 1:
 
 ![ravintola](https://github.com/kuosaton/tsoha-ravintolasovellus/assets/120479105/2c201a4a-ff54-4aa7-bbd6-259381e45ba9)
 
-Ravintolanäkymä, esimerkki 2
+#### Ravintolanäkymä, esimerkki 2:
 
 ![ravintola2](https://github.com/kuosaton/tsoha-ravintolasovellus/assets/120479105/2d3625b2-2a57-45bc-acc1-f21d865929e9)
 
-Hakuominaisuus
+#### Hakuominaisuus:
 
 ![hakutoiminto](https://github.com/kuosaton/tsoha-ravintolasovellus/assets/120479105/762bd9ff-805b-460a-8ed2-b94fc70ff50f)
 
-Profiili
+#### Profiili:
 
 ![profiili](https://github.com/kuosaton/tsoha-ravintolasovellus/assets/120479105/4e2a8213-c4be-43b6-9e14-9ec73be0b81e)
 
 </details>
-
-### Tietoturva
-
-Tietoa lisäävissä tai muokkaavissa toiminnallisuuksista on käyttäjäroolin ja CSRF-tokenin tarkistus. Esimerkkinä ravintolakirjauksen tai arvostelun poisto tai palautus.
-
-SQL-injektio ja XSS-haavoittuvuudet huomioidaan tietokantakäskyjä suunniteltaessa.
 
 ## Käynnistysohjeet
 
