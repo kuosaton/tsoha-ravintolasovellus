@@ -14,7 +14,7 @@
 <form action="/delete_review" method="post">
 
 {% for review in reviews %}
-<input type="radio" name="review" value="{{ review.id }}"> {{ review.title }}: {{ review.description }}, tekijä {{ review.user_name }}, käyttäjätunnus {{ review.user_id }}<br> 
+<input type="radio" name="review" value="{{ review.id }}"> {{ review.title }}: {{ review.description }}, tekijä {{ review.creator_name }}, käyttäjätunnus {{ review.creator_id }}<br> 
 {% endfor %} 
 <br>
 
