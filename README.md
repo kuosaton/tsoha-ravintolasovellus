@@ -75,6 +75,9 @@ Ravintolanäkymä, esimerkki 2
 
 ![ravintola2](https://github.com/kuosaton/tsoha-ravintolasovellus/assets/120479105/2d3625b2-2a57-45bc-acc1-f21d865929e9)
 
+Hakuominaisuus
+
+![hakutoiminto](https://github.com/kuosaton/tsoha-ravintolasovellus/assets/120479105/762bd9ff-805b-460a-8ed2-b94fc70ff50f)
 
 
 ### Tietoturva
