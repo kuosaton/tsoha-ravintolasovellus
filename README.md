@@ -30,10 +30,10 @@ Toteutetut toiminnot on merkitty tehty-ikonilla.
 - [x] Luodun arvostelun voi poistaa
 - [x] Käyttäjä voi etsiä ravintoloita (tekstihaku)
 - [x] Q&A: Käyttäjät voivat luoda ravintoloihin liittyviä kysymyksiä sekä vastata niihin
+- [x] Luotujen kirjausten tietoja voi muokata
+
 
 ### Jatkokehitysideoita
-
-- [ ] Luotujen kirjausten tietoja voi muokata
 - [ ] Käyttäjä voi tarkastella yllämainittuihin asioihin liittyviä tilastoja, esimerkiksi arvostelupisteyksien keskiarvo tai yleisin arvosana, suosituin keittiökulttuuri, tms.
 
 ### Kuvaus
@@ -47,7 +47,7 @@ Näkymästä voi navigoida eteenpäin seuraaviin toimintoihin:
 - Sisäänkirjautuminen
   - Tältä sivulta voi siirtyä uuden tilin rekisteröintiin
 - Ravintolan näkymä, jossa näytetään ravintolan tiedot, arvostelut sekä Q&A-osio
-  - Sivu sisältää dropdown-valikon toiminnalisuuksien käyttöön (arvostelun, kysymyksen tai vastauksen luonti)
+  - Sivu sisältää dropdown-valikon toiminnalisuuksien käyttöön (ravintolan tietojen muokkaus / arvostelun, kysymyksen tai vastauksen luonti)
 
 Sovellukseen voi luoda tilin (normaali käyttäjä tai ylläpitäjä), ja kirjautua sisään. Ylläpitäjä saa joitakin ylimääräisiä toiminnallisuuksia käyttöönsä, kuten kirjausten poiston ja palautuksen. 
 
