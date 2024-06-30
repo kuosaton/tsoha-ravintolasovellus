@@ -27,7 +27,7 @@ Toteutetut toiminnot on merkitty tehty-ikonilla. Tyhjällä ikonilla merkityt to
 - [x] Käyttäjä voi antaa arvosteluja luoduille ravintoloille
 - [x] Luodun arvostelun voi poistaa
 - [x] Käyttäjä voi etsiä ravintoloita (tekstihaku)
-- [ ] Q&A: Käyttäjät voivat luoda ravintoloihin liittyviä kysymyksiä sekä vastata niihin
+- [x] Q&A: Käyttäjät voivat luoda ravintoloihin liittyviä kysymyksiä sekä vastata niihin
 - [ ] Luotujen kirjausten tietoja voi muokata
 
 ### Jatkokehitysideoita
@@ -56,6 +56,13 @@ Ravintolat järjestetään ensisijaisesti kirjaustyypin (bucketlist-ravintola ta
 Tietoa lisäävissä tai muokkaavissa toiminnallisuuksista on käyttäjäroolin ja CSRF-tokenin tarkistus. Esimerkkinä ravintolakirjauksen tai arvostelun poisto tai palautus.
 
 SQL-injektio ja XSS-haavoittuvuudet huomioidaan tietokantakäskyjä suunniteltaessa.
+
+### Kuvia käyttöliittymästä
+
+Esimerkki ravintolan sisäisestä näkymästä realistisessa asiakaskäytössä.
+
+![ravintola](https://github.com/kuosaton/tsoha-ravintolasovellus/assets/120479105/2c201a4a-ff54-4aa7-bbd6-259381e45ba9)
+
 
 ## Käynnistysohjeet
 
