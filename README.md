@@ -14,6 +14,8 @@ Sovelluksen toimintoja:
 - Käyttäjä voi etsiä ja järjestää ravintoloita nimen, kategorian, kuvauksen avainsanan tai arvostelupisteytyksen perusteella.
 - Käyttäjä voi tarkastella yllämainittuihin asioihin liittyviä tilastoja, esimerkiksi arvostelupisteyksien keskiarvo tai yleisin arvosana, suosituin keittiökulttuuri, tms.
 
+(Sovelluksen kehittämisen alkuvaiheessa on kuvailtu sovellusta yllä esitetysti. Nämä toiminnallisuudet / tavoitteet ovat voineet muuttua kehityksen aikana, eivätkä ne välttämättä kuvaa sovelluksen lopullista tilaa.)
+
 ## Sovelluksen tämänhetkinen toiminnallisuus
 
 Toteutetut toiminnot on merkitty tehty-ikonilla. Tyhjällä ikonilla merkityt toiminnallisuudet ovat vielä kesken.
@@ -51,6 +53,30 @@ Sovellukseen voi luoda tilin (normaali käyttäjä tai ylläpitäjä), ja kirjau
 
 Ravintolat järjestetään ensisijaisesti kirjaustyypin (bucketlist-ravintola tai käyty ravintola) ja toissijaisesti nimen eli aakkosjärjestyksen mukaan. Arvostelut järjestetään ensisijaisesti pisteytyksen eli tähtien mukaan, suurin ensin.
 
+
+### Kuvia käyttöliittymästä
+
+Etusivu
+
+![etusivu](https://github.com/kuosaton/tsoha-ravintolasovellus/assets/120479105/bdb9bcf7-616b-4f11-ba52-769aa0ae4823)
+
+Ravintolakirjauksen luonti
+
+![ravintolan_luonti](https://github.com/kuosaton/tsoha-ravintolasovellus/assets/120479105/bdf160e9-1bf6-4921-b802-61e219d4dea8)
+
+
+Esimerkkejä ravintolan sisäisestä näkymästä realistisessa asiakaskäytössä.
+
+Ravintolanäkymä, esimerkki 1
+
+![ravintola](https://github.com/kuosaton/tsoha-ravintolasovellus/assets/120479105/2c201a4a-ff54-4aa7-bbd6-259381e45ba9)
+
+Ravintolanäkymä, esimerkki 2
+
+![ravintola2](https://github.com/kuosaton/tsoha-ravintolasovellus/assets/120479105/2d3625b2-2a57-45bc-acc1-f21d865929e9)
+
+
+
 ### Tietoturva
 
 Tietoa lisäävissä tai muokkaavissa toiminnallisuuksista on käyttäjäroolin ja CSRF-tokenin tarkistus. Esimerkkinä ravintolakirjauksen tai arvostelun poisto tai palautus.
@@ -87,24 +113,3 @@ Nyt voit käynnistää sovelluksen komennolla
 ```
 $ flask run
 ```
-
-## Kuvia käyttöliittymästä
-
-Etusivu
-
-![etusivu](https://github.com/kuosaton/tsoha-ravintolasovellus/assets/120479105/bdb9bcf7-616b-4f11-ba52-769aa0ae4823)
-
-Ravintolakirjauksen luonti
-
-![ravintolan_luonti](https://github.com/kuosaton/tsoha-ravintolasovellus/assets/120479105/bdf160e9-1bf6-4921-b802-61e219d4dea8)
-
-
-Esimerkkejä ravintolan sisäisestä näkymästä realistisessa asiakaskäytössä.
-
-Ravintolanäkymä, esimerkki 1
-
-![ravintola](https://github.com/kuosaton/tsoha-ravintolasovellus/assets/120479105/2c201a4a-ff54-4aa7-bbd6-259381e45ba9)
-
-Ravintolanäkymä, esimerkki 2
-
-![ravintola2](https://github.com/kuosaton/tsoha-ravintolasovellus/assets/120479105/2d3625b2-2a57-45bc-acc1-f21d865929e9)
