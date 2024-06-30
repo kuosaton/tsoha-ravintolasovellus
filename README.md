@@ -79,6 +79,10 @@ Hakuominaisuus
 
 ![hakutoiminto](https://github.com/kuosaton/tsoha-ravintolasovellus/assets/120479105/762bd9ff-805b-460a-8ed2-b94fc70ff50f)
 
+Profiili
+
+![profiili](https://github.com/kuosaton/tsoha-ravintolasovellus/assets/120479105/4e2a8213-c4be-43b6-9e14-9ec73be0b81e)
+
 
 ### Tietoturva
 
