@@ -18,7 +18,7 @@ Sovelluksen toimintoja:
 
 ## Sovelluksen tämänhetkinen toiminnallisuus
 
-Toteutetut toiminnot on merkitty tehty-ikonilla. Tyhjällä ikonilla merkityt toiminnallisuudet ovat vielä kesken.
+Toteutetut toiminnot on merkitty tehty-ikonilla.
 
 ### Ydintoiminnallisuus
 
@@ -33,8 +33,8 @@ Toteutetut toiminnot on merkitty tehty-ikonilla. Tyhjällä ikonilla merkityt to
 
 ### Jatkokehitysideoita
 
-- Luotujen kirjausten tietoja voi muokata
-- Käyttäjä voi tarkastella yllämainittuihin asioihin liittyviä tilastoja, esimerkiksi arvostelupisteyksien keskiarvo tai yleisin arvosana, suosituin keittiökulttuuri, tms.
+- [ ] Luotujen kirjausten tietoja voi muokata
+- [ ] Käyttäjä voi tarkastella yllämainittuihin asioihin liittyviä tilastoja, esimerkiksi arvostelupisteyksien keskiarvo tai yleisin arvosana, suosituin keittiökulttuuri, tms.
 
 ### Kuvaus
 
