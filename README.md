@@ -56,6 +56,11 @@ Ravintolat järjestetään ensisijaisesti kirjaustyypin (bucketlist-ravintola ta
 
 ### Kuvia käyttöliittymästä
 
+<details open>
+
+<summary> Kuvakaappauksia käyttöliittymästä (collapsible) </summary>
+
+
 Etusivu
 
 ![etusivu](https://github.com/kuosaton/tsoha-ravintolasovellus/assets/120479105/bdb9bcf7-616b-4f11-ba52-769aa0ae4823)
@@ -83,6 +88,7 @@ Profiili
 
 ![profiili](https://github.com/kuosaton/tsoha-ravintolasovellus/assets/120479105/4e2a8213-c4be-43b6-9e14-9ec73be0b81e)
 
+</details>
 
 ### Tietoturva
 
