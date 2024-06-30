@@ -126,7 +126,6 @@
 
 		{% if not answers %}
 			<p> Ei vielä vastauksia. Tietäisitkö sinä? </p>
-
 		{% else %}
 
 			{% for answer in answers %}
@@ -136,6 +135,8 @@
 						Vastaus kysymykseen käyttäjältä <b>{{ answer[0][2] }}</b>: <br>
 						<p> – {{ answer[0][3] }}</p>
 					</div>
+				{% else %}
+					<p> Ei vielä vastauksia. Tietäisitkö sinä? </p>
 				{% endif %}
 
 			{% endfor %}

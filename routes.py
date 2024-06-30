@@ -40,8 +40,8 @@ def create_restaurant():
 		address = request.form["address"]
 		if address == "":
 			address = "-"
-		elif len(address) > 50:
-			return render_template("error.html", errorcode = 1, message="Osoite voi olla 1-50 merkkiä pitkä.")
+		elif len(address) > 100:
+			return render_template("error.html", errorcode = 1, message="Yhteystiedot voivat olla 1-100 merkkiä pitkät.")
 
 		business_hours = request.form["business_hours"]
 		if business_hours == "":
